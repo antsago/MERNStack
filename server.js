@@ -108,11 +108,11 @@ var root = {
 
 var app = express();
 app.use(loggingMiddleware);
-app.use('/graphql', graphqlHTTP({
+app.use('/', graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql: true, // disable in production
 }));
 
 app.listen(4000);
-console.log('Running a GraphQL API server at http://localhost:4000/graphql');
+console.log('Running a GraphQL API server at http://localhost:4000/');
