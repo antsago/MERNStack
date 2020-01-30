@@ -34,21 +34,21 @@ const root = {
     if (!fakeDatabase[id]) {
       throw new Error(`no users exists with id ${id}`);
     }
-    return fakeDatabase[id];
+    return { id, ...fakeDatabase[id] };
   },
-  createUser: ({input}) => {
+  createUser: ({user}) => {
     // Create a random id for our "database".
     const id = require('crypto').randomBytes(10).toString('hex');
 
-    fakeDatabase[id] = input;
+    fakeDatabase[id] = user;
     return { id, ...fakeDatabase[id] };
   },
-  updateMessage: ({id, input}) => {
+  updateUser: ({id, user}) => {
     if (!fakeDatabase[id]) {
       throw new Error(`no users exists with id ${id}`);
     }
     // This replaces all old data, but some apps might want partial update.
-    fakeDatabase[id] = input;
+    fakeDatabase[id] = user;
     return { id, ...fakeDatabase[id] };
   },
 };
