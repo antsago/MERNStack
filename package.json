@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/antsago/graphql-test/issues"
   },
-  "homepage": "https://github.com/antsago/graphql-test#readme"
+  "homepage": "https://github.com/antsago/graphql-test#readme",
+  "dependencies": {
+    "graphql": "^14.6.0"
+  }
 }
