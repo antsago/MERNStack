@@ -1,0 +1,19 @@
+{
+  "name": "graphql-test",
+  "version": "1.0.0",
+  "description": "Repository to try graphql and accomplish the task set here: https://github.com/holidayextras/recruitment-tasks/blob/master/developer-API-task.md",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antsago/graphql-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antsago/graphql-test/issues"
+  },
+  "homepage": "https://github.com/antsago/graphql-test#readme"
+}
