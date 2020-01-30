@@ -21,6 +21,7 @@ var schema = buildSchema(`
     random: Float!
     getDie(numSides: Int): RandomDie
     getMessage(id: ID!): Message
+    ip: String
   }
 
   input MessageInput {
@@ -61,6 +62,12 @@ class Message {
   }
 }
 
+
+const loggingMiddleware = (req, res, next) => {
+  console.log('ip:', req.ip);
+  next();
+}
+
 var fakeDatabase = {};
 // The root provides a resolver function for each API endpoint
 var root = {
@@ -94,13 +101,17 @@ var root = {
     fakeDatabase[id] = input;
     return new Message(id, input);
   },
+  ip: function (args, request) {
+    return request.ip;
+  },
 };
 
 var app = express();
+app.use(loggingMiddleware);
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: root,
-  graphiql: true,
+  graphiql: true, // disable in production
 }));
 
 app.listen(4000);
