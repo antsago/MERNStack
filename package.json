@@ -4,14 +4,13 @@
   "description": "Repository to try graphql and accomplish the task set here: https://github.com/holidayextras/recruitment-tasks/blob/master/developer-API-task.md",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antsago/graphql-test.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/antsago/graphql-test/issues"
   },
@@ -20,5 +19,8 @@
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
