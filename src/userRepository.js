@@ -1,33 +1,16 @@
 const fakeDatabase = {};
+const User = require('./userModel');
 
-exports.getUser = ({ id }) => {
-  if (!fakeDatabase[id]) {
-    throw new Error(`no users exists with id ${id}`);
-  }
-  return { id, ...fakeDatabase[id] };
-};
+exports.getUser = async ({ id }) =>
+  await User.findOne({ id });
 
-exports.createUser = ({ user }) => {
+exports.createUser = async ({ user }) => {
   const id = require('crypto').randomBytes(10).toString('hex');
-
-  fakeDatabase[id] = user;
-  return { id, ...fakeDatabase[id] };
+  return await User.create({ ...user, id });
 };
 
-exports.updateUser = ({ id, user }) => {
-  if (!fakeDatabase[id]) {
-    throw new Error(`no users exists with id ${id}`);
-  }
-  // This replaces all old data, but some apps might want partial update.
-  fakeDatabase[id] = user;
-  return { id, ...fakeDatabase[id] };
-};
+exports.updateUser = async ({ id, user }) => 
+  await User.findOneAndUpdate({ id }, { $set: user }, { new: true});
 
-exports.deleteUser = ({ id }) => {
-  if (!fakeDatabase[id]) {
-    throw new Error(`no users exists with id ${id}`);
-  }
-  const user = fakeDatabase[id];
-  fakeDatabase[id] = undefined;
-  return { id, ...user };
-};
+exports.deleteUser = async ({ id }) =>
+  await User.findOneAndDelete({ id });

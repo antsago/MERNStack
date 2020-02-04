@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --inspect src/server.js"
+    "dev": "docker-compose up -d mongo && nodemon --inspect src/server.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
-    "graphql": "^14.6.0"
+    "graphql": "^14.6.0",
+    "mongoose": "^5.8.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
