@@ -1,5 +1,6 @@
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
+const { getUser, createUser, updateUser, deleteUser } = require('./userRepository');
 
 const schema = buildSchema(`  
   type User {
@@ -26,37 +27,11 @@ const schema = buildSchema(`
   }
 `);
 
-const fakeDatabase = {};
-
 const resolvers = {
-  user: ({ id }) => {
-    if (!fakeDatabase[id]) {
-      throw new Error(`no users exists with id ${id}`);
-    }
-    return { id, ...fakeDatabase[id] };
-  },
-  createUser: ({ user }) => {
-    const id = require('crypto').randomBytes(10).toString('hex');
-
-    fakeDatabase[id] = user;
-    return { id, ...fakeDatabase[id] };
-  },
-  updateUser: ({ id, user }) => {
-    if (!fakeDatabase[id]) {
-      throw new Error(`no users exists with id ${id}`);
-    }
-    // This replaces all old data, but some apps might want partial update.
-    fakeDatabase[id] = user;
-    return { id, ...fakeDatabase[id] };
-  },
-  deleteUser: ({ id }) => {
-    if (!fakeDatabase[id]) {
-      throw new Error(`no users exists with id ${id}`);
-    }
-    const user = fakeDatabase[id];
-    fakeDatabase[id] = undefined;
-    return { id, ...user };
-  }
+  user: getUser,
+  createUser,
+  updateUser,
+  deleteUser,
 };
 
 module.exports = graphqlHTTP({
