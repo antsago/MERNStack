@@ -24,26 +24,27 @@ const schema = buildSchema(`
   type Mutation {
     createUser(user: UserInput): User
     updateUser(id: ID!, user: UserInput): User
+    deleteUser(id: ID!): User
   }
 `);
 
 const fakeDatabase = {};
 // The root provides a resolver function for each API endpoint
 const root = {
-  user: ({id}) => {
+  user: ({ id }) => {
     if (!fakeDatabase[id]) {
       throw new Error(`no users exists with id ${id}`);
     }
     return { id, ...fakeDatabase[id] };
   },
-  createUser: ({user}) => {
+  createUser: ({ user }) => {
     // Create a random id for our "database".
     const id = require('crypto').randomBytes(10).toString('hex');
 
     fakeDatabase[id] = user;
     return { id, ...fakeDatabase[id] };
   },
-  updateUser: ({id, user}) => {
+  updateUser: ({ id, user }) => {
     if (!fakeDatabase[id]) {
       throw new Error(`no users exists with id ${id}`);
     }
@@ -51,6 +52,14 @@ const root = {
     fakeDatabase[id] = user;
     return { id, ...fakeDatabase[id] };
   },
+  deleteUser: ({ id }) => {
+    if (!fakeDatabase[id]) {
+      throw new Error(`no users exists with id ${id}`);
+    }
+    const user = fakeDatabase[id];
+    fakeDatabase[id] = undefined;
+    return { id, ...user };
+  }
 };
 
 const app = express();
