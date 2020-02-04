@@ -10,6 +10,6 @@ const UserSchema = new mongoose.Schema({
   email: String,
   givenName: String,
   familyName: String,
-});
+}, { timestamps: { createdAt: 'created' } });
 
 module.exports = mongoose.model('User', UserSchema);

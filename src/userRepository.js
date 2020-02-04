@@ -1,16 +1,24 @@
 const fakeDatabase = {};
 const User = require('./userModel');
 
+const toPlainObject = mongoUser => ({
+  id: mongoUser.id,
+  email: mongoUser.email,
+  givenName: mongoUser.givenName,
+  familyName: mongoUser.familyName,
+  created: String(mongoUser.created),
+});
+
 exports.getUser = async ({ id }) =>
-  await User.findOne({ id });
+  toPlainObject(await User.findOne({ id }));
 
 exports.createUser = async ({ user }) => {
   const id = require('crypto').randomBytes(10).toString('hex');
-  return await User.create({ ...user, id });
+  return toPlainObject(await User.create({ ...user, id }));
 };
 
 exports.updateUser = async ({ id, user }) => 
-  await User.findOneAndUpdate({ id }, { $set: user }, { new: true});
+  toPlainObject(await User.findOneAndUpdate({ id }, { $set: user }, { new: true}));
 
 exports.deleteUser = async ({ id }) =>
-  await User.findOneAndDelete({ id });
+  toPlainObject(await User.findOneAndDelete({ id }));

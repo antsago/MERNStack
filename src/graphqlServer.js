@@ -8,6 +8,7 @@ const schema = buildSchema(`
     email: String
     givenName: String
     familyName: String
+    created: String
   }
 
   input UserInput {
