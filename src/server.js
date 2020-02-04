@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const graphqlServer = require('./graphqlServer');
 const { port, dbUrl } = require('./config');
 
-mongoose.connect(dbUrl,  { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 const app = express();
 app.use('/', graphqlServer);
