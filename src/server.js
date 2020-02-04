@@ -8,5 +8,7 @@ mongoose.connect(dbUrl,  { useNewUrlParser: true, useUnifiedTopology: true });
 const app = express();
 app.use('/', graphqlServer);
 
-app.listen(port);
+const httpServer = app.listen(port);
 console.log(`Running a GraphQL API server at http://localhost:${port}/`);
+
+module.exports = httpServer;

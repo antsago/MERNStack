@@ -4,7 +4,7 @@
   "description": "Repository to try graphql and accomplish the task set here: https://github.com/holidayextras/recruitment-tasks/blob/master/developer-API-task.md",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "docker-compose up -d mongo && NODE_ENV=test jest",
     "dev": "docker-compose up -d mongo && nodemon --inspect src/server.js"
   },
   "repository": {
@@ -15,6 +15,11 @@
     "url": "https://github.com/antsago/graphql-test/issues"
   },
   "homepage": "https://github.com/antsago/graphql-test#readme",
+  "jest": {
+    "globalSetup": "./tests/globalSetup.js",
+    "globalTeardown": "./tests/globalTeardown.js",
+    "testEnvironment": "./tests/testEnvironment.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
@@ -22,6 +27,7 @@
     "mongoose": "^5.8.11"
   },
   "devDependencies": {
+    "jest": "^25.1.0",
     "nodemon": "^2.0.2"
   }
 }
