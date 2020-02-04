@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "docker-compose up -d mongo && NODE_ENV=test jest",
-    "dev": "docker-compose up -d mongo && nodemon --inspect src/server.js"
+    "dev": "docker-compose up -d mongo && nodemon --inspect src/server.js --ignore tests"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "mongoose": "^5.8.11"
   },
   "devDependencies": {
+    "axios": "^0.19.2",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2"
   }
