@@ -2,10 +2,10 @@
   "name": "graphql-test",
   "version": "1.0.0",
   "description": "Repository to try graphql and accomplish the task set here: https://github.com/holidayextras/recruitment-tasks/blob/master/developer-API-task.md",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --inspect server.js"
+    "dev": "nodemon --inspect src/server.js"
   },
   "repository": {
     "type": "git",

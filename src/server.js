@@ -38,7 +38,6 @@ const root = {
     return { id, ...fakeDatabase[id] };
   },
   createUser: ({ user }) => {
-    // Create a random id for our "database".
     const id = require('crypto').randomBytes(10).toString('hex');
 
     fakeDatabase[id] = user;
