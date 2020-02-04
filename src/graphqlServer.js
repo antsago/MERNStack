@@ -38,5 +38,5 @@ const resolvers = {
 module.exports = graphqlHTTP({
   schema: schema,
   rootValue: resolvers,
-  graphiql: true, // disable in production
+  graphiql: true, // disable in production/with a built client
 });

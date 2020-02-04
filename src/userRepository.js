@@ -1,4 +1,3 @@
-const fakeDatabase = {};
 const User = require('./userModel');
 
 const toPlainObject = mongoUser => ({
