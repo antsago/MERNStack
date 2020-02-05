@@ -2,7 +2,7 @@ const axios = require('axios');
 const { port } = require('../src/config');
 
 const axiosInstance = axios.create({
-  baseURL: `http://localhost:${port}/`,
+  baseURL: `http://localhost:${port}/graphql`,
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
