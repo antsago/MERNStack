@@ -9,4 +9,4 @@ RUN npm ci --only=production
 COPY . .
 EXPOSE 4000
 
-CMD [ "node", "server.js" ]
+CMD [ "node", "src/server.js" ]
