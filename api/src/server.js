@@ -11,9 +11,9 @@ mongoose.connect(dbUrl, {
 });
 
 const app = express();
-app.use('/graphql', graphqlServer);
+app.use('/', graphqlServer);
 
 const httpServer = app.listen(port);
-console.log(`Running a GraphQL API server at http://localhost:${port}/graphql`);
+console.log(`Running a GraphQL API server at http://localhost:${port}/`);
 
 module.exports = httpServer;

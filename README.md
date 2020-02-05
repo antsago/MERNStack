@@ -4,7 +4,7 @@ This repositories showcases a way of using GraphQL with
 Docker, Mongo and EndToEnd tests using Jest and Axios.
 
 To try it just run 'docker-compose up' and play with
-the graphiql client at 'http://localhost:4000/graphql'. Check the tests
+the graphiql client at 'http://localhost:4000/'. Check the tests
 for examples on the queries that can be made.
 
 To execute the tests run 'npm run test'
