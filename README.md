@@ -1,7 +1,10 @@
 # graphql-test
-Repository to try GraphQL in a non-trivial environment.
-This repositories showcases a way of using GraphQL with
-Docker, Mongo and EndToEnd tests using Jest and Axios.
+Repository to try GraphQL and Next.js in a non-trivial environment.
+
+This repositories showcases three microservices:
+  - mongo: default mongo image used as persistent storage
+  - api: a GraphQL server with Docker, and EndToEnd tests using Jest and Axios.
+  - client: a Next.js server that serves a isomorphic React client that consumes the api
 
 To try it just run 'docker-compose up' and play with
 the graphiql client at 'http://localhost:4000/'. Check the tests
