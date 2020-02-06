@@ -1,14 +1,14 @@
 version: '3'
 services:
-  # client:
-  #   container_name: client
-  #   build: ./client
-  #   ports:
-  #     - "80:3000"
-  #   links:
-  #     - api
-  #   depends_on:
-  #     - api
+  client:
+    container_name: client
+    build: ./client
+    ports:
+      - "80:3000"
+    links:
+      - api
+    depends_on:
+      - api
   api:
     container_name: api
     build: ./api
