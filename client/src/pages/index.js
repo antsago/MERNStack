@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import Layout from '../components/Layout';
-import UserItem from '../components/UserItem';
+import { Layout, UserItem } from '../components';
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
