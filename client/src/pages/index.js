@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import { Grid } from '@material-ui/core';
 import Layout from '../components/Layout';
 import UserItem from '../components/UserItem';
 

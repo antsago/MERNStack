@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import { makeStyles, Container } from '@material-ui/core';
 import Header from './Header';
 import Footer from './Footer';
 
