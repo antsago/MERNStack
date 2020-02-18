@@ -1,7 +1,9 @@
 import axios from 'axios';
 import Link from 'next/link';
 import Layout from '../components/Layout';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { red } from '@material-ui/core/colors';
 
 const PostLink = ({ show }) => (
   <li>
@@ -27,9 +29,16 @@ const PostLink = ({ show }) => (
   </li>
 );
 
+const styles = theme => ({
+  button: {
+    margin: theme.spacing(1),
+    backgroundColor: red,
+  },
+});
+
 const Index = props => (
   <Layout>
-    <Button variant="contained">
+    <Button variant="contained" className={props.classes.button}>
       Default
     </Button>
     <h1>Batman TV Shows</h1>
@@ -61,4 +70,4 @@ Index.getInitialProps = async function() {
   };
 };
 
-export default Index;
+export default withStyles(styles)(Index);
