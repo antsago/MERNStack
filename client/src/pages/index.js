@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-
+import Button from '@material-ui/core/Button';
 
 const PostLink = ({ show }) => (
   <li>
@@ -29,6 +29,9 @@ const PostLink = ({ show }) => (
 
 const Index = props => (
   <Layout>
+    <Button variant="contained">
+      Default
+    </Button>
     <h1>Batman TV Shows</h1>
     <ul>
       {props.shows.map(show => (
