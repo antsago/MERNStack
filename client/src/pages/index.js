@@ -1,22 +1,36 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
+import withApollo from '../withApollo';
+import { Grid, CircularProgress } from '@material-ui/core';
 import { Layout, UserItem } from '../components';
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const QUERY = gql`
+  {
+    users{id, givenName, email, created}
+  }
+`;
 
-const Index = () => (
-  <Layout>
-    <Grid container spacing={4}>
-      {cards.map(card => (
-        <UserItem
-          key={card}
-          image="https://source.unsplash.com/random"
-          heading="Heading"
-          content="This is a media card. You can use this section to describe the content."
-        />
-      ))}
-    </Grid>
-  </Layout>
-);
+const Index = () => {
+  const { data, loading } = useQuery(QUERY);
 
-export default Index;
+  return (
+    <Layout>
+      {loading || !data?
+        <CircularProgress /> :
+        <Grid container spacing={4}>
+          {data.users.map(user => (
+            <UserItem
+              key={user.id}
+              image="https://source.unsplash.com/random"
+              heading="Heading"
+              content="This is a media card. You can use this section to describe the content."
+            />
+          ))}
+        </Grid>
+      }
+    </Layout>
+  );
+}
+
+export default withApollo(Index);
