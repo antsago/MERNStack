@@ -4,7 +4,12 @@ import Header from './Header';
 import Footer from './Footer';
 
 const useStyles = makeStyles(theme => ({
-  cardGrid: {
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+  },
+  content: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
@@ -14,16 +19,16 @@ const Layout = props => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <div className={classes.root}>
       <Header />
-      <main>
-        <Container className={classes.cardGrid} maxWidth="md">
+      <main className={classes.main}>
+        <Container className={classes.content} maxWidth="md">
           {props.children}
         </Container>
       </main>
 
       <Footer />
-    </React.Fragment>
+    </div>
   );
 }
 

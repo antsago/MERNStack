@@ -16,9 +16,9 @@ const Index = () => {
 
   return (
     <Layout>
-      {loading || !data?
-        <CircularProgress /> :
-        <Grid container spacing={4}>
+      {loading || !data
+        ? <CircularProgress />
+        : <Grid container spacing={4}>
           {data.users.map(user => (
             <UserItem
               key={user.id}
