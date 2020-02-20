@@ -1,13 +1,13 @@
 # graphql-test
-Repository to try GraphQL and Next.js in a non-trivial environment.
+Repository to showcase a setup with modern technologies integrated together.
 
 This repositories showcases three microservices:
   - mongo: default mongo image used as persistent storage
   - api: a GraphQL server with Docker, and EndToEnd tests using Jest and Axios.
-  - client: a Next.js server that serves an isomorphic React client that consumes the api
+  - client: an SSR React app using ApolloClient and Material-UI and served with Next.js
 
 To try it just run 'docker-compose up' and play
-with the React client at 'http://localhost/' or with 
+with the React client at 'http://localhost:3000/' or with 
 the graphiql client at 'http://localhost:4000/'. Check the tests
 for examples on the queries that can be made to the api.
 
