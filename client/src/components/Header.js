@@ -1,5 +1,5 @@
 import React from 'react';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
+import { Group as UsersIcon } from '@material-ui/icons';
 import { AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -14,9 +14,9 @@ const Header = () => {
   return (
       <AppBar position="relative">
         <Toolbar>
-          <CameraIcon className={classes.icon} />
+          <UsersIcon className={classes.icon} />
           <Typography variant="h6" color="inherit" noWrap>
-            Album layout
+            Users
           </Typography>
         </Toolbar>
       </AppBar>

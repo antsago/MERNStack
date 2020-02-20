@@ -24,8 +24,7 @@ const Index = () => {
 
   return (
     <Layout>
-      <CircularProgress className={classes.loader}/>
-      {/* {loading || !data
+      {loading || !data
         ? <CircularProgress />
         : <Grid container spacing={4}>
           {data.users.map(user => (
@@ -37,7 +36,7 @@ const Index = () => {
             />
           ))}
         </Grid>
-      } */}
+      }
     </Layout>
   );
 }
