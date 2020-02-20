@@ -24,6 +24,8 @@ export default class Document extends BaseDocument {
     return (
       <Html>
         <Head>
+          <title>Users list</title>
+          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link
             rel="stylesheet"
