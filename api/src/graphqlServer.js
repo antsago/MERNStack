@@ -1,6 +1,6 @@
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
-const { getUser, createUser, updateUser, deleteUser } = require('./userRepository');
+const { getUser, createUser, updateUser, deleteUser, getUsers } = require('./userRepository');
 
 const schema = buildSchema(`  
   type User {
@@ -18,6 +18,7 @@ const schema = buildSchema(`
   }
 
   type Query {
+    users: [User]
     user(id: ID!): User
   }
 
@@ -30,6 +31,7 @@ const schema = buildSchema(`
 
 const resolvers = {
   user: getUser,
+  users: getUsers,
   createUser,
   updateUser,
   deleteUser,

@@ -16,6 +16,21 @@ const makeCall = async (query) => {
 }
 
 describe('User CRUD', () => {
+  test('List of users returns all users in database', async () => {
+    const response = await makeCall(`
+      {
+        users{id, givenName, email, created}
+      }
+    `);
+
+    expect(response.data.users).toEqual(expect.arrayContaining([{
+      id: 'testing',
+      givenName: "Test",
+      email: 'test@test.com',
+      created: expect.any(String)
+    }]));
+  });
+
   test('User can be created', async () => {
     const response = await makeCall(`
       mutation {

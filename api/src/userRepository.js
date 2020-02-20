@@ -8,6 +8,12 @@ const toPlainObject = mongoUser => ({
   created: String(mongoUser.created),
 });
 
+const toPlainObjects = arrayUsers =>
+  arrayUsers.map(user => toPlainObject(user));
+
+exports.getUsers = async () =>
+  toPlainObjects(await User.find());
+
 exports.getUser = async ({ id }) =>
   toPlainObject(await User.findOne({ id }));
 
