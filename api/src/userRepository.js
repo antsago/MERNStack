@@ -1,3 +1,4 @@
+const uuid = require('uuid/v4');
 const User = require('./userModel');
 
 const toPlainObject = mongoUser => ({
@@ -18,7 +19,7 @@ exports.getUser = async ({ id }) =>
   toPlainObject(await User.findOne({ id }));
 
 exports.createUser = async ({ user }) => {
-  const id = require('crypto').randomBytes(10).toString('hex');
+  const id = uuid();
   return toPlainObject(await User.create({ ...user, id }));
 };
 
