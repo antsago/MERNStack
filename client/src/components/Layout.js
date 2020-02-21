@@ -21,7 +21,7 @@ const Layout = props => {
   return (
     <div className={classes.root}>
       <Header />
-      <main className={classes.main}>
+      <main>
         <Container className={classes.content} maxWidth="md">
           {props.children}
         </Container>
