@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 
 const QUERY = gql`
   {
-    users{id, givenName, email, created}
+    users{id, givenName, familyName, email, created}
   }
 `;
 
@@ -25,17 +25,14 @@ const Index = () => {
   return (
     <Layout>
       {loading || !data
-        ? <CircularProgress />
-        : <Grid container spacing={4}>
-          {data.users.map(user => (
-            <UserItem
-              key={user.id}
-              image="https://source.unsplash.com/random"
-              heading="Heading"
-              content="This is a media card. You can use this section to describe the content."
-            />
-          ))}
-        </Grid>
+        ? <CircularProgress className={classes.loader} />
+        : (
+          <Grid container spacing={4}>
+            {data.users.map(user => (
+              <UserItem user={user} />
+            ))}
+          </Grid>
+        )
       }
     </Layout>
   );

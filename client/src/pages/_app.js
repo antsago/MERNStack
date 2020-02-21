@@ -20,6 +20,9 @@ export default class MyApp extends NextApp {
 
     return (
       <React.Fragment>
+        <Head>
+          <title>Users list</title>
+        </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Component {...pageProps} />
