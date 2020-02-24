@@ -1,7 +1,7 @@
 import React from 'react';
 import BaseDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../theme';
+import { theme } from '../common';
 
 export default class Document extends BaseDocument {
   static async getInitialProps (ctx) {

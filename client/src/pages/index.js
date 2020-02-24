@@ -1,8 +1,8 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import withApollo from '../withApollo';
-import { Layout, UsersList } from '../components';
+import { withApollo, Layout } from '../common';
+import { UsersList } from '../users';
 
 const QUERY = gql`
   {
