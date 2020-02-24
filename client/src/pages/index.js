@@ -2,15 +2,7 @@ import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import withApollo from '../withApollo';
-import { makeStyles, Grid, CircularProgress } from '@material-ui/core';
-import { Layout, UserItem } from '../components';
-
-const useStyles = makeStyles(theme => ({
-  loader: {
-    position: 'relative',
-    left: '50%',
-  },
-}));
+import { Layout, UsersList } from '../components';
 
 const QUERY = gql`
   {
@@ -20,20 +12,13 @@ const QUERY = gql`
 
 const Index = () => {
   const { data, loading } = useQuery(QUERY);
-  const classes = useStyles();
 
   return (
     <Layout>
-      {loading || !data
-        ? <CircularProgress className={classes.loader} />
-        : (
-          <Grid container spacing={4}>
-            {data.users.map(user => (
-              <UserItem user={user} />
-            ))}
-          </Grid>
-        )
-      }
+      <UsersList
+        users={data && data.users}
+        isLoading={loading}
+      />
     </Layout>
   );
 }
