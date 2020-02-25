@@ -1,7 +1,9 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { withApollo, Layout } from '../common';
+import { connect } from 'react-redux'
+import { Layout } from '../common';
+import { withApollo, loadUsers, usersLoaded } from '../utils';
 import { UsersList } from '../users';
 
 const QUERY = gql`
@@ -10,17 +12,28 @@ const QUERY = gql`
   }
 `;
 
-const Index = () => {
-  const { data, loading } = useQuery(QUERY);
+const Index = props => {
+  // const { data, loading } = useQuery(QUERY);
 
+  console.log(props.usersLoaded);
   return (
     <Layout>
       <UsersList
-        users={data && data.users}
-        isLoading={loading}
+        // users={data && data.users}
+        // isLoading={loading}
+        users={[]}
+        isLoading={true}
       />
     </Layout>
   );
 }
 
-export default withApollo(Index);
+const mapStateToProps = ( state ) => ( {
+  usersLoaded: usersLoaded(state),
+} );
+
+const mapActionsToProps = {
+  loadUsers,
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Index);
