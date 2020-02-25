@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { connect } from 'react-redux'
@@ -16,6 +16,9 @@ const Index = props => {
   // const { data, loading } = useQuery(QUERY);
 
   console.log(props.usersLoaded);
+
+  useEffect(() => { props.loadUsers() });
+
   return (
     <Layout>
       <UsersList
