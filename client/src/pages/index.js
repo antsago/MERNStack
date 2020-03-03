@@ -1,9 +1,7 @@
-import React, { useEffect, Component } from 'react';
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import React from 'react';
 import { connect } from 'react-redux'
 import { Layout } from '../common';
-import { withApollo, loadUsers, users, areUsersLoading } from '../utils';
+import { loadUsers, users, areUsersLoading } from '../utils';
 import { UsersList } from '../users';
 
 const Index = (props) => (
