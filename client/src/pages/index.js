@@ -12,21 +12,17 @@ const QUERY = gql`
   }
 `;
 
-class Index extends React.Component {
-  componentDidMount() {
-    this.props.loadUsers();
-  }
+const Index = () => (
+  <Layout>
+    <UsersList
+      users={this.props.users}
+      isLoading={this.props.areUsersLoaded}
+    />
+  </Layout>
+);
 
-  render() {
-    return (
-      <Layout>
-        <UsersList
-          users={this.props.users}
-          isLoading={this.props.areUsersLoaded}
-        />
-      </Layout>
-    );
-  }
+Index.getInitialProps = async (props) => {
+  props.ctx.store.dispatch(loadUsers())
 }
 
 const mapStateToProps = ( state ) => ( {
@@ -34,8 +30,4 @@ const mapStateToProps = ( state ) => ( {
   users: users(state),
 } );
 
-const mapActionsToProps = {
-  loadUsers,
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(Index);
+export default connect(mapStateToProps)(Index);
