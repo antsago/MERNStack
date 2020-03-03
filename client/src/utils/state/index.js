@@ -1,2 +1,2 @@
 export { default as createStore } from './store';
-export { loadUsers, usersLoaded } from './usersDuck'
+export { loadUsers, areUsersLoading, users } from './usersDuck'

@@ -3,7 +3,7 @@ import React from 'react';
 import NextApp from 'next/app';
 import Head from 'next/head';
 import withRedux from 'next-redux-wrapper'
-// import withReduxSaga from 'next-redux-saga'
+import withReduxSaga from 'next-redux-saga'
 import { Provider } from 'react-redux'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -46,4 +46,4 @@ class MyApp extends NextApp {
   }
 }
 
-export default withRedux(createStore)(MyApp);
+export default withRedux(createStore)(withReduxSaga(MyApp));

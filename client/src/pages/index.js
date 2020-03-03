@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Component } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { connect } from 'react-redux'
 import { Layout } from '../common';
-import { withApollo, loadUsers, usersLoaded } from '../utils';
+import { withApollo, loadUsers, users, areUsersLoading } from '../utils';
 import { UsersList } from '../users';
 
 const QUERY = gql`
@@ -12,27 +12,26 @@ const QUERY = gql`
   }
 `;
 
-const Index = props => {
-  // const { data, loading } = useQuery(QUERY);
+class Index extends React.Component {
+  componentDidMount() {
+    this.props.loadUsers();
+  }
 
-  console.log(props.usersLoaded);
-
-  useEffect(() => { props.loadUsers() });
-
-  return (
-    <Layout>
-      <UsersList
-        // users={data && data.users}
-        // isLoading={loading}
-        users={[]}
-        isLoading={true}
-      />
-    </Layout>
-  );
+  render() {
+    return (
+      <Layout>
+        <UsersList
+          users={this.props.users}
+          isLoading={this.props.areUsersLoaded}
+        />
+      </Layout>
+    );
+  }
 }
 
 const mapStateToProps = ( state ) => ( {
-  usersLoaded: usersLoaded(state),
+  areUsersLoaded: areUsersLoading(state),
+  users: users(state),
 } );
 
 const mapActionsToProps = {
