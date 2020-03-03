@@ -6,17 +6,11 @@ import { Layout } from '../common';
 import { withApollo, loadUsers, users, areUsersLoading } from '../utils';
 import { UsersList } from '../users';
 
-const QUERY = gql`
-  {
-    users{id, givenName, familyName, email, created}
-  }
-`;
-
-const Index = () => (
+const Index = (props) => (
   <Layout>
     <UsersList
-      users={this.props.users}
-      isLoading={this.props.areUsersLoaded}
+      users={props.users}
+      isLoading={props.areUsersLoaded}
     />
   </Layout>
 );

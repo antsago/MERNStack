@@ -2,6 +2,12 @@ import { put, takeEvery } from 'redux-saga/effects'
 import { LOAD_USERS } from './types';
 import { loadUsersSuccess, loadUsersError } from './actions';
 
+// const QUERY = gql`
+//   {
+//     users{id, givenName, familyName, email, created}
+//   }
+// `;
+
 function *loadUsers() {
   try {
     // const res = yield fetch('https://jsonplaceholder.typicode.com/users')
