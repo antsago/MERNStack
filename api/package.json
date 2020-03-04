@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "docker-compose up -d mongo && NODE_ENV=test jest",
-    "dev": "docker-compose up -d mongo && NODE_ENV=dev nodemon --inspect src/server.js --ignore tests"
+    "dev": "docker-compose up -d mongo && NODE_ENV=development nodemon --inspect src/server.js --ignore tests"
   },
   "repository": {
     "type": "git",

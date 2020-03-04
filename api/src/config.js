@@ -1,22 +1,27 @@
-const PROD = {
+const env = process.env.NODE_ENV || 'production';
+
+const production = {
+  env: 'production',
   port: 4000,
   dbUrl: 'mongodb://mongo:27017/graphql',
 };
 
-const DEV = {
+const development = {
+  env: 'development',
   port: 4000,
   dbUrl: 'mongodb://localhost:27017/graphql',
 };
 
-const TEST = {
+const test = {
+  env: 'test',
   port: 4100,
   dbUrl: 'mongodb://localhost:27017/test',
 }
 
-if (process.env.NODE_ENV === 'test') {
-  module.exports = TEST;
-} else if (process.env.NODE_ENV === 'dev') {
-  module.exports = DEV;
-} else {
-  module.exports = PROD;
-}
+const config = {
+  production,
+  development,
+  test
+};
+
+module.exports = config[env];
