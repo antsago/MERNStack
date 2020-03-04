@@ -1,7 +1,6 @@
 import axios from 'axios';
-
-const SERVER_URL = 'http://localhost:4000/';
+import { apiUrl } from './config';
 
 export async function makeQuery(query) {
-  return axios.post( SERVER_URL, { query });
+  return axios.post(apiUrl, { query });
 }

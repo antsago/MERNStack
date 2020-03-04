@@ -1,9 +1,10 @@
 import { applyMiddleware, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { rootReducer, rootSaga } from './rootStore'
+import { env } from '../config';
 
 const bindMiddleware = middleware => {
-  if (process.env.NODE_ENV !== 'production') {
+  if (env === 'development') {
     const { composeWithDevTools } = require('redux-devtools-extension')
     return composeWithDevTools(applyMiddleware(...middleware))
   }

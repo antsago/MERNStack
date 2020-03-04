@@ -1,3 +1,16 @@
+FROM node:12 AS build
+
+WORKDIR /usr/src/app
+
+# Create build environment
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+## ------- ## 
+
 FROM node:12
 
 WORKDIR /usr/src/app
@@ -6,7 +19,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci --only=production
 
-COPY . .
-RUN npm run build
+COPY --from=build /usr/src/app/.next ./.next
 
 CMD [ "npm", "start" ]
