@@ -8,8 +8,11 @@
     "baseUrl": ".",
     "pretty": true
   },
-
   "include": [
     "./src/**/*"
   ],
+  "exclude": [
+    "./**/*.test.ts",
+    "./**/*.spec.ts",
+  ]
 }
