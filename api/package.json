@@ -1,20 +1,12 @@
 {
   "name": "graphql-test",
   "version": "1.0.0",
-  "description": "Repository to try graphql and accomplish the task set here: https://github.com/holidayextras/recruitment-tasks/blob/master/developer-API-task.md",
-  "main": "src/server.js",
+  "main": "build/server.js",
   "scripts": {
-    "test": "docker-compose up -d mongo && NODE_ENV=test jest",
-    "dev": "docker-compose up -d mongo && NODE_ENV=development nodemon --inspect src/server.js --ignore tests"
+    "build": "tsc",
+    "test": "NODE_ENV=test jest",
+    "dev": "NODE_ENV=development ts-node-dev --inspect -- src/server.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/antsago/graphql-test.git"
-  },
-  "bugs": {
-    "url": "https://github.com/antsago/graphql-test/issues"
-  },
-  "homepage": "https://github.com/antsago/graphql-test#readme",
   "jest": {
     "globalSetup": "./tests/globalSetup.js",
     "globalTeardown": "./tests/globalTeardown.js",
@@ -29,8 +21,14 @@
     "uuid": "^3.4.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.3",
+    "@types/mongoose": "^5.7.3",
+    "@types/node": "^13.7.7",
+    "@types/uuid": "^7.0.0",
     "axios": "^0.19.2",
     "jest": "^25.1.0",
-    "nodemon": "^2.0.2"
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
   }
 }

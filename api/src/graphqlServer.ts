@@ -1,6 +1,6 @@
-const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
-const { getUser, createUser, updateUser, deleteUser, getUsers } = require('./userRepository');
+import graphqlHTTP from 'express-graphql';
+import { buildSchema } from 'graphql';
+import { getUser, createUser, updateUser, deleteUser, getUsers } from './userRepository';
 
 const schema = buildSchema(`  
   type User {
@@ -37,7 +37,7 @@ const resolvers = {
   deleteUser,
 };
 
-module.exports = graphqlHTTP({
+export default graphqlHTTP({
   schema: schema,
   rootValue: resolvers,
   graphiql: true, // disable in production/with a built client
