@@ -1,11 +1,11 @@
 {
-  "name": "graphql-test",
+  "name": "api",
   "version": "1.0.0",
-  "main": "build/server.js",
   "scripts": {
     "build": "tsc",
     "test": "NODE_ENV=test jest",
-    "dev": "NODE_ENV=development ts-node-dev --inspect -- src/server.ts"
+    "dev": "NODE_ENV=development ts-node-dev --inspect -- src/server.ts",
+    "start": "node build/server.js"
   },
   "jest": {
     "globalSetup": "./tests/globalSetup.js",

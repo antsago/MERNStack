@@ -1,14 +1,13 @@
-FROM node:12
+FROM node:12 AS build
 
 WORKDIR /usr/src/app
 
 # Create run environment
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 COPY . .
-
-CMD [ "node", "src/server.js" ]
+RUN npm run build
 
 ## ------- ##
 
@@ -20,6 +19,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci --only=production
 
-COPY . .
+COPY --from=build /usr/src/app/build ./build
 
-CMD [ "node", "src/server.js" ]
+CMD [ "npm", "start" ]
