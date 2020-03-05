@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    // Current e2e tests not supported with typescript
-    // "test": "NODE_ENV=test jest",
     "dev": "NODE_ENV=development ts-node-dev --inspect -- src/server.ts",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "format": "prettier-standard --format"
   },
   "jest": {
-    "transform": { "^.+\\.tsx?$": "ts-jest" }
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -28,6 +29,7 @@
     "@types/uuid": "^7.0.0",
     "axios": "^0.19.2",
     "jest": "^25.1.0",
+    "prettier-standard": "^16.2.1",
     "ts-jest": "^25.2.1",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"

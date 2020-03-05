@@ -1,6 +1,12 @@
-import graphqlHTTP from 'express-graphql';
-import { buildSchema } from 'graphql';
-import { getUser, createUser, updateUser, deleteUser, getUsers } from './userRepository';
+import graphqlHTTP from 'express-graphql'
+import { buildSchema } from 'graphql'
+import {
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  getUsers
+} from './userRepository'
 
 const schema = buildSchema(`  
   type User {
@@ -27,18 +33,18 @@ const schema = buildSchema(`
     updateUser(id: ID!, user: UserInput): User
     deleteUser(id: ID!): User
   }
-`);
+`)
 
 const resolvers = {
   user: getUser,
   users: getUsers,
   createUser,
   updateUser,
-  deleteUser,
-};
+  deleteUser
+}
 
 export default graphqlHTTP({
   schema: schema,
   rootValue: resolvers,
-  graphiql: true, // disable in production/with a built client
-});
+  graphiql: true // disable in production/with a built client
+})
