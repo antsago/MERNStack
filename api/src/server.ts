@@ -9,9 +9,7 @@ mongoose.connect(config.dbUrl, {
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false
-});
-
-// a new comment
+})
 
 const app = express()
 app.use(
