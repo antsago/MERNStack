@@ -1,22 +1,22 @@
-import React from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
-import Copyright from './Copyright';
+import React from 'react'
+import { Typography, makeStyles } from '@material-ui/core'
+import Copyright from './Copyright'
 
 const useStyles = makeStyles(theme => ({
   footer: {
     padding: theme.spacing(2),
-    marginTop: 'auto',
-  },
-}));
+    marginTop: 'auto'
+  }
+}))
 
 const Footer = () => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <footer className={classes.footer}>
       <Copyright />
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

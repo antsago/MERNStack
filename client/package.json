@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p 3000"
+    "start": "next start -p 3000",
+    "format": "prettier-standard --format --lint"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.3",
@@ -28,6 +29,7 @@
     "@types/node": "^13.7.7",
     "@types/react": "^16.9.23",
     "@types/react-redux": "^7.1.7",
+    "prettier-standard": "^16.2.1",
     "redux-devtools-extension": "^2.13.8",
     "typescript": "^3.8.3"
   }

@@ -1,25 +1,22 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import { Layout } from '../common';
-import { loadUsers, users, areUsersLoading } from '../utils';
-import { UsersList } from '../users';
+import { Layout } from '../common'
+import { loadUsers, users, areUsersLoading } from '../utils'
+import { UsersList } from '../users'
 
-const Index = (props) => (
+const Index = props => (
   <Layout>
-    <UsersList
-      users={props.users}
-      isLoading={props.areUsersLoaded}
-    />
+    <UsersList users={props.users} isLoading={props.areUsersLoaded} />
   </Layout>
-);
+)
 
-Index.getInitialProps = async (props) => {
+Index.getInitialProps = async props => {
   props.ctx.store.dispatch(loadUsers())
 }
 
-const mapStateToProps = ( state ) => ( {
+const mapStateToProps = state => ({
   areUsersLoaded: areUsersLoading(state),
-  users: users(state),
-} );
+  users: users(state)
+})
 
-export default connect(mapStateToProps)(Index);
+export default connect(mapStateToProps)(Index)
