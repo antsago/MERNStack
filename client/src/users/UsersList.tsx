@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import { makeStyles, Grid, CircularProgress } from '@material-ui/core'
+import User from './UserType'
 import UserItem from './UserItem'
 
 const useStyles = makeStyles(theme => ({
@@ -9,7 +10,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const UsersList = ({ users, isLoading }) => {
+const UsersList = ({
+  users,
+  isLoading
+}: {
+  users: User[]
+  isLoading: boolean
+}) => {
   const classes = useStyles()
 
   return isLoading || !users ? (

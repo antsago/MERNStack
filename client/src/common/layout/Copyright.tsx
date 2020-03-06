@@ -3,12 +3,7 @@ import { Typography, Link } from '@material-ui/core'
 
 const Copyright = () => (
   <Typography variant='body2' color='textSecondary' align='center'>
-    {'Copyright © '}
-    <Link color='inherit' href='https://material-ui.com/'>
-      Antonio Sánchez Gómez
-    </Link>{' '}
-    {new Date().getFullYear()}
-    {'.'}
+    {`Copyright © Antonio Sánchez Gómez ${new Date().getFullYear()}.`}
   </Typography>
 )
 
