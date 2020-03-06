@@ -1,25 +1,31 @@
-import { applyMiddleware, createStore } from 'redux'
-import createSagaMiddleware from 'redux-saga'
+import { applyMiddleware, createStore, Store } from 'redux'
+import createSagaMiddleware, { Task } from 'redux-saga'
 import { rootReducer, rootSaga } from './rootStore'
-import { env } from '../config';
+import config from '../config'
+
+interface SagaStore extends Store {
+  sagaTask?: Task
+}
 
 const bindMiddleware = middleware => {
-  if (env === 'development') {
+  if (config.env === 'development') {
     const { composeWithDevTools } = require('redux-devtools-extension')
     return composeWithDevTools(applyMiddleware(...middleware))
   }
   return applyMiddleware(...middleware)
 }
 
-function configureStore(initialState) {
+function configureStore (initialState, { isServer, req = null }): Store {
   const sagaMiddleware = createSagaMiddleware()
-  const store = createStore(
+  const store: SagaStore = createStore(
     rootReducer,
     initialState,
     bindMiddleware([sagaMiddleware])
   )
 
-  store.sagaTask = sagaMiddleware.run(rootSaga)
+  if (req || !isServer) {
+    store.sagaTask = sagaMiddleware.run(rootSaga)
+  }
 
   return store
 }

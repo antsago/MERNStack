@@ -5,12 +5,13 @@ import Head from 'next/head';
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 import { Provider } from 'react-redux'
+import { Store } from 'redux'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { theme } from '../common';
 import { createStore } from '../utils';
 
-class MyApp extends NextApp {
+class MyApp extends NextApp<{ store: Store }> {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
 
