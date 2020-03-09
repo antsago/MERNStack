@@ -6,8 +6,19 @@
     "moduleResolution": "node",
     "outDir": "build",
     "baseUrl": ".",
-    "pretty": true
+    "pretty": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2016",
+      "esnext.asynciterable"
+    ]
   },
-  "include": ["./src/**/*"],
-  "exclude": ["./**/*.test.ts", "./**/*.spec.ts"]
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./**/*.test.ts",
+    "./**/*.spec.ts"
+  ]
 }

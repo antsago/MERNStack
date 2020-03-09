@@ -17,21 +17,21 @@ export async function getUsers () {
   return toPlainObjects(await User.find())
 }
 
-export async function getUser ({ id }) {
+export async function getUser (id) {
   return toPlainObject(await User.findOne({ id }))
 }
 
-export async function createUser ({ user }) {
+export async function createUser (user) {
   const id = uuid()
   return toPlainObject(await User.create({ ...user, id }))
 }
 
-export async function updateUser ({ id, user }) {
+export async function updateUser (id, user) {
   return toPlainObject(
     await User.findOneAndUpdate({ id }, { $set: user }, { new: true })
   )
 }
 
-export async function deleteUser ({ id }) {
+export async function deleteUser (id) {
   return toPlainObject(await User.findOneAndDelete({ id }))
 }

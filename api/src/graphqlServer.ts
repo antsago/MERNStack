@@ -1,5 +1,15 @@
 import graphqlHTTP from 'express-graphql'
-import { buildSchema } from 'graphql'
+import {
+  ObjectType,
+  InputType,
+  Field,
+  Resolver,
+  Query,
+  Arg,
+  Mutation,
+  ID,
+  buildSchema
+} from 'type-graphql'
 import {
   getUser,
   createUser,
@@ -8,43 +18,71 @@ import {
   getUsers
 } from './userRepository'
 
-const schema = buildSchema(`  
-  type User {
-    id: ID!
-    email: String
-    givenName: String
-    familyName: String
-    created: String
-  }
+@ObjectType()
+class User {
+  @Field(() => ID)
+  id: string
 
-  input UserInput {
-    email: String
-    givenName: String
-    familyName: String
-  }
+  @Field({ nullable: true })
+  givenName?: string
 
-  type Query {
-    users: [User]
-    user(id: ID!): User
-  }
+  @Field({ nullable: true })
+  familyName?: string
 
-  type Mutation {
-    createUser(user: UserInput): User
-    updateUser(id: ID!, user: UserInput): User
-    deleteUser(id: ID!): User
-  }
-`)
+  @Field({ nullable: true })
+  email?: string
 
-const resolvers = {
-  user: getUser,
-  users: getUsers,
-  createUser,
-  updateUser,
-  deleteUser
+  @Field({ nullable: true })
+  created?: Date
 }
 
-export default graphqlHTTP({
-  schema: schema,
-  rootValue: resolvers,
-  graphiql: true // disable in production/with a built client
-})
+@InputType()
+class UserInput implements Partial<User> {
+  @Field({ nullable: true })
+  givenName?: string
+
+  @Field({ nullable: true })
+  familyName?: string
+
+  @Field({ nullable: true })
+  email?: string
+}
+
+@Resolver()
+class UsersResolver {
+  @Query(() => User)
+  async user (@Arg('id') id: string) {
+    return getUser(id)
+  }
+
+  @Query(() => [User])
+  async users () {
+    return getUsers()
+  }
+
+  @Mutation(() => User)
+  async createUser (@Arg('user') user: UserInput) {
+    return createUser(user)
+  }
+
+  @Mutation(() => User)
+  async updateUser (@Arg('id') id: string, @Arg('user') user: UserInput) {
+    return updateUser(id, user)
+  }
+
+  @Mutation(() => User)
+  async deleteUser (@Arg('id') id: string) {
+    return deleteUser(id)
+  }
+}
+
+export default async function startQraphlServer () {
+  const schema = await buildSchema({
+    resolvers: [UsersResolver]
+  })
+
+  return graphqlHTTP({
+    schema,
+    graphiql: true // disable in production/with a built client
+  })
+}
