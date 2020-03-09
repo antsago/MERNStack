@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import ApiClient from '../../api'
+import ApiClient from '../../ApiClient'
 import { Actions } from './types'
 import { loadUsersSuccess, loadUsersError } from './actions'
 
