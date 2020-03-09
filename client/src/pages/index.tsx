@@ -11,10 +11,10 @@ export const Index = ({
   users: User[]
   usersLoading: boolean
 }) => (
-    <Layout>
-      <UsersList users={users} isLoading={usersLoading} />
-    </Layout>
-  )
+  <Layout>
+    <UsersList users={users} isLoading={usersLoading} />
+  </Layout>
+)
 
 Index.getInitialProps = async ({ ctx }: { ctx: Context }) => {
   ctx.store.dispatch(loadUsers())

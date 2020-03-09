@@ -22,12 +22,12 @@ const UsersList = ({
   return isLoading || !users ? (
     <CircularProgress className={classes.loader} />
   ) : (
-      <Grid container spacing={4}>
-        {users.map(user => (
-          <UserItem key={user.id} user={user} />
-        ))}
-      </Grid>
-    )
+    <Grid container spacing={4}>
+      {users.map(user => (
+        <UserItem key={user.id} user={user} />
+      ))}
+    </Grid>
+  )
 }
 
 export default UsersList
