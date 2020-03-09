@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux'
+
 export default class ReducerFactory {
   private level
 
@@ -19,4 +21,14 @@ export default class ReducerFactory {
       return fn ? fn(state, action) : state
     }
   }
+}
+
+export function mapReducers (reducersMap: Record<string, ReducerFactory>) {
+  return combineReducers(
+    Object.entries(reducersMap).reduce((map, [level, factory]) => {
+      factory.setLevel(level)
+      map[level] = factory.reducer()
+      return map
+    }, {})
+  )
 }

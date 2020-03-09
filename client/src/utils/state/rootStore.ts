@@ -1,11 +1,9 @@
-import { combineReducers } from 'redux'
 import { all } from 'redux-saga/effects'
 import { reducer as usersReducer, saga as usersSaga } from './usersDuck'
+import { mapReducers } from './ReducerFactory'
 
-usersReducer.setLevel('users')
-
-export const rootReducer = combineReducers({
-  users: usersReducer.reducer()
+export const rootReducer = mapReducers({
+  users: usersReducer
 })
 
 export function * rootSaga () {
