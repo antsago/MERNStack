@@ -1,3 +1,3 @@
 export { loadUsers } from './actions'
 export * from './reducer'
-export * from './saga'
+export { default as saga } from './saga'

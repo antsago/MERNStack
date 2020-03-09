@@ -1,19 +1,19 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { makeQuery } from '../../api'
+import ApiClient from '../../api'
 import { Actions } from './types'
 import { loadUsersSuccess, loadUsersError } from './actions'
 
-function * loadUsers () {
+export function * loadUsers (apiClient) {
   try {
-    const response = yield makeQuery(
+    const response = yield apiClient(
       '{ users{id, givenName, familyName, email, created} }'
     )
-    yield put(loadUsersSuccess(response.data.data.users))
+    yield put(loadUsersSuccess(response.users))
   } catch (err) {
     yield put(loadUsersError(err))
   }
 }
 
-export function * saga () {
-  yield takeEvery(Actions.LOAD_USERS, loadUsers)
+export default function * saga () {
+  yield takeEvery(Actions.LOAD_USERS, loadUsers, new ApiClient())
 }
