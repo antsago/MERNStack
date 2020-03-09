@@ -1,4 +1,5 @@
 import { LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_ERROR } from './types'
+import Reducer from '../ReducerFactory'
 
 const initialState = {
   isLoading: false,
@@ -25,10 +26,7 @@ const actionsMap = {
   })
 }
 
-export function reducer (state = initialState, action) {
-  const fn = actionsMap[action.type]
-  return fn ? fn(state, action) : state
-}
+export const reducer = new Reducer(initialState, actionsMap)
 
-export const areUsersLoading = state => state.users.isLoading
-export const users = state => state.users.users
+export const areUsersLoading = reducer.selector(state => state.isLoading)
+export const users = reducer.selector(state => state.users)
