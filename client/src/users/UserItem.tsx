@@ -6,7 +6,7 @@ import {
   Grid,
   Typography
 } from '@material-ui/core'
-import User from './UserType'
+import { User } from '../utils'
 
 const useStyles = makeStyles(() => ({
   card: {

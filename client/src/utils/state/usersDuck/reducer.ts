@@ -1,7 +1,12 @@
-import { LOAD_USERS, LOAD_USERS_SUCCESS, LOAD_USERS_ERROR } from './types'
+import {
+  LOAD_USERS,
+  LOAD_USERS_SUCCESS,
+  LOAD_USERS_ERROR,
+  UserState
+} from './types'
 import Reducer from '../ReducerFactory'
 
-const initialState = {
+const initialState: UserState = {
   isLoading: false,
   users: [],
   error: null
