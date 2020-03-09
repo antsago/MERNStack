@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { makeQuery } from '../../api'
-import { LOAD_USERS } from './types'
+import { Actions } from './types'
 import { loadUsersSuccess, loadUsersError } from './actions'
 
 function * loadUsers () {
@@ -15,5 +15,5 @@ function * loadUsers () {
 }
 
 export function * saga () {
-  yield takeEvery(LOAD_USERS, loadUsers)
+  yield takeEvery(Actions.LOAD_USERS, loadUsers)
 }
