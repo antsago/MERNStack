@@ -1,8 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
-import 'reflect-metadata'
-import craeteGraphqlServer from './graphqlServer'
+import createGraphqlServer from './graphqlServer'
 import config from './config'
 
 export default async function main () {
@@ -20,7 +19,7 @@ export default async function main () {
         optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
       })
     )
-    .use('/', await craeteGraphqlServer())
+    .use('/', await createGraphqlServer())
 
   const httpServer = app.listen(config.port)
   console.log(
