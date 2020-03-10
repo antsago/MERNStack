@@ -1,14 +1,14 @@
 import { expectSaga } from 'redux-saga-test-plan'
 import { loadUsers as loadUsersSaga } from './saga'
 import { loadUsers, loadUsersSuccess, loadUsersError } from './actions'
+import ApiClient from '../../ApiClient'
 
 describe('Users Saga', () => {
   test('Users saga finds and loads the users', async () => {
-    const mockedClient = jest.fn()
     const users = [{ id: 'test', email: 'test@test.com' }]
-    mockedClient.mockResolvedValue({ users })
+    const mockedClient = { makeQuery: jest.fn().mockResolvedValue({ users }) }
 
-    await expectSaga(loadUsersSaga, mockedClient)
+    await expectSaga(loadUsersSaga, mockedClient as ApiClient)
       .put(loadUsersSuccess(users))
       .dispatch(loadUsers())
       .run()
@@ -17,11 +17,10 @@ describe('Users Saga', () => {
   })
 
   test('Users saga handles error', async () => {
-    const mockedClient = jest.fn()
     const error = new Error('testing!')
-    mockedClient.mockRejectedValue(error)
+    const mockedClient = { makeQuery: jest.fn().mockRejectedValue(error) }
 
-    await expectSaga(loadUsersSaga, mockedClient)
+    await expectSaga(loadUsersSaga, mockedClient as ApiClient)
       .put(loadUsersError(error))
       .dispatch(loadUsers())
       .run()
