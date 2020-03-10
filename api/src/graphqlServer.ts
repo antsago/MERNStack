@@ -5,7 +5,8 @@ import { UsersResolver } from './users'
 
 export default async function startQraphlServer () {
   const schema = await buildSchema({
-    resolvers: [UsersResolver]
+    resolvers: [UsersResolver],
+    validate: false // We are not using type-graphql for validation, and it gives a warning without it
   })
 
   return graphqlHTTP({
