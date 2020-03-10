@@ -1,6 +1,9 @@
-import mongoose from 'mongoose'
+import { model, Schema, Document } from 'mongoose'
+import { User } from './userTypes'
 
-const UserSchema = new mongoose.Schema(
+export interface UserModelType extends Omit<User, 'id'>, Document {}
+
+const UserSchema: Schema = new Schema(
   {
     //public id
     id: {
@@ -15,4 +18,4 @@ const UserSchema = new mongoose.Schema(
   { timestamps: { createdAt: 'created' } }
 )
 
-export default mongoose.model('User', UserSchema)
+export default model<UserModelType>('User', UserSchema)

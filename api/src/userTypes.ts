@@ -1,7 +1,8 @@
 import { ObjectType, InputType, Field, ID } from 'type-graphql'
+import { Document } from 'mongoose'
 
 @ObjectType()
-export class User {
+export abstract class User {
   @Field(() => ID)
   id: string
 
@@ -19,7 +20,7 @@ export class User {
 }
 
 @InputType()
-export class UserInput implements Partial<User> {
+export abstract class UserInput implements Partial<User> {
   @Field({ nullable: true })
   givenName?: string
 
