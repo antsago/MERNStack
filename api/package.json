@@ -5,12 +5,9 @@
     "dev": "NODE_ENV=development ts-node-dev --inspect -- src/server.ts",
     "build": "tsc",
     "start": "node build/server.js",
-    "format": "prettier-standard --format --lint"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    }
+    "format": "prettier-standard --format --lint",
+    "test": "jest",
+    "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
     "@types/graphql": "^14.5.0",
