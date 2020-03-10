@@ -1,37 +1,48 @@
 import { v4 as uuid } from 'uuid'
-import User from './userModel'
+import UserModel, { UserModelType } from './userModel'
+import { User, UserInput } from './userTypes'
 
-const toPlainObject = mongoUser => ({
-  id: mongoUser.id,
-  email: mongoUser.email,
-  givenName: mongoUser.givenName,
-  familyName: mongoUser.familyName,
-  created: String(mongoUser.created)
-})
+export default class UserRepository {
+  constructor (private userModel = UserModel) {}
 
-function toPlainObjects (arrayUsers) {
-  return arrayUsers.map(user => toPlainObject(user))
-}
+  private toPlainObject (mongoUser: UserModelType): User {
+    return {
+      id: mongoUser.id,
+      email: mongoUser.email,
+      givenName: mongoUser.givenName,
+      familyName: mongoUser.familyName,
+      created: mongoUser.created
+    }
+  }
 
-export async function getUsers () {
-  return toPlainObjects(await User.find())
-}
+  private toPlainObjects (arrayUsers: UserModelType[]): User[] {
+    return arrayUsers.map(user => this.toPlainObject(user))
+  }
 
-export async function getUser (id) {
-  return toPlainObject(await User.findOne({ id }))
-}
+  async getUsers (): Promise<User[]> {
+    return this.toPlainObjects(await this.userModel.find())
+  }
 
-export async function createUser (user) {
-  const id = uuid()
-  return toPlainObject(await User.create({ ...user, id }))
-}
+  async getUser (id: string): Promise<User> {
+    return this.toPlainObject(await this.userModel.findOne({ id }))
+  }
 
-export async function updateUser (id, user) {
-  return toPlainObject(
-    await User.findOneAndUpdate({ id }, { $set: user }, { new: true })
-  )
-}
+  async createUser (user: UserInput): Promise<User> {
+    const id = uuid()
+    return this.toPlainObject(await this.userModel.create({ ...user, id }))
+  }
 
-export async function deleteUser (id) {
-  return toPlainObject(await User.findOneAndDelete({ id }))
+  async updateUser (id: string, user: UserInput): Promise<User> {
+    return this.toPlainObject(
+      await this.userModel.findOneAndUpdate(
+        { id },
+        { $set: user },
+        { new: true }
+      )
+    )
+  }
+
+  async deleteUser (id: string): Promise<User> {
+    return this.toPlainObject(await this.userModel.findOneAndDelete({ id }))
+  }
 }
