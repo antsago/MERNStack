@@ -8,7 +8,7 @@ module.exports = {
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   // https://github.com/zeit/next.js/issues/8663#issue-490553899
   globals: {
     // we must specify a custom tsconfig for tests because we need the typescript transform
