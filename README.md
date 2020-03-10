@@ -23,3 +23,4 @@ Potential next steps:
 - Progressive Web App: as recommended by google (https://developers.google.com/web/ilt/pwa/why-build-pwa)
 - Integration tests: current tests are mostly unit tests, which don't give that much security. Especially in such a bare bones application
 - E2E tests: for extra confidence (with cypress?)
+- Better error handling
