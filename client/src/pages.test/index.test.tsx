@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { Context } from '../utils'
-import { Index } from './index'
+import { Index } from '../pages/index'
 
 describe('Index page', () => {
   test('Shows loader while loading', () => {
