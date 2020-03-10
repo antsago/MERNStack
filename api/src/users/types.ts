@@ -1,5 +1,4 @@
 import { ObjectType, InputType, Field, ID } from 'type-graphql'
-import { Document } from 'mongoose'
 
 @ObjectType()
 export abstract class User {

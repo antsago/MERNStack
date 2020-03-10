@@ -1,6 +1,6 @@
 import { Resolver, Query, Arg, Mutation } from 'type-graphql'
-import { User, UserInput } from './userTypes'
-import UserResolver from './userRepository'
+import { User, UserInput } from './types'
+import UserResolver from './repository'
 
 @Resolver()
 export default class UsersResolver {

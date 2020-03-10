@@ -1,7 +1,7 @@
 import 'reflect-metadata' // necessary for type-graphql
 import graphqlHTTP from 'express-graphql'
 import { buildSchema } from 'type-graphql'
-import UsersResolver from './usersResolver'
+import { UsersResolver } from './users'
 
 export default async function startQraphlServer () {
   const schema = await buildSchema({

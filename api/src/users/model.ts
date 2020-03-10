@@ -1,5 +1,5 @@
 import { model, Schema, Document } from 'mongoose'
-import { User } from './userTypes'
+import { User } from './types'
 
 export interface UserModelType extends Omit<User, 'id'>, Document {}
 
