@@ -3,3 +3,6 @@ db-data
 build
 .next
 .vscode
+# Auto generated:
+client/public/sw.js
+client/public/workbox*
