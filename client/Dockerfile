@@ -20,5 +20,6 @@ COPY package*.json ./
 RUN npm ci --only=production
 
 COPY --from=build /usr/src/app/.next ./.next
+COPY --from=build /usr/src/app/public ./public
 
 CMD [ "npm", "start" ]

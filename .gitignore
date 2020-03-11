@@ -3,6 +3,7 @@ db-data
 build
 .next
 .vscode
+*.map
 # Auto generated:
 client/public/sw.js
 client/public/workbox*
