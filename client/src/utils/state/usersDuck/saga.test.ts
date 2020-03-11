@@ -8,23 +8,23 @@ describe('Users Saga', () => {
     const users = [{ id: 'test', email: 'test@test.com' }]
     const mockedClient = { makeQuery: jest.fn().mockResolvedValue({ users }) }
 
-    await expectSaga(loadUsersSaga, mockedClient as ApiClient)
+    await expectSaga(loadUsersSaga, (mockedClient as any) as ApiClient)
       .put(loadUsersSuccess(users))
       .dispatch(loadUsers())
       .run()
 
-    expect(mockedClient).toHaveBeenCalled()
+    expect(mockedClient.makeQuery).toHaveBeenCalled()
   })
 
   test('Users saga handles error', async () => {
     const error = new Error('testing!')
     const mockedClient = { makeQuery: jest.fn().mockRejectedValue(error) }
 
-    await expectSaga(loadUsersSaga, mockedClient as ApiClient)
+    await expectSaga(loadUsersSaga, (mockedClient as any) as ApiClient)
       .put(loadUsersError(error))
       .dispatch(loadUsers())
       .run()
 
-    expect(mockedClient).toHaveBeenCalled()
+    expect(mockedClient.makeQuery).toHaveBeenCalled()
   })
 })
