@@ -9,7 +9,7 @@ To try it just run `docker-compose up` and play with the React client at http://
 It consists of two microservices:
 
 - api: a GraphQL server with Docker and Mongo.
-- client: an SSR React app using Redux-saga and Material-UI and served with Next.js
+- client: an SSR PWA build with React, Redux-Saga and Material-UI and served with Next.js
 - (and a default mongo image for persitency)
 
 Each microservice follows these conventions:
@@ -21,7 +21,6 @@ Each microservice follows these conventions:
 
 ## Potential next steps
 
-- Progressive Web App: [as recommended by google](https://developers.google.com/web/ilt/pwa/why-build-pwa)
 - Integration tests: current tests are mostly unit tests, which don't give that much security. Especially in such a bare bones application
 - E2E tests: for extra confidence (with cypress?)
 - Better error handling
