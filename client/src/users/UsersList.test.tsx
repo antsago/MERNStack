@@ -31,6 +31,7 @@ describe('UsersList', () => {
       <UsersList users={[user]} isLoading={false} />
     )
 
+    expect(queryByRole("dialog")).not.toBeInTheDocument()
     fireEvent.click(getByTestId("user-item"))
     expect(queryByRole("dialog")).toBeInTheDocument()
   })

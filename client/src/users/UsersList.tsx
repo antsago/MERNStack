@@ -28,11 +28,11 @@ const UsersList = ({
       ) : (
           <Grid container spacing={4}>
             {users.map(user => (
-              <UserItem key={user.id} user={user} onClick={() => setDialogOpen(!isDialogOpen)} />
+              <UserItem key={user.id} user={user} onClick={() => setDialogOpen(true)} />
             ))}
           </Grid>
         )}
-      <UserDialog open={isDialogOpen} title="Update user" />
+      <UserDialog open={isDialogOpen} title="Update user" onClose={() => setDialogOpen(false)} />
     </Fragment>
   )
 

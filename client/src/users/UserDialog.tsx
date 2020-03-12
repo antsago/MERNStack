@@ -4,9 +4,9 @@ import {
   DialogTitle,
 } from '@material-ui/core'
 
-const UserItem = ({ open, title }: { open: boolean, title: string }) => {
+const UserItem = ({ open, title, onClose }: { open: boolean, title: string, onClose?: () => void }) => {
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onClose={onClose}>
       <DialogTitle>{title}</DialogTitle>
     </Dialog>
   )
