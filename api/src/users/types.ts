@@ -14,8 +14,8 @@ export abstract class User {
   @Field({ nullable: true })
   email?: string
 
-  @Field({ nullable: true })
-  created?: Date
+  @Field()
+  created: Date
 }
 
 @InputType()
