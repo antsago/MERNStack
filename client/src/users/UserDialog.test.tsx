@@ -6,7 +6,6 @@ describe('UserDialog', () => {
   test('Renders correctly', () => {
     const title = 'Test title'
     const submit = 'Update'
-    const secondary = 'Delete'
     const user = {
       id: 'test',
       givenName: 'givenName',
@@ -19,13 +18,12 @@ describe('UserDialog', () => {
         open
         title={title}
         submitAction={submit}
-        secondaryAction={secondary}
       />
     )
 
     expect(getByText(title)).toBeInTheDocument()
     expect(getByText(submit)).toBeInTheDocument()
-    expect(getByText(secondary)).toBeInTheDocument()
+    expect(getByText('Cancel')).toBeInTheDocument()
     expect(getByDisplayValue(user.givenName)).toBeInTheDocument()
     expect(getByDisplayValue(user.familyName)).toBeInTheDocument()
     expect(getByDisplayValue(user.email)).toBeInTheDocument()
@@ -39,7 +37,6 @@ describe('UserDialog', () => {
           user={null}
           title={'title'}
           submitAction={'submit'}
-          secondaryAction={'secondary'}
         />
       )
 

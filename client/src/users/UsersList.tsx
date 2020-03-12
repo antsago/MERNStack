@@ -26,22 +26,21 @@ const UsersList = ({
       {isLoading || !users ? (
         <CircularProgress className={classes.loader} />
       ) : (
-        <Grid container spacing={2}>
-          {users.map(user => (
-            <UserItem
-              key={user.id}
-              user={user}
-              onClick={() => setSelectedUser(user)}
-            />
-          ))}
-        </Grid>
-      )}
+          <Grid container spacing={2}>
+            {users.map(user => (
+              <UserItem
+                key={user.id}
+                user={user}
+                onClick={() => setSelectedUser(user)}
+              />
+            ))}
+          </Grid>
+        )}
       <UserDialog
         open={!!selectedUser}
         user={selectedUser}
         title='Update user'
         submitAction='Update'
-        secondaryAction='Delete'
         onClose={() => setSelectedUser(null)}
       />
     </Fragment>

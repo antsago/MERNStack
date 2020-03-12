@@ -4,24 +4,17 @@ import {
   createStyles,
   Dialog,
   DialogTitle,
+  DialogContent,
+  DialogActions,
   TextField,
-  Button
+  Button,
 } from '@material-ui/core'
 import { User } from '../utils'
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    form: {
-      margin: theme.spacing(3),
-      marginTop: 0
-    },
     textField: {
       marginTop: theme.spacing(1)
-    },
-    buttonGroup: {
-      marginTop: theme.spacing(3),
-      display: 'flex',
-      justifyContent: 'space-between'
     }
   })
 )
@@ -31,14 +24,12 @@ const UserItem = ({
   open,
   title,
   submitAction,
-  secondaryAction,
   onClose
 }: {
   user: User
   open: boolean
   title: string
   submitAction: string
-  secondaryAction: string
   onClose?: () => void
 }) => {
   const classes = useStyles()
@@ -46,7 +37,7 @@ const UserItem = ({
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>{title}</DialogTitle>
-      <form className={classes.form}>
+      <DialogContent>
         <TextField
           className={classes.textField}
           value={open ? user.givenName : ''}
@@ -66,15 +57,15 @@ const UserItem = ({
           fullWidth
           type='email'
         />
-        <div className={classes.buttonGroup}>
-          <Button variant='outlined' color='secondary'>
-            {secondaryAction}
-          </Button>
-          <Button variant='contained' color='primary'>
-            {submitAction}
-          </Button>
-        </div>
-      </form>
+      </DialogContent>
+      <DialogActions>
+        <Button variant='text' color='primary' onClick={onClose}>
+          Cancel
+        </Button>
+        <Button variant='text' color='primary'>
+          {submitAction}
+        </Button>
+      </DialogActions>
     </Dialog>
   )
 }
