@@ -12,11 +12,13 @@ describe('UserItem', () => {
   })
 
   test('Responds when clicked', () => {
-    const onClickFunct = jest.fn();
+    const onClickFunct = jest.fn()
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
-    const { getByTestId } = render(<UserItem user={user} onClick={onClickFunct} />)
+    const { getByTestId } = render(
+      <UserItem user={user} onClick={onClickFunct} />
+    )
 
-    fireEvent.click(getByTestId("user-item"))
+    fireEvent.click(getByTestId('user-item'))
     expect(onClickFunct).toHaveBeenCalled()
   })
 })

@@ -19,13 +19,13 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const UserItem = ({ user, onClick }: { user: User, onClick?: () => void }) => {
+const UserItem = ({ user, onClick }: { user: User; onClick?: () => void }) => {
   const classes = useStyles()
 
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card className={classes.card}>
-        <CardActionArea onClick={onClick} data-testid="user-item">
+        <CardActionArea onClick={onClick} data-testid='user-item'>
           <CardContent className={classes.cardContent}>
             <Typography>{user.givenName}</Typography>
             <Typography>{user.familyName}</Typography>

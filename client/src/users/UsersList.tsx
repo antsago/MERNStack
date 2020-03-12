@@ -19,20 +19,31 @@ const UsersList = ({
   isLoading: boolean
 }) => {
   const classes = useStyles()
-  const [isDialogOpen, setDialogOpen] = useState(false)
+  const [selectedUser, setSelectedUser] = useState(null)
 
   return (
     <Fragment>
       {isLoading || !users ? (
         <CircularProgress className={classes.loader} />
       ) : (
-          <Grid container spacing={4}>
-            {users.map(user => (
-              <UserItem key={user.id} user={user} onClick={() => setDialogOpen(true)} />
-            ))}
-          </Grid>
-        )}
-      <UserDialog open={isDialogOpen} title="Update user" onClose={() => setDialogOpen(false)} />
+        <Grid container spacing={2}>
+          {users.map(user => (
+            <UserItem
+              key={user.id}
+              user={user}
+              onClick={() => setSelectedUser(user)}
+            />
+          ))}
+        </Grid>
+      )}
+      <UserDialog
+        open={!!selectedUser}
+        user={selectedUser}
+        title='Update user'
+        submitAction='Update'
+        secondaryAction='Delete'
+        onClose={() => setSelectedUser(null)}
+      />
     </Fragment>
   )
 
