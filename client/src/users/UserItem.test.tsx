@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import UserItem from './UserItem'
 
 describe('UserItem', () => {
@@ -9,5 +9,14 @@ describe('UserItem', () => {
 
     expect(getByText(user.givenName)).toBeInTheDocument()
     expect(getByText(user.familyName)).toBeInTheDocument()
+  })
+
+  test('Responds when clicked', () => {
+    const onClickFunct = jest.fn();
+    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+    const { getByTestId } = render(<UserItem user={user} onClick={onClickFunct} />)
+
+    fireEvent.click(getByTestId("user-item"))
+    expect(onClickFunct).toHaveBeenCalled()
   })
 })
