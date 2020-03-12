@@ -31,7 +31,7 @@ const UsersList = ({
               <UserItem
                 key={user.id}
                 user={user}
-                onClick={() => setSelectedUser(user)}
+                onUpdate={() => setSelectedUser(user)}
               />
             ))}
           </Grid>

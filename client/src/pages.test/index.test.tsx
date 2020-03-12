@@ -4,26 +4,13 @@ import { Context } from '../utils'
 import { Index } from '../pages/index'
 
 describe('Index page', () => {
-  test('Shows loader while loading', () => {
+  test('Renders correctly', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
-    const { getByRole, queryByText } = render(
+    const { getByRole } = render(
       <Index users={[user]} usersLoading />
     )
 
     expect(getByRole('progressbar')).toBeInTheDocument()
-    expect(queryByText(user.givenName)).not.toBeInTheDocument()
-    expect(queryByText(user.familyName)).not.toBeInTheDocument()
-  })
-
-  test('Shows users after loading', () => {
-    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
-    const { queryByRole, getByText } = render(
-      <Index users={[user]} usersLoading={false} />
-    )
-
-    expect(queryByRole('progressbar')).not.toBeInTheDocument()
-    expect(getByText(user.givenName)).toBeInTheDocument()
-    expect(getByText(user.familyName)).toBeInTheDocument()
   })
 
   test('Loads users on initial props', async () => {
