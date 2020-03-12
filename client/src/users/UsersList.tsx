@@ -39,7 +39,6 @@ const UsersList = ({
       <UserDialog
         open={!!selectedUser}
         user={selectedUser}
-        title='Update user'
         submitAction='Update'
         onClose={() => setSelectedUser(null)}
       />

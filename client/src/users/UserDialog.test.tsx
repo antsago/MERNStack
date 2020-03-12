@@ -4,7 +4,6 @@ import UserDialog from './UserDialog'
 
 describe('UserDialog', () => {
   test('Renders correctly', () => {
-    const title = 'Test title'
     const submit = 'Update'
     const user = {
       id: 'test',
@@ -15,13 +14,11 @@ describe('UserDialog', () => {
     const { getByText, getByDisplayValue } = render(
       <UserDialog
         user={user}
-        open
-        title={title}
         submitAction={submit}
+        open
       />
     )
 
-    expect(getByText(title)).toBeInTheDocument()
     expect(getByText(submit)).toBeInTheDocument()
     expect(getByText('Cancel')).toBeInTheDocument()
     expect(getByDisplayValue(user.givenName)).toBeInTheDocument()
@@ -35,7 +32,6 @@ describe('UserDialog', () => {
         <UserDialog
           open={false}
           user={null}
-          title={'title'}
           submitAction={'submit'}
         />
       )

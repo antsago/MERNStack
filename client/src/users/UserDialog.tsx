@@ -22,13 +22,11 @@ const useStyles = makeStyles(theme =>
 const UserItem = ({
   user,
   open,
-  title,
   submitAction,
   onClose
 }: {
   user: User
   open: boolean
-  title: string
   submitAction: string
   onClose?: () => void
 }) => {
@@ -36,7 +34,6 @@ const UserItem = ({
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <TextField
           className={classes.textField}
