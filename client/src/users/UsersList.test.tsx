@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import UsersList from './UsersList'
 
 describe('UsersList', () => {
@@ -23,5 +23,15 @@ describe('UsersList', () => {
     expect(queryByRole('progressbar')).not.toBeInTheDocument()
     expect(getByText(user.givenName)).toBeInTheDocument()
     expect(getByText(user.familyName)).toBeInTheDocument()
+  })
+
+  test('Shows dialog when clicking on user', () => {
+    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+    const { queryByRole, getByTestId } = render(
+      <UsersList users={[user]} isLoading={false} />
+    )
+
+    fireEvent.click(getByTestId("user-item"))
+    expect(queryByRole("dialog")).toBeInTheDocument()
   })
 })

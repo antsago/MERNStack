@@ -1,7 +1,8 @@
-import React, { FunctionComponent } from 'react'
+import React, { Fragment, useState } from 'react'
 import { makeStyles, Grid, CircularProgress } from '@material-ui/core'
 import { User } from '../utils'
 import UserItem from './UserItem'
+import UserDialog from './UserDialog'
 
 const useStyles = makeStyles(theme => ({
   loader: {
@@ -18,16 +19,24 @@ const UsersList = ({
   isLoading: boolean
 }) => {
   const classes = useStyles()
+  const [isDialogOpen, setDialogOpen] = useState(false)
 
-  return isLoading || !users ? (
-    <CircularProgress className={classes.loader} />
-  ) : (
-    <Grid container spacing={4}>
-      {users.map(user => (
-        <UserItem key={user.id} user={user} />
-      ))}
-    </Grid>
+  return (
+    <Fragment>
+      {isLoading || !users ? (
+        <CircularProgress className={classes.loader} />
+      ) : (
+          <Grid container spacing={4}>
+            {users.map(user => (
+              <UserItem key={user.id} user={user} onClick={() => setDialogOpen(!isDialogOpen)} />
+            ))}
+          </Grid>
+        )}
+      <UserDialog open={isDialogOpen} title="Update user" />
+    </Fragment>
   )
+
+  return
 }
 
 export default UsersList
