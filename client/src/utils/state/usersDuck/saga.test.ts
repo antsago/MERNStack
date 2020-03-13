@@ -1,7 +1,8 @@
 import { expectSaga } from 'redux-saga-test-plan'
-import { loadUsers as loadUsersSaga } from './saga'
-import { loadUsers, loadUsersSuccess, loadUsersError } from './actions'
 import ApiClient from '../../ApiClient'
+import { ManageAlerts } from '../utilsDuck'
+import { loadUsers as loadUsersSaga } from './saga'
+import { loadUsers, loadUsersSuccess } from './actions'
 
 describe('Users Saga', () => {
   test('Users saga finds and loads the users', async () => {
@@ -17,11 +18,14 @@ describe('Users Saga', () => {
   })
 
   test('Users saga handles error', async () => {
-    const error = new Error('testing!')
+    const message = 'testing!'
+    const error = new Error(message)
     const mockedClient = { makeQuery: jest.fn().mockRejectedValue(error) }
 
     await expectSaga(loadUsersSaga, (mockedClient as any) as ApiClient)
-      .put(loadUsersError(error))
+      .put.like({
+        action: { type: ManageAlerts.ADD_ALERT, alert: { message } }
+      })
       .dispatch(loadUsers())
       .run()
 

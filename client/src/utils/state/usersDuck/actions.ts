@@ -7,6 +7,3 @@ export function loadUsers (): UserActionTypes {
 export function loadUsersSuccess (users: User[]): UserActionTypes {
   return { type: Actions.LOAD_USERS_SUCCESS, users }
 }
-export function loadUsersError (error: Error): UserActionTypes {
-  return { type: Actions.LOAD_USERS_ERROR, error }
-}

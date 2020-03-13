@@ -3,12 +3,10 @@ import { User } from '../../types'
 export interface UserState {
   isLoading: boolean
   users: User[]
-  error: Error
 }
 export enum Actions {
   LOAD_USERS = 'LOAD_USERS',
-  LOAD_USERS_SUCCESS = 'LOAD_USERS_SUCCESS',
-  LOAD_USERS_ERROR = 'LOAD_USERS_ERROR'
+  LOAD_USERS_SUCCESS = 'LOAD_USERS_SUCCESS'
 }
 
 interface LoadUsersAction {
@@ -20,12 +18,4 @@ export interface LoadUsersSuccessAction {
   users: User[]
 }
 
-interface LoadUsersErrorAction {
-  type: Actions.LOAD_USERS_ERROR
-  error: Error
-}
-
-export type UserActionTypes =
-  | LoadUsersAction
-  | LoadUsersSuccessAction
-  | LoadUsersErrorAction
+export type UserActionTypes = LoadUsersAction | LoadUsersSuccessAction

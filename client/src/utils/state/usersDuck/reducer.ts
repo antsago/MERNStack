@@ -3,26 +3,18 @@ import Reducer from '../ReducerFactory'
 
 const initialState: UserState = {
   isLoading: false,
-  users: [],
-  error: null
+  users: []
 }
 
 const actionsMap = {
   [Actions.LOAD_USERS]: state => ({
     ...state,
-    isLoading: true,
-    error: null
+    isLoading: true
   }),
   [Actions.LOAD_USERS_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    users: action.users,
-    error: null
-  }),
-  [Actions.LOAD_USERS_ERROR]: (state, action) => ({
-    ...state,
-    isLoading: false,
-    error: action.error
+    users: action.users
   })
 }
 

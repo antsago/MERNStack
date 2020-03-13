@@ -1,7 +1,8 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import ApiClient from '../../ApiClient'
+import { addAlert } from '../utilsDuck'
 import { Actions } from './types'
-import { loadUsersSuccess, loadUsersError } from './actions'
+import { loadUsersSuccess } from './actions'
 
 export function * loadUsers (apiClient: ApiClient) {
   try {
@@ -10,7 +11,8 @@ export function * loadUsers (apiClient: ApiClient) {
     )
     yield put(loadUsersSuccess(response.users))
   } catch (err) {
-    yield put(loadUsersError(err))
+    const message = err.message || 'We found an error while loading users'
+    yield put(addAlert(message))
   }
 }
 
