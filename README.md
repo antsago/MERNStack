@@ -23,6 +23,5 @@ Each microservice follows these conventions:
 
 - Integration tests: current tests are mostly unit tests, which don't give that much security. Especially in such a bare bones application
 - E2E tests: for extra confidence (with cypress?)
-- Better error handling
 - Move to prettier and es-lint from prettier-standard, as the former has more widespread support and provides more flexibility
 - Logging
