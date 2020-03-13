@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { makeStyles, Grid, CircularProgress } from '@material-ui/core'
-import { User, UserInput } from '../utils'
+import { User, UserInput } from '../../utils'
 import UserItem from './UserItem'
 import UserDialog from './UserDialog'
 

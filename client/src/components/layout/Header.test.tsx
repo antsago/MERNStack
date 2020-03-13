@@ -5,7 +5,7 @@ import Header from './Header'
 describe('Header', () => {
   test('Renders correctly', () => {
     const { getByRole, getByText } = render(<Header />)
-    expect(getByText('Users')).toBeInTheDocument()
+    expect(getByText('UsersList')).toBeInTheDocument()
     expect(getByRole('heading')).toBeInTheDocument()
   })
 })

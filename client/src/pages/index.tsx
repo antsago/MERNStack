@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Layout } from '../common'
+import { Layout, UsersList } from '../components'
 import { loadUsers, users, areUsersLoading, Context, User } from '../utils'
-import { UsersList } from '../users'
 
 export const Index = ({
   users,

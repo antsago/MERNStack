@@ -8,7 +8,7 @@ import {
   Typography,
   Button
 } from '@material-ui/core'
-import { User } from '../utils'
+import { User } from '../../utils'
 
 const UserItem = ({ user, onUpdate, onDelete }: { user: User; onUpdate?: () => void, onDelete?: () => void }) => {
   return (
