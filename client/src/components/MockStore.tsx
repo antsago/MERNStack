@@ -6,4 +6,4 @@ import configureStore from 'redux-mock-store'
 export const mockStore = configureStore([])
 
 export const renderWithStore = ui =>
-  render(<Provider store={mockStore({})}>{ui}</Provider>)
+  render(<Provider store={mockStore({ utils: [] })}>{ui}</Provider>)
