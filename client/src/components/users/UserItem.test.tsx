@@ -4,10 +4,17 @@ import UserItem from './UserItem'
 
 describe('UserItem', () => {
   test('Renders correctly', () => {
-    const user = { id: 'test', givenName: 'name', familyName: 'surname', email: 'foo@foo.com' }
+    const user = {
+      id: 'test',
+      givenName: 'name',
+      familyName: 'surname',
+      email: 'foo@foo.com'
+    }
     const { getByText } = render(<UserItem user={user} />)
 
-    expect(getByText(`${user.givenName} ${user.familyName}`)).toBeInTheDocument()
+    expect(
+      getByText(`${user.givenName} ${user.familyName}`)
+    ).toBeInTheDocument()
     expect(getByText(user.email)).toBeInTheDocument()
   })
 

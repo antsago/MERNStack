@@ -1,16 +1,24 @@
 import React from 'react'
 import { Group as UsersIcon } from '@material-ui/icons'
-import { AppBar, Toolbar, Typography, makeStyles, createStyles } from '@material-ui/core'
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  makeStyles,
+  createStyles
+} from '@material-ui/core'
 import Menu from './Menu'
 
-const useStyles = makeStyles(theme => createStyles({
-  icon: {
-    marginRight: theme.spacing(2)
-  },
-  grow: {
-    flexGrow: 1,
-  }
-}))
+const useStyles = makeStyles(theme =>
+  createStyles({
+    icon: {
+      marginRight: theme.spacing(2)
+    },
+    grow: {
+      flexGrow: 1
+    }
+  })
+)
 
 const Header = () => {
   const classes = useStyles()

@@ -6,7 +6,12 @@ describe('UsersList', () => {
   test('Shows loader while loading', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
     const { getByRole, queryByTestId } = render(
-      <UsersList users={[user]} isLoading deleteUser={() => { }} updateUser={() => { }} />
+      <UsersList
+        users={[user]}
+        isLoading
+        deleteUser={() => {}}
+        updateUser={() => {}}
+      />
     )
 
     expect(getByRole('progressbar')).toBeInTheDocument()
@@ -16,7 +21,12 @@ describe('UsersList', () => {
   test('Shows users after loading', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
     const { queryByRole, getByTestId } = render(
-      <UsersList users={[user]} isLoading={false} deleteUser={() => { }} updateUser={() => { }} />
+      <UsersList
+        users={[user]}
+        isLoading={false}
+        deleteUser={() => {}}
+        updateUser={() => {}}
+      />
     )
 
     expect(queryByRole('progressbar')).not.toBeInTheDocument()
@@ -25,9 +35,19 @@ describe('UsersList', () => {
 
   test('Calls updates user when clicking', () => {
     const updateUser = jest.fn()
-    const user = { id: 'test', givenName: 'name', familyName: 'surname', email: 'email' }
+    const user = {
+      id: 'test',
+      givenName: 'name',
+      familyName: 'surname',
+      email: 'email'
+    }
     const { queryByRole, getByText } = render(
-      <UsersList users={[user]} isLoading={false} deleteUser={() => { }} updateUser={updateUser} />
+      <UsersList
+        users={[user]}
+        isLoading={false}
+        deleteUser={() => {}}
+        updateUser={updateUser}
+      />
     )
 
     expect(queryByRole('dialog')).not.toBeInTheDocument()
@@ -42,7 +62,12 @@ describe('UsersList', () => {
     const deleteUser = jest.fn()
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
     const { getByText } = render(
-      <UsersList users={[user]} isLoading={false} updateUser={() => { }} deleteUser={deleteUser} />
+      <UsersList
+        users={[user]}
+        isLoading={false}
+        updateUser={() => {}}
+        deleteUser={deleteUser}
+      />
     )
 
     fireEvent.click(getByText('Delete'))

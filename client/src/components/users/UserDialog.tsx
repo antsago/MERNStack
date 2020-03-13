@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-  Button,
+  Button
 } from '@material-ui/core'
 import { UserInput } from '../../utils'
 
@@ -64,11 +64,17 @@ const UserItem = ({
         <Button variant='text' color='primary' onClick={onClose}>
           Cancel
         </Button>
-        <Button variant='text' color='primary' onClick={() => onSubmit({
-          givenName: name,
-          familyName: surname,
-          email,
-        })}>
+        <Button
+          variant='text'
+          color='primary'
+          onClick={() =>
+            onSubmit({
+              givenName: name,
+              familyName: surname,
+              email
+            })
+          }
+        >
           Save
         </Button>
       </DialogActions>

@@ -10,14 +10,24 @@ import {
 } from '@material-ui/core'
 import { User } from '../../utils'
 
-const UserItem = ({ user, onUpdate, onDelete }: { user: User; onUpdate?: () => void, onDelete?: () => void }) => {
+const UserItem = ({
+  user,
+  onUpdate,
+  onDelete
+}: {
+  user: User
+  onUpdate?: () => void
+  onDelete?: () => void
+}) => {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card>
         <CardActionArea onClick={onUpdate} data-testid='user-item'>
           <CardContent>
-            <Typography variant="h5">{user.givenName} {user.familyName}</Typography>
-            <Typography variant="subtitle1">{user.email}</Typography>
+            <Typography variant='h5'>
+              {user.givenName} {user.familyName}
+            </Typography>
+            <Typography variant='subtitle1'>{user.email}</Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>

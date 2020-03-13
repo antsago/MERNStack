@@ -7,7 +7,7 @@ const APP_NAME = 'Users List'
 const APP_DESCRIPTION = 'An example app to explore the MERN stack'
 
 export default class Document extends BaseDocument {
-  static async getInitialProps(ctx) {
+  static async getInitialProps (ctx) {
     const sheets = new ServerStyleSheets()
     const originalRenderPage = ctx.renderPage
 
@@ -26,7 +26,7 @@ export default class Document extends BaseDocument {
     }
   }
 
-  render() {
+  render () {
     return (
       <Html lang='en' dir='ltr'>
         <Head>

@@ -18,9 +18,9 @@ const UsersList = ({
   updateUser
 }: {
   users: User[]
-  isLoading: boolean,
-  deleteUser: (string) => void,
-  updateUser: (UserInput) => void,
+  isLoading: boolean
+  deleteUser: (string) => void
+  updateUser: (UserInput) => void
 }) => {
   const classes = useStyles()
   const [selectedUser, setSelectedUser] = useState(null)
@@ -30,17 +30,17 @@ const UsersList = ({
       {isLoading || !users ? (
         <CircularProgress className={classes.loader} />
       ) : (
-          <Grid container spacing={2}>
-            {users.map(user => (
-              <UserItem
-                key={user.id}
-                user={user}
-                onUpdate={() => setSelectedUser(user)}
-                onDelete={() => deleteUser(user.id)}
-              />
-            ))}
-          </Grid>
-        )}
+        <Grid container spacing={2}>
+          {users.map(user => (
+            <UserItem
+              key={user.id}
+              user={user}
+              onUpdate={() => setSelectedUser(user)}
+              onDelete={() => deleteUser(user.id)}
+            />
+          ))}
+        </Grid>
+      )}
       {!!selectedUser && (
         <UserDialog
           open={!!selectedUser}

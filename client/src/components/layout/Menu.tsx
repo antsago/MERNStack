@@ -5,14 +5,29 @@ import { IconButton } from '@material-ui/core'
 import { UserDialog } from '../users'
 import { UserInput } from '../../utils'
 
-export const Menu = ({ createUser, createRandomUser }: { createUser: (UserInput) => void, createRandomUser: () => void }) => {
+export const Menu = ({
+  createUser,
+  createRandomUser
+}: {
+  createUser: (UserInput) => void
+  createRandomUser: () => void
+}) => {
   const [showDialog, setShowDialog] = useState(false)
   return (
     <Fragment>
-      <IconButton color="inherit" onClick={() => setShowDialog(true)} aria-label="Add user">
+      <IconButton
+        color='inherit'
+        onClick={() => setShowDialog(true)}
+        aria-label='Add user'
+      >
         <Add />
       </IconButton>
-      <IconButton color="inherit" edge="end" onClick={createRandomUser} aria-label="Add random user">
+      <IconButton
+        color='inherit'
+        edge='end'
+        onClick={createRandomUser}
+        aria-label='Add random user'
+      >
         <PlusOne />
       </IconButton>
       {showDialog && (
@@ -31,8 +46,8 @@ export const Menu = ({ createUser, createRandomUser }: { createUser: (UserInput)
 }
 
 const mapDispatchToProps = dispatch => ({
-  createUser: () => { },
-  createRandomUser: () => { }
+  createUser: () => {},
+  createRandomUser: () => {}
 })
 
 export default connect(undefined, mapDispatchToProps)(Menu)
