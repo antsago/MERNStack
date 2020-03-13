@@ -21,7 +21,7 @@ Each microservice follows these conventions:
 
 ## Potential next steps
 
-- Integration tests: current tests are mostly unit tests, which don't give that much security. Especially in such a bare bones application
+- Integration tests: current tests are mostly unit tests (expect react ones), which don't give that much security.
 - E2E tests: for extra confidence (with cypress?)
 - Move to prettier and es-lint from prettier-standard, as the former has more widespread support and provides more flexibility
 - Logging
