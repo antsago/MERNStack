@@ -6,4 +6,8 @@ export interface User {
   created?: Date
 }
 
-export default User
+export interface UserInput extends Partial<User> {
+  givenName?: string
+  familyName?: string
+  email?: string
+}

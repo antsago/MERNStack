@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import { makeStyles, Grid, CircularProgress } from '@material-ui/core'
-import { User } from '../utils'
+import { User, UserInput } from '../utils'
 import UserItem from './UserItem'
 import UserDialog from './UserDialog'
 
@@ -13,10 +13,14 @@ const useStyles = makeStyles(theme => ({
 
 const UsersList = ({
   users,
-  isLoading
+  isLoading,
+  deleteUser,
+  updateUser
 }: {
   users: User[]
-  isLoading: boolean
+  isLoading: boolean,
+  deleteUser: (string) => void,
+  updateUser: (UserInput) => void,
 }) => {
   const classes = useStyles()
   const [selectedUser, setSelectedUser] = useState(null)
@@ -32,20 +36,25 @@ const UsersList = ({
                 key={user.id}
                 user={user}
                 onUpdate={() => setSelectedUser(user)}
+                onDelete={() => deleteUser(user.id)}
               />
             ))}
           </Grid>
         )}
-      <UserDialog
-        open={!!selectedUser}
-        user={selectedUser}
-        submitAction='Update'
-        onClose={() => setSelectedUser(null)}
-      />
+      {!!selectedUser && (
+        <UserDialog
+          open={!!selectedUser}
+          user={selectedUser}
+          submitAction='Update'
+          onClose={() => setSelectedUser(null)}
+          onSubmit={changes => {
+            updateUser(changes)
+            setSelectedUser(null)
+          }}
+        />
+      )}
     </Fragment>
   )
-
-  return
 }
 
 export default UsersList

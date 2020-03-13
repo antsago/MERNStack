@@ -1,15 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   makeStyles,
   createStyles,
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogActions,
   TextField,
   Button,
 } from '@material-ui/core'
-import { User } from '../utils'
+import { UserInput } from '../utils'
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -23,13 +22,18 @@ const UserItem = ({
   user,
   open,
   submitAction,
-  onClose
+  onClose,
+  onSubmit
 }: {
-  user: User
+  user: UserInput
   open: boolean
   submitAction: string
-  onClose?: () => void
+  onClose: () => void
+  onSubmit: (UserInput) => void
 }) => {
+  const [name, setName] = useState(open ? user.givenName : '')
+  const [surname, setSurname] = useState(open ? user.familyName : '')
+  const [email, setEmail] = useState(open ? user.email : '')
   const classes = useStyles()
 
   return (
@@ -37,29 +41,36 @@ const UserItem = ({
       <DialogContent>
         <TextField
           className={classes.textField}
-          value={open ? user.givenName : ''}
           label='Name'
+          value={name}
+          onChange={event => setName(event.target.value)}
           fullWidth
         />
         <TextField
           className={classes.textField}
-          value={open ? user.familyName : ''}
           label='Surname'
+          value={surname}
+          onChange={event => setSurname(event.target.value)}
           fullWidth
         />
         <TextField
           className={classes.textField}
-          value={open ? user.email : ''}
           label='Email'
-          fullWidth
           type='email'
+          value={email}
+          onChange={event => setEmail(event.target.value)}
+          fullWidth
         />
       </DialogContent>
       <DialogActions>
         <Button variant='text' color='primary' onClick={onClose}>
           Cancel
         </Button>
-        <Button variant='text' color='primary'>
+        <Button variant='text' color='primary' onClick={() => onSubmit({
+          givenName: name,
+          familyName: surname,
+          email,
+        })}>
           {submitAction}
         </Button>
       </DialogActions>

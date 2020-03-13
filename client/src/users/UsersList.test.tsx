@@ -6,7 +6,7 @@ describe('UsersList', () => {
   test('Shows loader while loading', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
     const { getByRole, queryByTestId } = render(
-      <UsersList users={[user]} isLoading />
+      <UsersList users={[user]} isLoading deleteUser={() => { }} updateUser={() => { }} />
     )
 
     expect(getByRole('progressbar')).toBeInTheDocument()
@@ -16,7 +16,7 @@ describe('UsersList', () => {
   test('Shows users after loading', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
     const { queryByRole, getByTestId } = render(
-      <UsersList users={[user]} isLoading={false} />
+      <UsersList users={[user]} isLoading={false} deleteUser={() => { }} updateUser={() => { }} />
     )
 
     expect(queryByRole('progressbar')).not.toBeInTheDocument()
@@ -26,7 +26,7 @@ describe('UsersList', () => {
   test('Shows dialog when clicking on user', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
     const { queryByRole, getByTestId } = render(
-      <UsersList users={[user]} isLoading={false} />
+      <UsersList users={[user]} isLoading={false} deleteUser={() => { }} updateUser={() => { }} />
     )
 
     expect(queryByRole('dialog')).not.toBeInTheDocument()

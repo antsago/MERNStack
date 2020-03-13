@@ -6,15 +6,19 @@ import { UsersList } from '../users'
 
 export const Index = ({
   users,
-  usersLoading
+  usersLoading,
+  updateUser,
+  deleteUser
 }: {
   users: User[]
-  usersLoading: boolean
+  usersLoading: boolean,
+  updateUser: () => void,
+  deleteUser: () => void
 }) => (
-  <Layout>
-    <UsersList users={users} isLoading={usersLoading} />
-  </Layout>
-)
+    <Layout>
+      <UsersList users={users} isLoading={usersLoading} updateUser={updateUser} deleteUser={deleteUser} />
+    </Layout>
+  )
 
 Index.getInitialProps = async ({ ctx }: { ctx: Context }) => {
   ctx.store.dispatch(loadUsers())
@@ -25,4 +29,9 @@ const mapStateToProps = state => ({
   users: users(state)
 })
 
-export default connect(mapStateToProps)(Index)
+const mapDispatchToProps = dispatch => ({
+  updateUser: () => { },
+  deleteUser: () => { }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

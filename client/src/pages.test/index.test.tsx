@@ -7,7 +7,7 @@ describe('Index page', () => {
   test('Renders correctly', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
     const { getByRole } = render(
-      <Index users={[user]} usersLoading />
+      <Index users={[user]} usersLoading deleteUser={() => { }} updateUser={() => { }} />
     )
 
     expect(getByRole('progressbar')).toBeInTheDocument()
