@@ -45,7 +45,6 @@ const UsersList = ({
         <UserDialog
           open={!!selectedUser}
           user={selectedUser}
-          submitAction='Update'
           onClose={() => setSelectedUser(null)}
           onSubmit={changes => {
             updateUser(changes)

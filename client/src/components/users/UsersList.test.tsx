@@ -23,14 +23,29 @@ describe('UsersList', () => {
     expect(getByTestId('user-item')).toBeInTheDocument()
   })
 
-  test('Shows dialog when clicking on user', () => {
-    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
-    const { queryByRole, getByTestId } = render(
-      <UsersList users={[user]} isLoading={false} deleteUser={() => { }} updateUser={() => { }} />
+  test('Calls updates user when clicking', () => {
+    const updateUser = jest.fn()
+    const user = { id: 'test', givenName: 'name', familyName: 'surname', email: 'email' }
+    const { queryByRole, getByText } = render(
+      <UsersList users={[user]} isLoading={false} deleteUser={() => { }} updateUser={updateUser} />
     )
 
     expect(queryByRole('dialog')).not.toBeInTheDocument()
-    fireEvent.click(getByTestId('user-item'))
+    fireEvent.click(getByText('Update'))
     expect(queryByRole('dialog')).toBeInTheDocument()
+    fireEvent.click(getByText('Save'))
+    expect(queryByRole('dialog')).not.toBeInTheDocument()
+    expect(updateUser).toHaveBeenCalledWith({ ...user, id: undefined })
+  })
+
+  test('Calls delete user when clicking', () => {
+    const deleteUser = jest.fn()
+    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+    const { getByText } = render(
+      <UsersList users={[user]} isLoading={false} updateUser={() => { }} deleteUser={deleteUser} />
+    )
+
+    fireEvent.click(getByText('Delete'))
+    expect(deleteUser).toHaveBeenCalledWith(user.id)
   })
 })

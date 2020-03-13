@@ -21,19 +21,17 @@ const useStyles = makeStyles(theme =>
 const UserItem = ({
   user,
   open,
-  submitAction,
   onClose,
   onSubmit
 }: {
   user: UserInput
   open: boolean
-  submitAction: string
   onClose: () => void
   onSubmit: (UserInput) => void
 }) => {
-  const [name, setName] = useState(open ? user.givenName : '')
-  const [surname, setSurname] = useState(open ? user.familyName : '')
-  const [email, setEmail] = useState(open ? user.email : '')
+  const [name, setName] = useState((user && user.givenName) || '')
+  const [surname, setSurname] = useState((user && user.familyName) || '')
+  const [email, setEmail] = useState((user && user.email) || '')
   const classes = useStyles()
 
   return (
@@ -71,7 +69,7 @@ const UserItem = ({
           familyName: surname,
           email,
         })}>
-          {submitAction}
+          Save
         </Button>
       </DialogActions>
     </Dialog>

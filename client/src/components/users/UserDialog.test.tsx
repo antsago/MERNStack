@@ -4,7 +4,6 @@ import UserDialog from './UserDialog'
 
 describe('UserDialog', () => {
   test('Renders correctly', () => {
-    const submit = 'Update'
     const user = {
       givenName: 'givenName',
       familyName: 'familyName',
@@ -13,14 +12,13 @@ describe('UserDialog', () => {
     const { getByText, getByDisplayValue } = render(
       <UserDialog
         user={user}
-        submitAction={submit}
         onClose={() => { }}
         onSubmit={() => { }}
         open
       />
     )
 
-    expect(getByText(submit)).toBeInTheDocument()
+    expect(getByText('Save')).toBeInTheDocument()
     expect(getByText('Cancel')).toBeInTheDocument()
     expect(getByDisplayValue(user.givenName)).toBeInTheDocument()
     expect(getByDisplayValue(user.familyName)).toBeInTheDocument()
@@ -33,7 +31,6 @@ describe('UserDialog', () => {
         <UserDialog
           open={false}
           user={null}
-          submitAction={'submit'}
           onClose={() => { }}
           onSubmit={() => { }}
         />
@@ -53,7 +50,6 @@ describe('UserDialog', () => {
       <UserDialog
         open
         user={user}
-        submitAction={'submit'}
         onClose={onClose}
         onSubmit={() => { }}
       />
@@ -65,7 +61,6 @@ describe('UserDialog', () => {
   })
 
   test('Calls onSubmit on submit', () => {
-    const submit = 'Update'
     const user = {
       givenName: 'givenName',
       familyName: 'familyName',
@@ -76,13 +71,12 @@ describe('UserDialog', () => {
       <UserDialog
         open
         user={user}
-        submitAction={submit}
         onSubmit={onSubmit}
         onClose={() => { }}
       />
     )
 
-    fireEvent.click(getByText(submit))
+    fireEvent.click(getByText('Save'))
 
     expect(onSubmit).toHaveBeenCalledWith(user)
   })
