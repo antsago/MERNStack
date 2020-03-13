@@ -1,10 +1,10 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { renderWithStore } from '../MockStore'
 import Layout from './Layout'
 
 describe('Layout', () => {
   test('Renders correctly', () => {
-    const { getByRole, getByText } = render(
+    const { getByRole, getByText } = renderWithStore(
       <Layout>
         <div>Test</div>
       </Layout>

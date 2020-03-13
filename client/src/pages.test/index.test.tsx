@@ -1,12 +1,12 @@
 import React from 'react'
-import { render } from '@testing-library/react'
 import { Context } from '../utils'
+import { renderWithStore } from '../components'
 import { Index } from '../pages/index'
 
 describe('Index page', () => {
   test('Renders correctly', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
-    const { getByRole } = render(
+    const { getByRole } = renderWithStore(
       <Index users={[user]} usersLoading deleteUser={() => { }} updateUser={() => { }} />
     )
 
