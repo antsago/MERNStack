@@ -1,7 +1,7 @@
 import React from 'react'
 import BaseDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/core/styles'
-import { theme } from '../common'
+import { theme } from '../components'
 
 const APP_NAME = 'Users List'
 const APP_DESCRIPTION = 'An example app to explore the MERN stack'
