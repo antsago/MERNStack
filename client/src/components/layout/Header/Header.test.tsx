@@ -1,5 +1,5 @@
 import React from 'react'
-import { renderWithStore } from '../MockStore'
+import { renderWithStore } from '../../MockStore'
 import Header from './Header'
 
 describe('Header', () => {

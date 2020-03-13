@@ -2,8 +2,8 @@ import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { Add, PlusOne } from '@material-ui/icons'
 import { IconButton } from '@material-ui/core'
-import { UserDialog } from '../users'
-import { UserInput } from '../../utils'
+import { UserDialog } from '../../users'
+import { UserInput } from '../../../utils'
 
 export const Menu = ({
   createUser,
@@ -46,8 +46,8 @@ export const Menu = ({
 }
 
 const mapDispatchToProps = dispatch => ({
-  createUser: () => {},
-  createRandomUser: () => {}
+  createUser: () => { },
+  createRandomUser: () => { }
 })
 
 export default connect(undefined, mapDispatchToProps)(Menu)
