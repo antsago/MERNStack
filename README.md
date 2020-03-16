@@ -18,6 +18,8 @@ Each microservice follows these conventions:
 - `npm run dev` for easy development (e.g. nodemon-like)
 - `npm run test` to execute the tests (done with jest)
 - `npm run format` to use prettier-standard to format and lint the code
+- `npm run build` to create the production build (compile typescript among others)
+- `npm start` to execute the build (you can see it in action in the Dockerfiles)
 
 ## Potential next steps
 
