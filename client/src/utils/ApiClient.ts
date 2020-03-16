@@ -1,4 +1,5 @@
 import axios, { AxiosStatic } from 'axios'
+import { User, UserInput } from './types'
 import config from './config'
 
 export default class ApiClient {
@@ -7,8 +8,39 @@ export default class ApiClient {
     private fetcher: AxiosStatic = axios
   ) {}
 
-  async makeQuery (query) {
-    const response = await this.fetcher.post(this.url, { query })
+  async makeQuery (query, variables?) {
+    const response = await this.fetcher.post(this.url, { query, variables })
     return response.data.data
+  }
+
+  async createUser (user: UserInput): Promise<User> {
+    const response = await this.makeQuery(
+      'mutation createUser($user: UserInput!) { createUser(user: $user){ id, givenName, familyName, email, created } }',
+      { user }
+    )
+    return response.createUser
+  }
+
+  async loadUsers (): Promise<User[]> {
+    const response = await this.makeQuery(
+      '{ users{ id, givenName, familyName, email, created } }'
+    )
+    return response.users
+  }
+
+  async updateUser (id: string, user: UserInput): Promise<User> {
+    const response = await this.makeQuery(
+      'mutation updateUser($id: String!, $user: UserInput!) { updateUser(id: $id, user: $user){ id, givenName, familyName, email, created } }',
+      { id, user }
+    )
+    return response.updateUser
+  }
+
+  async deleteUser (id: string): Promise<User> {
+    const response = await this.makeQuery(
+      'mutation deleteUser($id: String!) { deleteUser(id: $id){ id, givenName, familyName, email, created } }',
+      { id }
+    )
+    return response.deleteUser
   }
 }
