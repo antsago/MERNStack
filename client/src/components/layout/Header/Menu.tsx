@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Add, PlusOne } from '@material-ui/icons'
 import { IconButton } from '@material-ui/core'
 import { UserDialog } from '../../users'
-import { UserInput } from '../../../utils'
+import { UserInput, createUser } from '../../../utils'
 
 export const Menu = ({
   createUser,
@@ -46,7 +46,7 @@ export const Menu = ({
 }
 
 const mapDispatchToProps = dispatch => ({
-  createUser: () => { },
+  createUser: user => dispatch(createUser(user)),
   createRandomUser: () => { }
 })
 
