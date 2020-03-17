@@ -1,7 +1,19 @@
 import { applyMiddleware, createStore, Store } from 'redux'
+import { all } from 'redux-saga/effects'
 import createSagaMiddleware, { Task } from 'redux-saga'
-import { rootReducer, rootSaga } from './rootStore'
 import config from '../config'
+import usersDuck from './usersDuck'
+import utilsDuck from './utilsDuck'
+import Duck from './Duck'
+
+const rootDuck = Duck.fromDucks({
+  users: usersDuck,
+  utils: utilsDuck
+})
+
+function * rootSaga () {
+  yield all(rootDuck.sagas)
+}
 
 interface SagaStore extends Store {
   sagaTask?: Task
@@ -18,7 +30,7 @@ const bindMiddleware = middleware => {
 function configureStore (initialState, { isServer, req = null }): Store {
   const sagaMiddleware = createSagaMiddleware()
   const store: SagaStore = createStore(
-    rootReducer,
+    rootDuck.reducer,
     initialState,
     bindMiddleware([sagaMiddleware])
   )

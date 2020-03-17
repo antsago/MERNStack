@@ -11,7 +11,7 @@ import { theme } from '../components'
 import { createStore } from '../utils'
 
 class MyApp extends NextApp<{ store: Store }> {
-  static async getInitialProps ({ Component, ctx }) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
 
     if (Component.getInitialProps) {
@@ -21,7 +21,7 @@ class MyApp extends NextApp<{ store: Store }> {
     return { pageProps }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) {
@@ -29,7 +29,7 @@ class MyApp extends NextApp<{ store: Store }> {
     }
   }
 
-  render () {
+  render() {
     const { Component, pageProps, store } = this.props
 
     return (

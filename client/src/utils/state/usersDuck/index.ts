@@ -1,3 +1,6 @@
-export { createUser, loadUsers, updateUser, deleteUser } from './actions'
-export * from './reducer'
-export { default as saga } from './saga'
+import usersDuck from './usersDuck'
+
+export * from './usersDuck'
+export { areUsersLoading } from './loadingDuck'
+export { users } from './storeDuck'
+export default usersDuck

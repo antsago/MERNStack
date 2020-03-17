@@ -9,8 +9,8 @@ describe('UsersList', () => {
       <UsersList
         users={[user]}
         isLoading
-        deleteUser={() => {}}
-        updateUser={() => {}}
+        deleteUser={() => { }}
+        updateUser={() => { }}
       />
     )
 
@@ -24,8 +24,8 @@ describe('UsersList', () => {
       <UsersList
         users={[user]}
         isLoading={false}
-        deleteUser={() => {}}
-        updateUser={() => {}}
+        deleteUser={() => { }}
+        updateUser={() => { }}
       />
     )
 
@@ -45,7 +45,7 @@ describe('UsersList', () => {
       <UsersList
         users={[user]}
         isLoading={false}
-        deleteUser={() => {}}
+        deleteUser={() => { }}
         updateUser={updateUser}
       />
     )
@@ -55,7 +55,7 @@ describe('UsersList', () => {
     expect(queryByRole('dialog')).toBeInTheDocument()
     fireEvent.click(getByText('Save'))
     expect(queryByRole('dialog')).not.toBeInTheDocument()
-    expect(updateUser).toHaveBeenCalledWith({ ...user, id: undefined })
+    expect(updateUser).toHaveBeenCalledWith(user.id, { ...user, id: undefined })
   })
 
   test('Calls delete user when clicking', () => {
@@ -65,7 +65,7 @@ describe('UsersList', () => {
       <UsersList
         users={[user]}
         isLoading={false}
-        updateUser={() => {}}
+        updateUser={() => { }}
         deleteUser={deleteUser}
       />
     )

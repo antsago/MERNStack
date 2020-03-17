@@ -1,3 +1,4 @@
-export { addAlert, dismissAlert } from './actions'
-export { ManageAlerts } from './types'
-export * from './reducer'
+import alertDuck from './alertDuck'
+
+export * from './alertDuck'
+export default alertDuck

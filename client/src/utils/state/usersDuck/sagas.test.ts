@@ -1,17 +1,20 @@
 import { expectSaga } from 'redux-saga-test-plan'
 import ApiClient from '../../ApiClient'
-import { ManageAlerts } from '../utilsDuck'
-import usersSaga from './saga'
+import { addAlert } from '../utilsDuck'
 import {
-  createUser,
-  loadUsers,
-  updateUser,
-  deleteUser,
-  createUserSuccess,
-  loadUsersSuccess,
-  updateUserSuccess,
-  deleteUserSuccess
-} from './actions'
+  addUser,
+  appendUsers,
+  updateUser as changeUser,
+  deleteUser as removeUser
+} from './storeDuck'
+import { startLoading, stopLoading } from './loadingDuck'
+import { createUser, updateUser, deleteUser } from './usersDuck'
+import {
+  createUserSaga,
+  loadUsersSaga,
+  updateUserSaga,
+  deleteUserSaga
+} from './sagas'
 
 describe('Users Saga', () => {
   test('Create user creates new user', async () => {
@@ -19,10 +22,15 @@ describe('Users Saga', () => {
     const user = { id: 'test', ...newUser }
     const mockedClient = { createUser: jest.fn().mockResolvedValue(user) }
 
-    await expectSaga(usersSaga, (mockedClient as any) as ApiClient)
-      .put(createUserSuccess(user))
-      .dispatch(createUser(newUser))
-      .silentRun()
+    await expectSaga(
+      createUserSaga,
+      (mockedClient as any) as ApiClient,
+      createUser(newUser)
+    )
+      .put(startLoading())
+      .put(addUser(user))
+      .put(stopLoading())
+      .run()
 
     expect(mockedClient.createUser).toHaveBeenCalled()
   })
@@ -33,12 +41,16 @@ describe('Users Saga', () => {
     const error = new Error(message)
     const mockedClient = { createUser: jest.fn().mockRejectedValue(error) }
 
-    await expectSaga(usersSaga, (mockedClient as any) as ApiClient)
+    await expectSaga(
+      createUserSaga,
+      (mockedClient as any) as ApiClient,
+      createUser(newUser)
+    )
+      .put(startLoading())
       .put.like({
-        action: { type: ManageAlerts.ADD_ALERT, alert: { message } }
+        action: { type: addAlert.type, alert: { message } }
       })
-      .dispatch(createUser(newUser))
-      .silentRun()
+      .run()
 
     expect(mockedClient.createUser).toHaveBeenCalled()
   })
@@ -47,10 +59,11 @@ describe('Users Saga', () => {
     const users = [{ id: 'test', email: 'test@test.com' }]
     const mockedClient = { loadUsers: jest.fn().mockResolvedValue(users) }
 
-    await expectSaga(usersSaga, (mockedClient as any) as ApiClient)
-      .put(loadUsersSuccess(users))
-      .dispatch(loadUsers())
-      .silentRun()
+    await expectSaga(loadUsersSaga, (mockedClient as any) as ApiClient)
+      .put(startLoading())
+      .put(appendUsers(users))
+      .put(stopLoading())
+      .run()
 
     expect(mockedClient.loadUsers).toHaveBeenCalled()
   })
@@ -60,12 +73,12 @@ describe('Users Saga', () => {
     const error = new Error(message)
     const mockedClient = { loadUsers: jest.fn().mockRejectedValue(error) }
 
-    await expectSaga(usersSaga, (mockedClient as any) as ApiClient)
+    await expectSaga(loadUsersSaga, (mockedClient as any) as ApiClient)
+      .put(startLoading())
       .put.like({
-        action: { type: ManageAlerts.ADD_ALERT, alert: { message } }
+        action: { type: addAlert.type, alert: { message } }
       })
-      .dispatch(loadUsers())
-      .silentRun()
+      .run()
 
     expect(mockedClient.loadUsers).toHaveBeenCalled()
   })
@@ -76,10 +89,15 @@ describe('Users Saga', () => {
     const user = { id, ...newUser }
     const mockedClient = { updateUser: jest.fn().mockResolvedValue(user) }
 
-    await expectSaga(usersSaga, (mockedClient as any) as ApiClient)
-      .put(updateUserSuccess(user))
-      .dispatch(updateUser(id, newUser))
-      .silentRun()
+    await expectSaga(
+      updateUserSaga,
+      (mockedClient as any) as ApiClient,
+      updateUser(id, newUser)
+    )
+      .put(startLoading())
+      .put(changeUser(user))
+      .put(stopLoading())
+      .run()
 
     expect(mockedClient.updateUser).toHaveBeenCalled()
   })
@@ -91,12 +109,16 @@ describe('Users Saga', () => {
     const error = new Error(message)
     const mockedClient = { updateUser: jest.fn().mockRejectedValue(error) }
 
-    await expectSaga(usersSaga, (mockedClient as any) as ApiClient)
+    await expectSaga(
+      updateUserSaga,
+      (mockedClient as any) as ApiClient,
+      updateUser(id, newUser)
+    )
+      .put(startLoading())
       .put.like({
-        action: { type: ManageAlerts.ADD_ALERT, alert: { message } }
+        action: { type: addAlert.type, alert: { message } }
       })
-      .dispatch(updateUser(id, newUser))
-      .silentRun()
+      .run()
 
     expect(mockedClient.updateUser).toHaveBeenCalled()
   })
@@ -106,10 +128,15 @@ describe('Users Saga', () => {
     const user = { id, email: 'test@test.com' }
     const mockedClient = { deleteUser: jest.fn().mockResolvedValue(user) }
 
-    await expectSaga(usersSaga, (mockedClient as any) as ApiClient)
-      .put(deleteUserSuccess(id))
-      .dispatch(deleteUser(id))
-      .silentRun()
+    await expectSaga(
+      deleteUserSaga,
+      (mockedClient as any) as ApiClient,
+      deleteUser(id)
+    )
+      .put(startLoading())
+      .put(removeUser(id))
+      .put(stopLoading())
+      .run()
 
     expect(mockedClient.deleteUser).toHaveBeenCalled()
   })
@@ -120,11 +147,15 @@ describe('Users Saga', () => {
     const error = new Error(message)
     const mockedClient = { deleteUser: jest.fn().mockRejectedValue(error) }
 
-    await expectSaga(usersSaga, (mockedClient as any) as ApiClient)
+    await expectSaga(
+      deleteUserSaga,
+      (mockedClient as any) as ApiClient,
+      deleteUser(id)
+    )
+      .put(startLoading())
       .put.like({
-        action: { type: ManageAlerts.ADD_ALERT, alert: { message } }
+        action: { type: addAlert.type, alert: { message } }
       })
-      .dispatch(deleteUser(id))
       .silentRun()
 
     expect(mockedClient.deleteUser).toHaveBeenCalled()
