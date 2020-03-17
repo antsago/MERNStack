@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { ForkEffect, all, takeEvery } from 'redux-saga/effects'
+import { Saga } from 'redux-saga'
 import {
   createSlice,
   CreateSliceOptions,
@@ -34,7 +35,7 @@ interface SliceReturn<State, CaseReducers extends SliceCaseReducers<State>>
 interface SagaArgument<P> {
   type: string
   prepare?: PrepareAction<P>
-  effect: (string) => ForkEffect
+  effect: (string) => Saga
 }
 
 export default class Duck<State> {
@@ -42,7 +43,7 @@ export default class Duck<State> {
 
   constructor (
     public reducer: Reducer<State>,
-    public sagas: ForkEffect[] = [],
+    public sagas: Saga[] = [],
     public dependentSelectors: SelectorPrefix[] = []
   ) {}
 
@@ -64,7 +65,11 @@ export default class Duck<State> {
 
     const reducers = combineReducers(reducerMap)
 
-    const sagas = [].concat(Object.values(duckMap).map(duck => duck.sagas))
+    const sagas = [].concat(
+      Object.values(duckMap)
+        .map(duck => duck.sagas)
+        .flat()
+    )
 
     const dependentSelectors = Object.entries(duckMap).reduce(
       (allDependents, [prefix, duck]) => {
