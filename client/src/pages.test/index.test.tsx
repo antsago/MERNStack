@@ -1,5 +1,5 @@
 import React from 'react'
-import { Context } from '../utils'
+import { Context, loadUsers } from '../utils'
 import { renderWithStore } from '../components'
 import { Index } from '../pages/index'
 
@@ -10,8 +10,8 @@ describe('Index page', () => {
       <Index
         users={[user]}
         usersLoading
-        deleteUser={() => {}}
-        updateUser={() => {}}
+        deleteUser={() => { }}
+        updateUser={() => { }}
       />
     )
 
@@ -23,6 +23,6 @@ describe('Index page', () => {
     const contex: Context = { store: { dispatch } } as any
     await Index.getInitialProps({ ctx: contex })
 
-    expect(dispatch).toHaveBeenCalledWith({ type: 'LOAD_USERS' })
+    expect(dispatch).toHaveBeenCalledWith(loadUsers())
   })
 })

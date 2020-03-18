@@ -9,7 +9,7 @@ import {
 } from './storeDuck'
 import { startLoading, stopLoading } from './loadingDuck'
 
-export function * createUserSaga (apiClient: ApiClient, action) {
+export function * createUserSaga (action, apiClient = new ApiClient()) {
   try {
     yield put(startLoading())
     const user = yield apiClient.createUser(action.payload)
@@ -22,7 +22,7 @@ export function * createUserSaga (apiClient: ApiClient, action) {
   }
 }
 
-export function * loadUsersSaga (apiClient: ApiClient) {
+export function * loadUsersSaga (action, apiClient = new ApiClient()) {
   try {
     yield put(startLoading())
     const users = yield apiClient.loadUsers()
@@ -35,7 +35,7 @@ export function * loadUsersSaga (apiClient: ApiClient) {
   }
 }
 
-export function * updateUserSaga (apiClient: ApiClient, action) {
+export function * updateUserSaga (action, apiClient = new ApiClient()) {
   try {
     yield put(startLoading())
     const changedUser = yield apiClient.updateUser(
@@ -46,11 +46,12 @@ export function * updateUserSaga (apiClient: ApiClient, action) {
   } catch (err) {
     const message = err.message || 'We found an error while updating users'
     yield put(addAlert(message))
+  } finally {
     yield put(stopLoading())
   }
 }
 
-export function * deleteUserSaga (apiClient: ApiClient, action) {
+export function * deleteUserSaga (action, apiClient = new ApiClient()) {
   try {
     yield put(startLoading())
     const user = yield apiClient.deleteUser(action.payload)

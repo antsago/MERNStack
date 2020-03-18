@@ -35,7 +35,7 @@ interface SliceReturn<State, CaseReducers extends SliceCaseReducers<State>>
 interface SagaArgument<P> {
   type: string
   prepare?: PrepareAction<P>
-  effect: (string) => Saga
+  effect: (string) => ForkEffect
 }
 
 export default class Duck<State> {
@@ -87,7 +87,11 @@ export default class Duck<State> {
 
   saga<P> (options: SagaArgument<P>) {
     const action = createAction(options.type, options.prepare)
-    this.sagas.push(options.effect(action.type))
+
+    function * watchEffect () {
+      yield options.effect(action.type)
+    }
+    this.sagas.push(watchEffect)
 
     return action
   }

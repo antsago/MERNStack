@@ -8,7 +8,7 @@ import {
   deleteUser as removeUser
 } from './storeDuck'
 import { startLoading, stopLoading } from './loadingDuck'
-import { createUser, updateUser, deleteUser } from './usersDuck'
+import { createUser, loadUsers, updateUser, deleteUser } from './usersDuck'
 import {
   createUserSaga,
   loadUsersSaga,
@@ -24,8 +24,8 @@ describe('Users Saga', () => {
 
     await expectSaga(
       createUserSaga,
-      (mockedClient as any) as ApiClient,
-      createUser(newUser)
+      createUser(newUser),
+      (mockedClient as any) as ApiClient
     )
       .put(startLoading())
       .put(addUser(user))
@@ -43,13 +43,14 @@ describe('Users Saga', () => {
 
     await expectSaga(
       createUserSaga,
-      (mockedClient as any) as ApiClient,
-      createUser(newUser)
+      createUser(newUser),
+      (mockedClient as any) as ApiClient
     )
       .put(startLoading())
       .put.like({
-        action: { type: addAlert.type, alert: { message } }
+        action: { type: addAlert.type, payload: { message } }
       })
+      .put(stopLoading())
       .run()
 
     expect(mockedClient.createUser).toHaveBeenCalled()
@@ -59,7 +60,11 @@ describe('Users Saga', () => {
     const users = [{ id: 'test', email: 'test@test.com' }]
     const mockedClient = { loadUsers: jest.fn().mockResolvedValue(users) }
 
-    await expectSaga(loadUsersSaga, (mockedClient as any) as ApiClient)
+    await expectSaga(
+      loadUsersSaga,
+      loadUsers(),
+      (mockedClient as any) as ApiClient
+    )
       .put(startLoading())
       .put(appendUsers(users))
       .put(stopLoading())
@@ -73,11 +78,16 @@ describe('Users Saga', () => {
     const error = new Error(message)
     const mockedClient = { loadUsers: jest.fn().mockRejectedValue(error) }
 
-    await expectSaga(loadUsersSaga, (mockedClient as any) as ApiClient)
+    await expectSaga(
+      loadUsersSaga,
+      loadUsers(),
+      (mockedClient as any) as ApiClient
+    )
       .put(startLoading())
       .put.like({
-        action: { type: addAlert.type, alert: { message } }
+        action: { type: addAlert.type, payload: { message } }
       })
+      .put(stopLoading())
       .run()
 
     expect(mockedClient.loadUsers).toHaveBeenCalled()
@@ -91,8 +101,8 @@ describe('Users Saga', () => {
 
     await expectSaga(
       updateUserSaga,
-      (mockedClient as any) as ApiClient,
-      updateUser(id, newUser)
+      updateUser(id, newUser),
+      (mockedClient as any) as ApiClient
     )
       .put(startLoading())
       .put(changeUser(user))
@@ -111,13 +121,14 @@ describe('Users Saga', () => {
 
     await expectSaga(
       updateUserSaga,
-      (mockedClient as any) as ApiClient,
-      updateUser(id, newUser)
+      updateUser(id, newUser),
+      (mockedClient as any) as ApiClient
     )
       .put(startLoading())
       .put.like({
-        action: { type: addAlert.type, alert: { message } }
+        action: { type: addAlert.type, payload: { message } }
       })
+      .put(stopLoading())
       .run()
 
     expect(mockedClient.updateUser).toHaveBeenCalled()
@@ -130,8 +141,8 @@ describe('Users Saga', () => {
 
     await expectSaga(
       deleteUserSaga,
-      (mockedClient as any) as ApiClient,
-      deleteUser(id)
+      deleteUser(id),
+      (mockedClient as any) as ApiClient
     )
       .put(startLoading())
       .put(removeUser(id))
@@ -149,14 +160,15 @@ describe('Users Saga', () => {
 
     await expectSaga(
       deleteUserSaga,
-      (mockedClient as any) as ApiClient,
-      deleteUser(id)
+      deleteUser(id),
+      (mockedClient as any) as ApiClient
     )
       .put(startLoading())
       .put.like({
-        action: { type: addAlert.type, alert: { message } }
+        action: { type: addAlert.type, payload: { message } }
       })
-      .silentRun()
+      .put(stopLoading())
+      .run()
 
     expect(mockedClient.deleteUser).toHaveBeenCalled()
   })
