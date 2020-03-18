@@ -7,7 +7,8 @@ import UserDialog from './UserDialog'
 const useStyles = makeStyles(theme => ({
   loader: {
     position: 'relative',
-    left: '50%'
+    left: '50%',
+    margin: theme.spacing(3)
   }
 }))
 
@@ -27,20 +28,17 @@ const UsersList = ({
 
   return (
     <Fragment>
-      {isLoading || !users ? (
-        <CircularProgress className={classes.loader} />
-      ) : (
-          <Grid container spacing={2}>
-            {users.map(user => (
-              <UserItem
-                key={user.id}
-                user={user}
-                onUpdate={() => setSelectedUser(user)}
-                onDelete={() => deleteUser(user.id)}
-              />
-            ))}
-          </Grid>
-        )}
+      <Grid container spacing={2}>
+        {users.map(user => (
+          <UserItem
+            key={user.id}
+            user={user}
+            onUpdate={() => setSelectedUser(user)}
+            onDelete={() => deleteUser(user.id)}
+          />
+        ))}
+      </Grid>
+      {isLoading && <CircularProgress className={classes.loader} />}
       {!!selectedUser && (
         <UserDialog
           open={!!selectedUser}

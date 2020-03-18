@@ -3,9 +3,9 @@ import { render, fireEvent } from '@testing-library/react'
 import UsersList from './UsersList'
 
 describe('UsersList', () => {
-  test('Shows loader while loading', () => {
+  test('Shows loader when loading', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
-    const { getByRole, queryByTestId } = render(
+    const { getByRole } = render(
       <UsersList
         users={[user]}
         isLoading
@@ -15,12 +15,11 @@ describe('UsersList', () => {
     )
 
     expect(getByRole('progressbar')).toBeInTheDocument()
-    expect(queryByTestId('user-item')).not.toBeInTheDocument()
   })
 
-  test('Shows users after loading', () => {
+  test('Does not shows loader when not loading', () => {
     const user = { id: 'test', givenName: 'name', familyName: 'surname' }
-    const { queryByRole, getByTestId } = render(
+    const { queryByRole, } = render(
       <UsersList
         users={[user]}
         isLoading={false}
@@ -30,7 +29,35 @@ describe('UsersList', () => {
     )
 
     expect(queryByRole('progressbar')).not.toBeInTheDocument()
+  })
+
+  test('Shows users if given', () => {
+    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+    const { getByTestId } = render(
+      <UsersList
+        users={[user]}
+        isLoading={false}
+        deleteUser={() => { }}
+        updateUser={() => { }}
+      />
+    )
+
     expect(getByTestId('user-item')).toBeInTheDocument()
+  })
+
+  test('Shows users and loader', () => {
+    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+    const { getByRole, getByTestId } = render(
+      <UsersList
+        users={[user]}
+        isLoading
+        deleteUser={() => { }}
+        updateUser={() => { }}
+      />
+    )
+
+    expect(getByTestId('user-item')).toBeInTheDocument()
+    expect(getByRole('progressbar')).toBeInTheDocument()
   })
 
   test('Calls updates user when clicking', () => {
