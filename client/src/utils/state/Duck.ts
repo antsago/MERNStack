@@ -43,7 +43,7 @@ export default class Duck<State> {
 
   constructor (
     public reducer: Reducer<State>,
-    public sagas: Saga[] = [],
+    public sagas: Generator<ForkEffect, any, unknown>[] = [],
     public dependentSelectors: SelectorPrefix[] = []
   ) {}
 
@@ -91,7 +91,7 @@ export default class Duck<State> {
     function * watchEffect () {
       yield options.effect(action.type)
     }
-    this.sagas.push(watchEffect)
+    this.sagas.push(watchEffect())
 
     return action
   }
