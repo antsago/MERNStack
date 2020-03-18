@@ -16,7 +16,7 @@ import {
   deleteUserSaga
 } from './sagas'
 
-describe('Users Saga', () => {
+describe('Users sagas', () => {
   test('Create user creates new user', async () => {
     const newUser = { email: 'test@test.com' }
     const user = { id: 'test', ...newUser }

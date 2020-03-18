@@ -1,6 +1,8 @@
 import { takeEvery } from 'redux-saga/effects'
-import ApiClient from '../../ApiClient'
+import { createAction } from '@reduxjs/toolkit'
+import { UserInput } from '../../types'
 import Duck from '../Duck'
+import { firstNames, lastNames } from './names'
 import storeDuck from './storeDuck'
 import loadingDuck from './loadingDuck'
 import {
@@ -9,7 +11,6 @@ import {
   updateUserSaga,
   deleteUserSaga
 } from './sagas'
-import { UserInput } from '../../types'
 
 const duck = Duck.fromDucks({ users: storeDuck, isLoading: loadingDuck })
 
@@ -35,5 +36,18 @@ export const deleteUser = duck.saga({
   prepare: (payload: UserInput) => ({ payload }),
   effect: type => takeEvery(type, deleteUserSaga)
 })
+
+export const createRandomUser = () => {
+  const name = firstNames[Math.floor(Math.random() * firstNames.length)]
+  const surname = lastNames[Math.floor(Math.random() * lastNames.length)]
+
+  const randomUser: UserInput = {
+    givenName: name,
+    familyName: surname,
+    email: `${name}@${surname}.com`
+  }
+
+  return createUser(randomUser)
+}
 
 export default duck
