@@ -16,15 +16,13 @@ describe('Duck', () => {
   })
 
   test('Combine ducks sagas', () => {
-    function * saga1 () {
-      yield put({ type: 'Saga1' })
+    function * testSaga (type) {
+      yield put({ type })
     }
-    function * saga2 () {
-      yield put({ type: 'Saga2' })
-    }
-    function * saga3 () {
-      yield put({ type: 'Saga3' })
-    }
+
+    const saga1 = testSaga('Saga1')
+    const saga2 = testSaga('Saga2')
+    const saga3 = testSaga('Saga3')
 
     const duck1 = new Duck(null, [saga1], [])
     const duck2 = new Duck(null, [saga2, saga3], [])
