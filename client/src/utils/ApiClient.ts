@@ -4,12 +4,15 @@ import config from './config'
 
 export default class ApiClient {
   constructor (
-    private url: string = config.apiUrl,
+    private urlFromServer: string = config.apiFromServer,
+    private urlFromClient: string = config.apiFromClient,
     private fetcher: AxiosStatic = axios
   ) {}
 
   async makeQuery (query, variables?) {
-    const response = await this.fetcher.post(this.url, { query, variables })
+    const url =
+      typeof window === 'undefined' ? this.urlFromServer : this.urlFromClient
+    const response = await this.fetcher.post(url, { query, variables })
     return response.data.data
   }
 

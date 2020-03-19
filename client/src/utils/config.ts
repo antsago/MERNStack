@@ -3,17 +3,20 @@ const env = process.env.NODE_ENV
 
 interface Config {
   env: string
-  apiUrl: string
+  apiFromServer: string
+  apiFromClient: string
 }
 
 const production: Config = {
   env: 'production',
-  apiUrl: 'http://api:4000/'
+  apiFromServer: 'http://api:4000/',
+  apiFromClient: 'http://localhost:4000/'
 }
 
 const development: Config = {
   env: 'development',
-  apiUrl: 'http://localhost:4000/'
+  apiFromServer: 'http://localhost:4000/',
+  apiFromClient: 'http://localhost:4000/'
 }
 
 const config: { [environment: string]: Config } = {

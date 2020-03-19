@@ -14,7 +14,7 @@ describe('ApiClient', () => {
 
     mockAxios.post.mockResolvedValue({ data: { data: graphQlPayload } })
 
-    const client = new ApiClient(url, (mockAxios as any) as AxiosStatic)
+    const client = new ApiClient(url, url, (mockAxios as any) as AxiosStatic)
     const response = await client.makeQuery(query, variables)
 
     expect(response).toEqual(graphQlPayload)
@@ -33,7 +33,7 @@ describe('ApiClient', () => {
       data: { data: { createUser: newUser } }
     })
 
-    const client = new ApiClient(url, (mockAxios as any) as AxiosStatic)
+    const client = new ApiClient(url, url, (mockAxios as any) as AxiosStatic)
     const response = await client.createUser(newUser)
 
     expect(response).toEqual(newUser)
@@ -51,7 +51,7 @@ describe('ApiClient', () => {
 
     mockAxios.post.mockResolvedValue({ data: { data: { users } } })
 
-    const client = new ApiClient(url, (mockAxios as any) as AxiosStatic)
+    const client = new ApiClient(url, url, (mockAxios as any) as AxiosStatic)
     const response = await client.loadUsers()
 
     expect(response).toEqual(users)
@@ -71,7 +71,7 @@ describe('ApiClient', () => {
       data: { data: { updateUser: responseUser } }
     })
 
-    const client = new ApiClient(url, (mockAxios as any) as AxiosStatic)
+    const client = new ApiClient(url, url, (mockAxios as any) as AxiosStatic)
     const response = await client.updateUser(id, userChange)
 
     expect(response).toEqual(responseUser)
@@ -90,7 +90,7 @@ describe('ApiClient', () => {
       data: { data: { deleteUser: responseUser } }
     })
 
-    const client = new ApiClient(url, (mockAxios as any) as AxiosStatic)
+    const client = new ApiClient(url, url, (mockAxios as any) as AxiosStatic)
     const response = await client.deleteUser(id)
 
     expect(response).toEqual(responseUser)
