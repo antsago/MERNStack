@@ -27,7 +27,7 @@ const UserItem = ({
   user: UserInput
   open: boolean
   onClose: () => void
-  onSubmit: (UserInput) => void
+  onSubmit: (user: UserInput) => void
 }) => {
   const [name, setName] = useState((user && user.givenName) || '')
   const [surname, setSurname] = useState((user && user.familyName) || '')

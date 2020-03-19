@@ -1,6 +1,6 @@
 import React from 'react'
 import { Context, loadUsers } from '../utils'
-import { renderWithStore } from '../components'
+import { renderWithStore } from '../components/MockStore'
 import { Index } from '../pages/index'
 
 describe('Index page', () => {
