@@ -27,3 +27,4 @@ Each microservice follows these conventions:
 - E2E tests: for extra confidence (with cypress?)
 - Move to prettier and es-lint from prettier-standard, as the former has more widespread support and provides more flexibility
 - Logging
+- Split api into two. A stateful microservice to handle data storing and persitency and a stateless one to include business logic.
