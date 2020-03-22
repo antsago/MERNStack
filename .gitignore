@@ -2,7 +2,9 @@ node_modules
 db-data
 build
 .next
-.vscode
+.vscode/*
+# Have everyone using the same plugin
+!.vscode/settings.json
 *.map
 # Auto generated:
 client/public/sw.js

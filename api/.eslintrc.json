@@ -1,0 +1,21 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["prettier"],
+    "extends": [
+        "airbnb-base",
+        "plugin:@typescript-eslint/recommended",
+        // Always the last to prevent rule conflicts with prettier
+        "plugin:prettier/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "rules": {
+        "prettier/prettier": "error"
+    }
+}
