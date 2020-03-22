@@ -8,7 +8,9 @@
   },
   "eslint.validate": [
     "javascript",
-    "typescript"
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
   ],
   "eslint.workingDirectories": ["api"]
 }

@@ -4,6 +4,7 @@ build
 .next
 .vscode/*
 # Have everyone using the same plugin
+!.vscode/extensions.json
 !.vscode/settings.json
 *.map
 # Auto generated:
