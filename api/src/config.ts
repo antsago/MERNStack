@@ -1,4 +1,4 @@
-const env = process.env.NODE_ENV || 'production'
+const env = process.env.NODE_ENV || "production"
 
 interface Config {
   env: string
@@ -7,27 +7,27 @@ interface Config {
 }
 
 const production: Config = {
-  env: 'production',
+  env: "production",
   port: 4000,
-  dbUrl: 'mongodb://mongo:27017/graphql'
+  dbUrl: "mongodb://mongo:27017/graphql",
 }
 
 const development: Config = {
-  env: 'development',
+  env: "development",
   port: 4000,
-  dbUrl: 'mongodb://localhost:27017/graphql'
+  dbUrl: "mongodb://localhost:27017/graphql",
 }
 
 const test: Config = {
-  env: 'test',
+  env: "test",
   port: 4100,
-  dbUrl: 'mongodb://localhost:27017/test'
+  dbUrl: "mongodb://localhost:27017/test",
 }
 
 const config: { [environment: string]: Config } = {
   production,
   development,
-  test
+  test,
 }
 
 export default config[env]

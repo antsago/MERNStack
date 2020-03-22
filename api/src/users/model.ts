@@ -1,21 +1,21 @@
-import { model, Schema, Document } from 'mongoose'
-import { User } from './types'
+import { model, Schema, Document } from "mongoose"
+import { User } from "./types"
 
-export interface UserModelType extends Omit<User, 'id'>, Document {}
+export interface UserModelType extends Omit<User, "id">, Document {}
 
 const UserSchema: Schema = new Schema(
   {
-    //public id
+    // public id
     id: {
       type: String,
       require: true,
-      unique: true
+      unique: true,
     },
     email: String,
     givenName: String,
-    familyName: String
+    familyName: String,
   },
-  { timestamps: { createdAt: 'created' } }
+  { timestamps: { createdAt: "created" } },
 )
 
-export default model<UserModelType>('User', UserSchema)
+export default model<UserModelType>("User", UserSchema)

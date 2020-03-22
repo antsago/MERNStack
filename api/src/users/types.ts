@@ -1,4 +1,4 @@
-import { ObjectType, InputType, Field, ID } from 'type-graphql'
+import { ObjectType, InputType, Field, ID } from "type-graphql"
 
 @ObjectType()
 export abstract class User {
