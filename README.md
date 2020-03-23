@@ -17,14 +17,13 @@ Each microservice follows these conventions:
 - The code is contained within the src folder
 - `npm run dev` for easy development (e.g. nodemon-like)
 - `npm run test` to execute the tests (done with jest)
-- `npm run format` to use prettier-standard to format and lint the code
+- `npm run format` to use eslint and prettier to format and lint the code
 - `npm run build` to create the production build (compile typescript among others)
 - `npm start` to execute the build (you can see it in action in the Dockerfiles)
 
 ## Potential next steps
 
-- Integration tests: current tests are mostly unit tests (expect react ones), which don't give that much security.
 - E2E tests: for extra confidence (with cypress?)
-- Move to prettier and es-lint from prettier-standard, as the former has more widespread support and provides more flexibility
 - Logging
 - Split api into two. A stateful microservice to handle data storing and persitency and a stateless one to include business logic.
+- Integration tests: current tests are mostly unit tests, which don't give that much security. On the other hand the application is very simple one and typescript does a lot to test the integration between the different components.
