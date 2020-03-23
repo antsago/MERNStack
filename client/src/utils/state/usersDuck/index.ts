@@ -1,6 +1,6 @@
-import usersDuck from './usersDuck'
+import usersDuck from "./usersDuck"
 
-export * from './usersDuck'
-export { areUsersLoading } from './loadingDuck'
-export { users } from './storeDuck'
+export * from "./usersDuck"
+export { areUsersLoading } from "./loadingDuck"
+export { usersSelector } from "./storeDuck"
 export default usersDuck

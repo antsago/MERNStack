@@ -1,27 +1,27 @@
-import React from 'react'
-import { Context, loadUsers } from '../utils'
-import { renderWithStore } from '../components/MockStore'
-import { Index } from '../pages/index'
+import React from "react"
+import { Context, loadUsers } from "../utils"
+import { renderWithStore } from "../components/MockStore"
+import { Index } from "../pages/index"
 
-describe('Index page', () => {
-  test('Renders correctly', () => {
-    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+describe("Index page", () => {
+  test("Renders correctly", () => {
+    const user = { id: "test", givenName: "name", familyName: "surname" }
     const { getByRole } = renderWithStore(
       <Index
         users={[user]}
         usersLoading
-        deleteUser={() => { }}
-        updateUser={() => { }}
-      />
+        removeUser={() => {}}
+        changeUser={() => {}}
+      />,
     )
 
-    expect(getByRole('progressbar')).toBeInTheDocument()
+    expect(getByRole("progressbar")).toBeInTheDocument()
   })
 
-  test('Loads users on initial props', async () => {
+  test("Loads users on initial props", () => {
     const dispatch = jest.fn()
-    const contex: Context = { store: { dispatch } } as any
-    await Index.getInitialProps({ ctx: contex })
+    const contex: Context = ({ store: { dispatch } } as unknown) as Context
+    Index.getInitialProps({ ctx: contex })
 
     expect(dispatch).toHaveBeenCalledWith(loadUsers())
   })

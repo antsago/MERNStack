@@ -8,20 +8,20 @@ interface Config {
 }
 
 const production: Config = {
-  env: 'production',
-  apiFromServer: 'http://api:4000/',
-  apiFromClient: 'http://localhost:4000/'
+  env: "production",
+  apiFromServer: "http://api:4000/",
+  apiFromClient: "http://localhost:4000/",
 }
 
 const development: Config = {
-  env: 'development',
-  apiFromServer: 'http://localhost:4000/',
-  apiFromClient: 'http://localhost:4000/'
+  env: "development",
+  apiFromServer: "http://localhost:4000/",
+  apiFromClient: "http://localhost:4000/",
 }
 
 const config: { [environment: string]: Config } = {
   production,
-  development
+  development,
 }
 
 export default config[env]

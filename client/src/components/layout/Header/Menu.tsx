@@ -1,32 +1,36 @@
-import React, { Fragment, useState } from 'react'
-import { connect } from 'react-redux'
-import { Add, PlusOne } from '@material-ui/icons'
-import { IconButton } from '@material-ui/core'
-import { UserDialog } from '../../users'
-import { UserInput, createUser, createRandomUser } from '../../../utils'
+import React, { useState } from "react"
+import { connect } from "react-redux"
+import { Add, PlusOne } from "@material-ui/icons"
+import { IconButton } from "@material-ui/core"
+import { UserDialog } from "../../users"
+import {
+  UserInput,
+  createUser as addUser,
+  createRandomUser as addRandomUser,
+} from "../../../utils"
 
 export const Menu = ({
   createUser,
-  createRandomUser
+  createRandomUser,
 }: {
-  createUser: (UserInput) => void
+  createUser: (user: UserInput) => void
   createRandomUser: () => void
 }) => {
   const [showDialog, setShowDialog] = useState(false)
   return (
-    <Fragment>
+    <>
       <IconButton
-        color='inherit'
+        color="inherit"
         onClick={() => setShowDialog(true)}
-        aria-label='Add user'
+        aria-label="Add user"
       >
         <Add />
       </IconButton>
       <IconButton
-        color='inherit'
-        edge='end'
+        color="inherit"
+        edge="end"
         onClick={createRandomUser}
-        aria-label='Add random user'
+        aria-label="Add random user"
       >
         <PlusOne />
       </IconButton>
@@ -34,20 +38,20 @@ export const Menu = ({
         <UserDialog
           user={{}}
           onClose={() => setShowDialog(false)}
-          onSubmit={newUser => {
+          onSubmit={(newUser) => {
             createUser(newUser)
             setShowDialog(false)
           }}
           open
         />
       )}
-    </Fragment>
+    </>
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  createUser: user => dispatch(createUser(user)),
-  createRandomUser: () => dispatch(createRandomUser())
+const mapDispatchToProps = (dispatch) => ({
+  createUser: (user) => dispatch(addUser(user)),
+  createRandomUser: () => dispatch(addRandomUser()),
 })
 
 export default connect(undefined, mapDispatchToProps)(Menu)

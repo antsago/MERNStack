@@ -25,7 +25,16 @@
         "SharedArrayBuffer": "readonly"
     },
     "rules": {
-        "object-curly-newline": ["error", { "multiline": true }],
+        "object-curly-newline": "off",
+        "operator-linebreak": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "react/jsx-props-no-spreading": "off",
+        "function-paren-newline": "off",
+        "react/jsx-curly-newline": "off",
+        "no-confusing-arrow": "off",
+        "implicit-arrow-linebreak": "off",
+        "react/jsx-wrap-multilines": "off",
+        "react/destructuring-assignment": "off",
         "prettier/prettier": ["error", {
             "trailingComma": "all",
             "semi": false

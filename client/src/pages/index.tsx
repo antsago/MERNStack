@@ -1,41 +1,49 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Layout, UsersList } from '../components'
-import { loadUsers, updateUser, deleteUser, users, areUsersLoading, Context, User } from '../utils'
+import React from "react"
+import { connect } from "react-redux"
+import { Layout, UsersList } from "../components"
+import {
+  loadUsers,
+  updateUser,
+  deleteUser,
+  usersSelector,
+  areUsersLoading,
+  Context,
+  User,
+} from "../utils"
 
 export const Index = ({
   users,
   usersLoading,
-  updateUser,
-  deleteUser
+  changeUser,
+  removeUser,
 }: {
   users: User[]
   usersLoading: boolean
-  updateUser: () => void
-  deleteUser: () => void
+  changeUser: () => void
+  removeUser: () => void
 }) => (
-    <Layout>
-      <UsersList
-        users={users}
-        isLoading={usersLoading}
-        updateUser={updateUser}
-        deleteUser={deleteUser}
-      />
-    </Layout>
-  )
+  <Layout>
+    <UsersList
+      users={users}
+      isLoading={usersLoading}
+      updateUser={changeUser}
+      deleteUser={removeUser}
+    />
+  </Layout>
+)
 
-Index.getInitialProps = async ({ ctx }: { ctx: Context }) => {
+Index.getInitialProps = ({ ctx }: { ctx: Context }) => {
   ctx.store.dispatch(loadUsers())
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   usersLoading: areUsersLoading(state),
-  users: users(state)
+  users: usersSelector(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  updateUser: (id, user) => dispatch(updateUser(id, user)),
-  deleteUser: id => dispatch(deleteUser(id))
+const mapDispatchToProps = (dispatch) => ({
+  changeUser: (id, user) => dispatch(updateUser(id, user)),
+  removeUser: (id) => dispatch(deleteUser(id)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

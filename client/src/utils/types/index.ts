@@ -1,2 +1,2 @@
-export * from './AlertType'
-export * from './UserType'
+export * from "./AlertType"
+export * from "./UserType"

@@ -1,14 +1,14 @@
-import React from 'react'
-import NextApp from 'next/app'
-import Head from 'next/head'
-import withRedux from 'next-redux-wrapper'
-import withReduxSaga from 'next-redux-saga'
-import { Provider } from 'react-redux'
-import { Store } from 'redux'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider } from '@material-ui/core/styles'
-import { theme } from '../components'
-import { createStore } from '../utils'
+import React from "react"
+import NextApp from "next/app"
+import Head from "next/head"
+import withRedux from "next-redux-wrapper"
+import withReduxSaga from "next-redux-saga"
+import { Provider } from "react-redux"
+import { Store } from "redux"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import { ThemeProvider } from "@material-ui/core/styles"
+import { theme } from "../components"
+import { createStore } from "../utils"
 
 class MyApp extends NextApp<{ store: Store }> {
   static async getInitialProps({ Component, ctx }) {
@@ -23,7 +23,7 @@ class MyApp extends NextApp<{ store: Store }> {
 
   componentDidMount() {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side')
+    const jssStyles = document.querySelector("#jss-server-side")
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles)
     }

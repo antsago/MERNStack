@@ -1,15 +1,15 @@
-import Duck from '../Duck'
+import Duck from "../Duck"
 
 const { actions, duck } = Duck.fromSlice({
-  name: 'users/loading',
+  name: "users/loading",
   initialState: false,
   reducers: {
     start: () => true,
-    stop: () => false
-  }
+    stop: () => false,
+  },
 })
 
-export const areUsersLoading = duck.selector(state => state)
+export const areUsersLoading = duck.selector((state) => state)
 
 export const startLoading = actions.start
 export const stopLoading = actions.stop

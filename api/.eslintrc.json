@@ -24,7 +24,12 @@
         "SharedArrayBuffer": "readonly"
     },
     "rules": {
-        "object-curly-newline": ["error", { "multiline": true }],
+        "object-curly-newline": "off",
+        "operator-linebreak": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "function-paren-newline": "off",
+        "no-confusing-arrow": "off",
+        "implicit-arrow-linebreak": "off",
         "prettier/prettier": ["error", {
             "trailingComma": "all",
             "semi": false

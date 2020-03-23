@@ -1,26 +1,24 @@
-import React from 'react'
-import { renderWithStore } from '../MockStore'
-import { Layout } from './Layout'
+import React from "react"
+import { renderWithStore } from "../MockStore"
+import { Layout } from "./Layout"
 
-describe('Layout', () => {
-  test('Renders correctly', () => {
+describe("Layout", () => {
+  test("Renders correctly", () => {
     const { getByRole, getByText } = renderWithStore(
-      <Layout showAlert={() => { }} classes={{ root: '', content: '' }}>
+      <Layout showAlert={() => {}} classes={{ root: "", content: "" }}>
         <div>Test</div>
-      </Layout>
+      </Layout>,
     )
 
-    expect(getByText('Test')).toBeInTheDocument()
-    expect(getByRole('heading')).toBeInTheDocument()
-    expect(getByRole('contentinfo')).toBeInTheDocument()
+    expect(getByText("Test")).toBeInTheDocument()
+    expect(getByRole("heading")).toBeInTheDocument()
+    expect(getByRole("contentinfo")).toBeInTheDocument()
   })
 
-  test('Handles errors gracefully', () => {
+  test("Handles errors gracefully", () => {
     // Silence the console
-    const spy = jest.spyOn(console, 'error')
-    spy.mockImplementation(() => { })
-
-
+    const spy = jest.spyOn(console, "error")
+    spy.mockImplementation(() => {})
 
     const showAlert = jest.fn()
     const message = "An error"
@@ -29,17 +27,16 @@ describe('Layout', () => {
     }
 
     const { getByRole } = renderWithStore(
-      <Layout showAlert={showAlert} classes={{ root: '', content: '' }}>
+      <Layout showAlert={showAlert} classes={{ root: "", content: "" }}>
         <Bug />
-      </Layout>
+      </Layout>,
     )
 
-    expect(getByRole('heading')).toBeInTheDocument()
-    expect(getByRole('contentinfo')).toBeInTheDocument()
+    expect(getByRole("heading")).toBeInTheDocument()
+    expect(getByRole("contentinfo")).toBeInTheDocument()
 
     expect(showAlert).toHaveBeenCalledWith(message)
 
     spy.mockRestore()
   })
-
 })

@@ -1,103 +1,103 @@
-import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
-import UsersList from './UsersList'
+import React from "react"
+import { render, fireEvent } from "@testing-library/react"
+import UsersList from "./UsersList"
 
-describe('UsersList', () => {
-  test('Shows loader when loading', () => {
-    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+describe("UsersList", () => {
+  test("Shows loader when loading", () => {
+    const user = { id: "test", givenName: "name", familyName: "surname" }
     const { getByRole } = render(
       <UsersList
         users={[user]}
         isLoading
-        deleteUser={() => { }}
-        updateUser={() => { }}
-      />
+        deleteUser={() => {}}
+        updateUser={() => {}}
+      />,
     )
 
-    expect(getByRole('progressbar')).toBeInTheDocument()
+    expect(getByRole("progressbar")).toBeInTheDocument()
   })
 
-  test('Does not shows loader when not loading', () => {
-    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
-    const { queryByRole, } = render(
+  test("Does not shows loader when not loading", () => {
+    const user = { id: "test", givenName: "name", familyName: "surname" }
+    const { queryByRole } = render(
       <UsersList
         users={[user]}
         isLoading={false}
-        deleteUser={() => { }}
-        updateUser={() => { }}
-      />
+        deleteUser={() => {}}
+        updateUser={() => {}}
+      />,
     )
 
-    expect(queryByRole('progressbar')).not.toBeInTheDocument()
+    expect(queryByRole("progressbar")).not.toBeInTheDocument()
   })
 
-  test('Shows users if given', () => {
-    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+  test("Shows users if given", () => {
+    const user = { id: "test", givenName: "name", familyName: "surname" }
     const { getByTestId } = render(
       <UsersList
         users={[user]}
         isLoading={false}
-        deleteUser={() => { }}
-        updateUser={() => { }}
-      />
+        deleteUser={() => {}}
+        updateUser={() => {}}
+      />,
     )
 
-    expect(getByTestId('user-item')).toBeInTheDocument()
+    expect(getByTestId("user-item")).toBeInTheDocument()
   })
 
-  test('Shows users and loader', () => {
-    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+  test("Shows users and loader", () => {
+    const user = { id: "test", givenName: "name", familyName: "surname" }
     const { getByRole, getByTestId } = render(
       <UsersList
         users={[user]}
         isLoading
-        deleteUser={() => { }}
-        updateUser={() => { }}
-      />
+        deleteUser={() => {}}
+        updateUser={() => {}}
+      />,
     )
 
-    expect(getByTestId('user-item')).toBeInTheDocument()
-    expect(getByRole('progressbar')).toBeInTheDocument()
+    expect(getByTestId("user-item")).toBeInTheDocument()
+    expect(getByRole("progressbar")).toBeInTheDocument()
   })
 
-  test('Calls updates user when clicking', () => {
+  test("Calls updates user when clicking", () => {
     const updateUser = jest.fn()
     const user = {
-      id: 'test',
-      givenName: 'name',
-      familyName: 'surname',
-      email: 'email'
+      id: "test",
+      givenName: "name",
+      familyName: "surname",
+      email: "email",
     }
     const { queryByRole, getByText } = render(
       <UsersList
         users={[user]}
         isLoading={false}
-        deleteUser={() => { }}
+        deleteUser={() => {}}
         updateUser={updateUser}
-      />
+      />,
     )
 
-    expect(queryByRole('dialog')).not.toBeInTheDocument()
-    fireEvent.click(getByText('Update'))
-    expect(queryByRole('dialog')).toBeInTheDocument()
-    fireEvent.click(getByText('Save'))
-    expect(queryByRole('dialog')).not.toBeInTheDocument()
+    expect(queryByRole("dialog")).not.toBeInTheDocument()
+    fireEvent.click(getByText("Update"))
+    expect(queryByRole("dialog")).toBeInTheDocument()
+    fireEvent.click(getByText("Save"))
+    expect(queryByRole("dialog")).not.toBeInTheDocument()
     expect(updateUser).toHaveBeenCalledWith(user.id, { ...user, id: undefined })
   })
 
-  test('Calls delete user when clicking', () => {
+  test("Calls delete user when clicking", () => {
     const deleteUser = jest.fn()
-    const user = { id: 'test', givenName: 'name', familyName: 'surname' }
+    const user = { id: "test", givenName: "name", familyName: "surname" }
     const { getByText } = render(
       <UsersList
         users={[user]}
         isLoading={false}
-        updateUser={() => { }}
+        updateUser={() => {}}
         deleteUser={deleteUser}
-      />
+      />,
     )
 
-    fireEvent.click(getByText('Delete'))
+    fireEvent.click(getByText("Delete"))
     expect(deleteUser).toHaveBeenCalledWith(user.id)
   })
 })

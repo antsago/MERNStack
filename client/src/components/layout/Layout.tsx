@@ -1,49 +1,55 @@
-import React, { Component, ReactNode } from 'react'
-import { connect } from 'react-redux'
-import { createStyles, withStyles, WithStyles, Container } from '@material-ui/core'
-import { addAlert } from '../../utils'
-import Header from './Header'
-import Footer from './Footer'
-import Alert from './Alert'
+import React, { Component, ReactNode } from "react"
+import { connect } from "react-redux"
+import {
+  createStyles,
+  withStyles,
+  WithStyles,
+  Container,
+} from "@material-ui/core"
+import { addAlert } from "../../utils"
+import Header from "./Header"
+import Footer from "./Footer"
+import Alerts from "./Alert"
 
-const styles = theme => createStyles({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh'
-  },
-  content: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8)
-  }
-})
+const styles = (theme) =>
+  createStyles({
+    root: {
+      display: "flex",
+      flexDirection: "column",
+      minHeight: "100vh",
+    },
+    content: {
+      paddingTop: theme.spacing(8),
+      paddingBottom: theme.spacing(8),
+    },
+  })
 
 interface Props extends WithStyles<typeof styles> {
-  showAlert: (string) => void,
+  showAlert: (string) => void
   children: ReactNode
 }
 
 export class Layout extends Component<Props, { hasError: boolean }> {
   constructor(props) {
-    super(props);
-    this.state = { hasError: false };
+    super(props)
+    this.state = { hasError: false }
   }
 
   static getDerivedStateFromError() {
-    return { hasError: true };
+    return { hasError: true }
   }
 
   componentDidCatch(error) {
-    this.props.showAlert(error.message);
+    this.props.showAlert(error.message)
   }
 
   render() {
     return (
       <div className={this.props.classes.root}>
-        <Alert />
+        <Alerts />
         <Header />
         <main>
-          <Container className={this.props.classes.content} maxWidth='md'>
+          <Container className={this.props.classes.content} maxWidth="md">
             {this.state.hasError ? "Something went wrong" : this.props.children}
           </Container>
         </main>
@@ -54,8 +60,11 @@ export class Layout extends Component<Props, { hasError: boolean }> {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  showAlert: (message) => dispatch(addAlert(message))
+const mapDispatchToProps = (dispatch) => ({
+  showAlert: (message) => dispatch(addAlert(message)),
 })
 
-export default connect(undefined, mapDispatchToProps)(withStyles(styles)(Layout))
+export default connect(
+  undefined,
+  mapDispatchToProps,
+)(withStyles(styles)(Layout))

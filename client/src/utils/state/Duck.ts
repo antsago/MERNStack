@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux'
-import { Effect } from 'redux-saga/effects'
+import { combineReducers } from "redux"
+import { Effect } from "redux-saga/effects"
 import {
   createSlice,
   CreateSliceOptions,
@@ -7,23 +7,9 @@ import {
   Reducer,
   Slice,
   createAction,
-  PrepareAction
-} from '@reduxjs/toolkit'
-
-export class SelectorPrefix {
-  private prefixes: ((any) => any)[] = []
-
-  getLocalState (rootState) {
-    return this.prefixes.reduceRight(
-      (prevState, prefix) => prefix(prevState),
-      rootState
-    )
-  }
-
-  addPrefix (prefix) {
-    this.prefixes.push(prefix)
-  }
-}
+  PrepareAction,
+} from "@reduxjs/toolkit"
+import SelectorPrefix from "./SelectorPrefix"
 
 interface SliceReturn<State, CaseReducers extends SliceCaseReducers<State>>
   extends Slice<State, CaseReducers> {
@@ -39,24 +25,26 @@ interface SagaArgument<P> {
 export default class Duck<State> {
   private prefix: SelectorPrefix = new SelectorPrefix()
 
-  constructor (
+  constructor(
     public reducer: Reducer<State>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public sagas: Generator<Effect, any, unknown>[] = [],
-    public dependentSelectors: SelectorPrefix[] = []
+    public dependentSelectors: SelectorPrefix[] = [],
   ) {}
 
-  static fromSlice<State, CaseReducers extends SliceCaseReducers<State>> (
-    sliceOptions: CreateSliceOptions<State, CaseReducers>
+  static fromSlice<State, CaseReducers extends SliceCaseReducers<State>>(
+    sliceOptions: CreateSliceOptions<State, CaseReducers>,
   ): SliceReturn<State, CaseReducers> {
     const slice = createSlice(sliceOptions)
     return {
       ...slice,
-      duck: new Duck(slice.reducer)
+      duck: new Duck(slice.reducer),
     }
   }
 
-  static fromDucks (duckMap: Record<string, Duck<any>>) {
+  static fromDucks(duckMap: Record<string, Duck<unknown>>) {
     const reducerMap = Object.entries(duckMap).reduce((map, [level, duck]) => {
+      // eslint-disable-next-line no-param-reassign
       map[level] = duck.reducer
       return map
     }, {})
@@ -65,28 +53,28 @@ export default class Duck<State> {
 
     const sagas = [].concat(
       Object.values(duckMap)
-        .map(duck => duck.sagas)
-        .flat()
+        .map((duck) => duck.sagas)
+        .flat(),
     )
 
     const dependentSelectors = Object.entries(duckMap).reduce(
       (allDependents, [prefix, duck]) => {
         const newDependents = duck.dependentSelectors.concat(duck.prefix)
-        newDependents.forEach(dependent =>
-          dependent.addPrefix(state => state[prefix])
+        newDependents.forEach((dependent) =>
+          dependent.addPrefix((state) => state[prefix]),
         )
         return allDependents.concat(newDependents)
       },
-      []
+      [],
     )
 
     return new Duck(reducers, sagas, dependentSelectors)
   }
 
-  saga<P> (options: SagaArgument<P>) {
+  saga<P>(options: SagaArgument<P>) {
     const action = createAction(options.type, options.prepare)
 
-    function * watchEffect () {
+    function* watchEffect() {
       yield options.effect(action.type)
     }
     this.sagas.push(watchEffect())
@@ -94,7 +82,7 @@ export default class Duck<State> {
     return action
   }
 
-  selector (select) {
-    return state => select(this.prefix.getLocalState(state))
+  selector(select) {
+    return (state) => select(this.prefix.getLocalState(state))
   }
 }

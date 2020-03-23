@@ -1,4 +1,4 @@
-import alertDuck from './alertDuck'
+import alertDuck from "./alertDuck"
 
-export * from './alertDuck'
+export * from "./alertDuck"
 export default alertDuck

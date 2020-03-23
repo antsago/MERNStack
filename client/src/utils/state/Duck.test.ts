@@ -1,28 +1,15 @@
-import Duck, { SelectorPrefix } from './Duck'
-import { put } from 'redux-saga/effects'
+import { put } from "redux-saga/effects"
+import Duck from "./Duck"
 
-describe('Duck', () => {
-  test('Adding of prefixes', () => {
-    const prefix = new SelectorPrefix()
-
-    const selector = state => prefix.getLocalState(state)[0]
-    expect(selector([1])).toBe(1)
-
-    prefix.addPrefix(state => state.list)
-    expect(selector({ list: [1] })).toBe(1)
-
-    prefix.addPrefix(state => state.location)
-    expect(selector({ location: { list: [1] } })).toBe(1)
-  })
-
-  test('Combine ducks sagas', () => {
-    function * testSaga (type) {
+describe("Duck", () => {
+  test("Combine ducks sagas", () => {
+    function* testSaga(type) {
       yield put({ type })
     }
 
-    const saga1 = testSaga('Saga1')
-    const saga2 = testSaga('Saga2')
-    const saga3 = testSaga('Saga3')
+    const saga1 = testSaga("Saga1")
+    const saga2 = testSaga("Saga2")
+    const saga3 = testSaga("Saga3")
 
     const duck1 = new Duck(null, [saga1], [])
     const duck2 = new Duck(null, [saga2, saga3], [])
@@ -34,15 +21,15 @@ describe('Duck', () => {
     expect(newDuck.sagas).toContain(saga3)
   })
 
-  test('Combine ducks selectors', () => {
+  test("Combine ducks selectors", () => {
     const duck1 = new Duck(null, [], [])
-    const selector1 = duck1.selector(state => state)
+    const selector1 = duck1.selector((state) => state)
     const duck2 = new Duck(null, [], [])
-    const selector2 = duck2.selector(state => state)
+    const selector2 = duck2.selector((state) => state)
 
     Duck.fromDucks({ duck1, duck2 })
 
-    const testState = { duck1: 'duck1', duck2: 'duck2' }
+    const testState = { duck1: "duck1", duck2: "duck2" }
 
     expect(selector1(testState)).toEqual(testState.duck1)
     expect(selector2(testState)).toEqual(testState.duck2)

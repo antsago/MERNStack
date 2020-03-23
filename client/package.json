@@ -6,7 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start -p 3000",
-    "format": "prettier-standard --format --lint",
+    "format": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src",
     "test": "jest",
     "test:watch": "npm run test -- --watch"
   },
