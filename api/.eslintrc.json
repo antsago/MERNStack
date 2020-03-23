@@ -24,6 +24,10 @@
         "SharedArrayBuffer": "readonly"
     },
     "rules": {
-        "prettier/prettier": "error"
+        "object-curly-newline": ["error", { "multiline": true }],
+        "prettier/prettier": ["error", {
+            "trailingComma": "all",
+            "semi": false
+        }]
     }
 }

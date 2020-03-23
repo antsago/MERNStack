@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { ObjectType, InputType, Field, ID } from "type-graphql"
 
 @ObjectType()
@@ -19,7 +20,7 @@ export abstract class User {
 }
 
 @InputType()
-export abstract class UserInput implements Partial<User> {
+export abstract class UserInput implements Omit<User, "id" | "created"> {
   @Field({ nullable: true })
   givenName?: string
 

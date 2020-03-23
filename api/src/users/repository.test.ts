@@ -7,7 +7,7 @@ describe("User repository", () => {
     const modelMock = { create: jest.fn().mockResolvedValue({ id: "mock" }) }
 
     const repository = new UserRepository(
-      (modelMock as any) as Model<UserModelType>,
+      (modelMock as unknown) as Model<UserModelType>,
     )
 
     const user = { givenName: "test" }

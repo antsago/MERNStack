@@ -4,7 +4,7 @@ import cors from "cors"
 import createGraphqlServer from "./graphqlServer"
 import config from "./config"
 
-export default async function main() {
+export default async function main(): Promise<void> {
   await mongoose.connect(config.dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -21,12 +21,12 @@ export default async function main() {
     )
     .use("/", await createGraphqlServer())
 
-  const httpServer = app.listen(config.port)
+  app.listen(config.port)
+
+  // eslint-disable-next-line no-console
   console.log(
     `Running a GraphQL API server at http://localhost:${config.port}/`,
   )
-
-  return httpServer
 }
 
 main()

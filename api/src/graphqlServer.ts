@@ -1,12 +1,13 @@
 import "reflect-metadata" // necessary for type-graphql
-import graphqlHTTP from "express-graphql"
+import graphqlHTTP, { Middleware } from "express-graphql"
 import { buildSchema } from "type-graphql"
-import { UsersResolver } from "./users"
+import UsersResolver from "./users"
 
-export default async function startQraphlServer() {
+export default async function startQraphlServer(): Promise<Middleware> {
   const schema = await buildSchema({
     resolvers: [UsersResolver],
-    validate: false, // We are not using type-graphql for validation, and it gives a warning without it
+    // We are not using type-graphql for validation, and it gives a warning without it
+    validate: false,
   })
 
   return graphqlHTTP({

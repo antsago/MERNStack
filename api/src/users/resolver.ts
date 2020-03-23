@@ -7,27 +7,30 @@ export default class UsersResolver {
   constructor(private resolver: UserResolver = new UserResolver()) {}
 
   @Query(() => User)
-  async user(@Arg("id") id: string) {
+  async user(@Arg("id") id: string): Promise<User> {
     return this.resolver.getUser(id)
   }
 
   @Query(() => [User])
-  async users() {
+  async users(): Promise<User[]> {
     return this.resolver.getUsers()
   }
 
   @Mutation(() => User)
-  async createUser(@Arg("user") user: UserInput) {
+  async createUser(@Arg("user") user: UserInput): Promise<User> {
     return this.resolver.createUser(user)
   }
 
   @Mutation(() => User)
-  async updateUser(@Arg("id") id: string, @Arg("user") user: UserInput) {
+  async updateUser(
+    @Arg("id") id: string,
+    @Arg("user") user: UserInput,
+  ): Promise<User> {
     return this.resolver.updateUser(id, user)
   }
 
   @Mutation(() => User)
-  async deleteUser(@Arg("id") id: string) {
+  async deleteUser(@Arg("id") id: string): Promise<User> {
     return this.resolver.deleteUser(id)
   }
 }
