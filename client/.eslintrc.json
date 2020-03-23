@@ -1,0 +1,34 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": ["./tsconfig.json"]
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "jest",
+        "prettier"
+    ],
+    "extends": [
+        // Use "airbnb-typescript/base" for non-react and 
+        // "airbnb-typescript" with react (requires aditional plugins),
+        // check: https://www.npmjs.com/package/eslint-config-airbnb-typescript
+        "airbnb-typescript",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        // Always the last to prevent rule conflicts with prettier
+        "prettier/@typescript-eslint"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "rules": {
+        "object-curly-newline": ["error", { "multiline": true }],
+        "prettier/prettier": ["error", {
+            "trailingComma": "all",
+            "semi": false
+        }]
+    }
+}
