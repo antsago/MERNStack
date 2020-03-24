@@ -1,5 +1,6 @@
 node_modules
 npm-debug.log
 build
-tests
-.prettierignore
+.eslintignore
+.eslintrc.json
+jest.config.js

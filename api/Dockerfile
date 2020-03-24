@@ -2,7 +2,7 @@ FROM node:12 AS build
 
 WORKDIR /usr/src/app
 
-# Create run environment
+# Create build environment
 COPY package*.json ./
 RUN npm ci
 
