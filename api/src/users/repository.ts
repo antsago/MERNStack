@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid"
+import uuid from "uuid/v4"
 import UserModel, { UserModelType } from "./model"
 import { User, UserInput } from "./types"
 
