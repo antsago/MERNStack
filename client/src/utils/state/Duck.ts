@@ -27,8 +27,7 @@ export default class Duck<State> {
 
   constructor(
     public reducer: Reducer<State>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public sagas: Generator<Effect, any, unknown>[] = [],
+    public sagas: Effect[] = [],
     public dependentSelectors: SelectorPrefix[] = [],
   ) {}
 
@@ -74,10 +73,7 @@ export default class Duck<State> {
   saga<P>(options: SagaArgument<P>) {
     const action = createAction(options.type, options.prepare)
 
-    function* watchEffect() {
-      yield options.effect(action.type)
-    }
-    this.sagas.push(watchEffect())
+    this.sagas.push(options.effect(action.type))
 
     return action
   }

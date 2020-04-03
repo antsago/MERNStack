@@ -1,4 +1,4 @@
-import { put } from "redux-saga/effects"
+import { put, takeEvery } from "redux-saga/effects"
 import Duck from "./Duck"
 
 describe("Duck", () => {
@@ -7,9 +7,9 @@ describe("Duck", () => {
       yield put({ type })
     }
 
-    const saga1 = testSaga("Saga1")
-    const saga2 = testSaga("Saga2")
-    const saga3 = testSaga("Saga3")
+    const saga1 = takeEvery("Saga1", testSaga, "1")
+    const saga2 = takeEvery("Saga2", testSaga, "2")
+    const saga3 = takeEvery("Saga3", testSaga, "3")
 
     const duck1 = new Duck(null, [saga1], [])
     const duck2 = new Duck(null, [saga2, saga3], [])
