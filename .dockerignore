@@ -1,0 +1,9 @@
+*
+!./packages
+**/node_modules
+**/npm-debug.log
+**/build
+**/.eslintignore
+**/.eslintrc.json
+**/jest.config.js
+**/.next

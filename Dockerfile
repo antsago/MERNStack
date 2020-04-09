@@ -1,22 +1,24 @@
 FROM node:12 AS build
 
+ARG root=./packages/api
 WORKDIR /usr/src/app
 
 # Create build environment
-COPY package*.json ./
+COPY $root/package*.json ./
 RUN npm ci
 
-COPY . .
+COPY $root/ ./
 RUN npm run build
 
 ## ------- ##
 
 FROM node:12
 
+ARG root=./packages/api
 WORKDIR /usr/src/app
 
 # Create run environment
-COPY package*.json ./
+COPY $root/package*.json ./
 RUN npm ci --only=production
 
 COPY --from=build /usr/src/app/build ./build
