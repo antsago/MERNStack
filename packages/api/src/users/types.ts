@@ -1,8 +1,12 @@
 /* eslint-disable max-classes-per-file */
 import { ObjectType, InputType, Field, ID } from "type-graphql"
+import {
+  User as UserDefinition,
+  UserInput as UserInputDefintion,
+} from "./interfaces"
 
 @ObjectType()
-export abstract class User {
+export abstract class User implements UserDefinition {
   @Field(() => ID)
   id: string
 
@@ -20,7 +24,7 @@ export abstract class User {
 }
 
 @InputType()
-export abstract class UserInput implements Omit<User, "id" | "created"> {
+export abstract class UserInput implements UserInputDefintion {
   @Field({ nullable: true })
   givenName?: string
 
