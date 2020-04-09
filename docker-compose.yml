@@ -4,20 +4,20 @@ services:
     container_name: client
     build:
       context: .
-      dockerfile: ./client.dockerfile
+      dockerfile: ./services/client.dockerfile
     ports:
       - "3000:3000"
   api:
     container_name: api
     build:
       context: .
-      dockerfile: ./api.dockerfile
+      dockerfile: ./services/api.dockerfile
     ports:
       - "4000:4000"
   mongo:
     container_name: mongo
     image: mongo
     volumes:
-      - ./db-data:/data/db
+      - ./services/db-data:/data/db
     ports:
       - "27017:27017"
