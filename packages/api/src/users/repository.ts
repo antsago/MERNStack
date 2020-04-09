@@ -1,6 +1,6 @@
 import uuid from "uuid/v4"
 import UserModel, { UserModelType } from "./model"
-import { User, UserInput } from "./types"
+import { User, UserInput } from "../../../shared"
 
 export default class UserRepository {
   constructor(private userModel = UserModel) {}

@@ -1,5 +1,5 @@
 import { model, Schema, Document } from "mongoose"
-import { User } from "./types"
+import { User } from "../../../shared"
 
 export type UserModelType = User & Document
 
