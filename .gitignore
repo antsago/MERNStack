@@ -1,12 +1,16 @@
-node_modules
-db-data
-build
-.next
+## Recommended editor ##
 .vscode/*
-# Have everyone using the same plugin
 !.vscode/extensions.json
 !.vscode/settings.json
+
+## Packages ##
+node_modules
+build
+.next
 *.map
 # Auto generated:
 client/public/sw.js
 client/public/workbox*
+
+## Services ##
+db-data
