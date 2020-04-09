@@ -7,7 +7,9 @@ services:
       - "3000:3000"
   api:
     container_name: api
-    build: .
+    build:
+      context: .
+      dockerfile: ./api.dockerfile
     ports:
       - "4000:4000"
   mongo:
