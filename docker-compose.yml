@@ -2,12 +2,12 @@ version: '3'
 services:
   client:
     container_name: client
-    build: ./client
+    build: ./packages/client
     ports:
       - "3000:3000"
   api:
     container_name: api
-    build: ./api
+    build: ./packages/api
     ports:
       - "4000:4000"
   mongo:
