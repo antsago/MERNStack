@@ -15,6 +15,6 @@
     ]
   },
   "include": [
-    "./src/**/*", "../shared/interfaces.ts"
-  ],
+    "./src/**/*", "../shared/*"
+  ]
 }

@@ -1,26 +1,34 @@
 FROM node:12 AS build
 
-ARG root=./packages/api
-WORKDIR /usr/src/app
+ARG root=./packages
 
 # Create build environment
-COPY $root/package*.json ./
+WORKDIR /usr/src/app/api
+COPY $root/api/package*.json ./
+
 RUN npm ci
 
-COPY $root/ ./
+# Build the service
+WORKDIR /usr/src/app/
+COPY $root/api/ ./api/
+COPY $root/shared/ ./shared/
+
+WORKDIR /usr/src/app/api
 RUN npm run build
 
 ## ------- ##
 
 FROM node:12
 
-ARG root=./packages/api
-WORKDIR /usr/src/app
+ARG root=./packages
 
 # Create run environment
-COPY $root/package*.json ./
+WORKDIR /usr/src/app/api
+COPY $root/api/package*.json ./
+
 RUN npm ci --only=production
 
-COPY --from=build /usr/src/app/build ./build
+# Run the service
+COPY --from=build /usr/src/app/api/build ./build
 
 CMD [ "npm", "start" ]
