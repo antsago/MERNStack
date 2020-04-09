@@ -9,7 +9,7 @@ build
 .next
 *.map
 # Auto generated:
-client/public/sw.js
+client/public/sw.js*
 client/public/workbox*
 
 ## Services ##
