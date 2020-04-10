@@ -1,8 +1,8 @@
 import axios, { AxiosStatic } from "axios"
-import { User, UserInput } from "@djogger/test"
+import { User, UserInput, UsersResolver } from "@djogger/test"
 import config from "./config"
 
-export default class ApiClient {
+export default class ApiClient implements UsersResolver {
   constructor(
     private urlFromServer: string = config.apiFromServer,
     private urlFromClient: string = config.apiFromClient,
@@ -25,7 +25,14 @@ export default class ApiClient {
     return response.createUser
   }
 
-  async loadUsers(): Promise<User[]> {
+  async user(): Promise<User> {
+    const response = await this.makeQuery(
+      "{ user{ id, givenName, familyName, email, created } }",
+    )
+    return response.users
+  }
+
+  async users(): Promise<User[]> {
     const response = await this.makeQuery(
       "{ users{ id, givenName, familyName, email, created } }",
     )

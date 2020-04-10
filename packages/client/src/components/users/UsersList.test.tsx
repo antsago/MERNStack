@@ -4,7 +4,12 @@ import UsersList from "./UsersList"
 
 describe("UsersList", () => {
   test("Shows loader when loading", () => {
-    const user = { id: "test", givenName: "name", familyName: "surname" }
+    const user = {
+      id: "test",
+      givenName: "name",
+      familyName: "surname",
+      created: new Date(),
+    }
     const { getByRole } = render(
       <UsersList
         users={[user]}
@@ -18,7 +23,12 @@ describe("UsersList", () => {
   })
 
   test("Does not shows loader when not loading", () => {
-    const user = { id: "test", givenName: "name", familyName: "surname" }
+    const user = {
+      id: "test",
+      givenName: "name",
+      familyName: "surname",
+      created: new Date(),
+    }
     const { queryByRole } = render(
       <UsersList
         users={[user]}
@@ -32,7 +42,12 @@ describe("UsersList", () => {
   })
 
   test("Shows users if given", () => {
-    const user = { id: "test", givenName: "name", familyName: "surname" }
+    const user = {
+      id: "test",
+      givenName: "name",
+      familyName: "surname",
+      created: new Date(),
+    }
     const { getByTestId } = render(
       <UsersList
         users={[user]}
@@ -46,7 +61,12 @@ describe("UsersList", () => {
   })
 
   test("Shows users and loader", () => {
-    const user = { id: "test", givenName: "name", familyName: "surname" }
+    const user = {
+      id: "test",
+      givenName: "name",
+      familyName: "surname",
+      created: new Date(),
+    }
     const { getByRole, getByTestId } = render(
       <UsersList
         users={[user]}
@@ -67,6 +87,7 @@ describe("UsersList", () => {
       givenName: "name",
       familyName: "surname",
       email: "email",
+      created: new Date(),
     }
     const { queryByRole, getByText } = render(
       <UsersList
@@ -82,12 +103,21 @@ describe("UsersList", () => {
     expect(queryByRole("dialog")).toBeInTheDocument()
     fireEvent.click(getByText("Save"))
     expect(queryByRole("dialog")).not.toBeInTheDocument()
-    expect(updateUser).toHaveBeenCalledWith(user.id, { ...user, id: undefined })
+    expect(updateUser).toHaveBeenCalledWith(user.id, {
+      ...user,
+      id: undefined,
+      created: undefined,
+    })
   })
 
   test("Calls delete user when clicking", () => {
     const deleteUser = jest.fn()
-    const user = { id: "test", givenName: "name", familyName: "surname" }
+    const user = {
+      id: "test",
+      givenName: "name",
+      familyName: "surname",
+      created: new Date(),
+    }
     const { getByText } = render(
       <UsersList
         users={[user]}

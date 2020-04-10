@@ -1,4 +1,5 @@
 import { expectSaga } from "redux-saga-test-plan"
+import { User } from "@djogger/test"
 import ApiClient from "../../ApiClient"
 import { addAlert } from "../utilsDuck"
 import {
@@ -18,8 +19,8 @@ import {
 
 describe("Users sagas", () => {
   test("Create user creates new user", async () => {
-    const newUser = { email: "test@test.com" }
-    const user = { id: "test", ...newUser }
+    const newUser = { email: "test@test.com", created: new Date() }
+    const user: User = { id: "test", ...newUser }
     const mockedClient = { createUser: jest.fn().mockResolvedValue(user) }
 
     await expectSaga(
@@ -57,8 +58,8 @@ describe("Users sagas", () => {
   })
 
   test("Load users finds and loads the users", async () => {
-    const users = [{ id: "test", email: "test@test.com" }]
-    const mockedClient = { loadUsers: jest.fn().mockResolvedValue(users) }
+    const users = [{ id: "test", email: "test@test.com", created: new Date() }]
+    const mockedClient = { users: jest.fn().mockResolvedValue(users) }
 
     await expectSaga(
       loadUsersSaga,
@@ -70,13 +71,13 @@ describe("Users sagas", () => {
       .put(stopLoading())
       .run()
 
-    expect(mockedClient.loadUsers).toHaveBeenCalled()
+    expect(mockedClient.users).toHaveBeenCalled()
   })
 
   test("Load users handles error", async () => {
     const message = "testing!"
     const error = new Error(message)
-    const mockedClient = { loadUsers: jest.fn().mockRejectedValue(error) }
+    const mockedClient = { users: jest.fn().mockRejectedValue(error) }
 
     await expectSaga(
       loadUsersSaga,
@@ -90,11 +91,11 @@ describe("Users sagas", () => {
       .put(stopLoading())
       .run()
 
-    expect(mockedClient.loadUsers).toHaveBeenCalled()
+    expect(mockedClient.users).toHaveBeenCalled()
   })
 
   test("Update user changes user", async () => {
-    const newUser = { email: "test@test.com" }
+    const newUser = { email: "test@test.com", created: new Date() }
     const id = "test"
     const user = { id, ...newUser }
     const mockedClient = { updateUser: jest.fn().mockResolvedValue(user) }

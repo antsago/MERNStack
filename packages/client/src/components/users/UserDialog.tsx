@@ -8,7 +8,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core"
-import { UserInput } from "../../utils"
+import { UserInput } from "@djogger/test"
 
 const useStyles = makeStyles((theme) =>
   createStyles({

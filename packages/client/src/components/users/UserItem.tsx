@@ -8,7 +8,7 @@ import {
   Typography,
   Button,
 } from "@material-ui/core"
-import { User } from "../../utils"
+import { User } from "@djogger/test"
 
 const UserItem = ({
   user,

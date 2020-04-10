@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit"
-import { User } from "../../types"
+import { User } from "@djogger/test"
 import Duck from "../Duck"
 
 const initialState: User[] = []

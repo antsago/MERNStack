@@ -5,7 +5,12 @@ import { Index } from "../pages/index"
 
 describe("Index page", () => {
   test("Renders correctly", () => {
-    const user = { id: "test", givenName: "name", familyName: "surname" }
+    const user = {
+      id: "test",
+      givenName: "name",
+      familyName: "surname",
+      created: new Date(),
+    }
     const { getByRole } = renderWithStore(
       <Index
         users={[user]}

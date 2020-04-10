@@ -9,6 +9,7 @@ describe("UserItem", () => {
       givenName: "name",
       familyName: "surname",
       email: "foo@foo.com",
+      created: new Date(),
     }
     const { getByText } = render(<UserItem user={user} />)
 
@@ -20,7 +21,12 @@ describe("UserItem", () => {
 
   test("Updates when clicked", () => {
     const onClickFunct = jest.fn()
-    const user = { id: "test", givenName: "name", familyName: "surname" }
+    const user = {
+      id: "test",
+      givenName: "name",
+      familyName: "surname",
+      created: new Date(),
+    }
     const { getByTestId, getByText } = render(
       <UserItem user={user} onUpdate={onClickFunct} />,
     )
@@ -32,7 +38,12 @@ describe("UserItem", () => {
 
   test("Deletes when clicked", () => {
     const onClickFunct = jest.fn()
-    const user = { id: "test", givenName: "name", familyName: "surname" }
+    const user = {
+      id: "test",
+      givenName: "name",
+      familyName: "surname",
+      created: new Date(),
+    }
     const { getByText } = render(
       <UserItem user={user} onDelete={onClickFunct} />,
     )

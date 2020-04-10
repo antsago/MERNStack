@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import { User } from "@djogger/test"
 import { Layout, UsersList } from "../components"
 import {
   loadUsers,
@@ -8,7 +9,6 @@ import {
   usersSelector,
   areUsersLoading,
   Context,
-  User,
 } from "../utils"
 
 export const Index = ({

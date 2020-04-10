@@ -58,7 +58,7 @@ describe("ApiClient", () => {
       url,
       (mockAxios as unknown) as AxiosStatic,
     )
-    const response = await client.loadUsers()
+    const response = await client.users()
 
     expect(response).toEqual(users)
   })

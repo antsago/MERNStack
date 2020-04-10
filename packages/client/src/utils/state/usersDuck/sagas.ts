@@ -25,7 +25,7 @@ export function* createUserSaga(action, apiClient = new ApiClient()) {
 export function* loadUsersSaga(action, apiClient = new ApiClient()) {
   try {
     yield put(startLoading())
-    const users = yield apiClient.loadUsers()
+    const users = yield apiClient.users()
     yield put(appendUsers(users))
   } catch (err) {
     const message = err.message || "We found an error while loading users"
