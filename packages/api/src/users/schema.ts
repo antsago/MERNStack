@@ -3,7 +3,7 @@ import { ObjectType, InputType, Field, ID } from "type-graphql"
 import {
   User as UserDefinition,
   UserInput as UserInputDefintion,
-} from "../../../shared"
+} from "@djogger/test"
 
 @ObjectType()
 export abstract class User implements UserDefinition {

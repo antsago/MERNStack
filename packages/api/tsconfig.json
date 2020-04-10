@@ -14,6 +14,7 @@
       "esnext.asynciterable"
     ]
   },
+  "references": [{ "path":  "../test" }],
   "include": [
     "./src/**/*", "../shared/*"
   ]
