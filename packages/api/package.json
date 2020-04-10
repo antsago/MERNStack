@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "NODE_ENV=development ts-node-dev --inspect -- src/server.ts",
     "build": "tsc",
-    "start": "node build/api/src/server.js",
+    "start": "node dist/server.js",
     "format": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src",
     "test": "jest",
     "test:watch": "npm run test -- --watch"

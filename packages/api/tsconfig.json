@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "target": "es6",
     "moduleResolution": "node",
-    "outDir": "build",
+    "outDir": "dist",
     "baseUrl": ".",
     "pretty": true,
     "emitDecoratorMetadata": true,
