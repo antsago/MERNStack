@@ -1,5 +1,5 @@
 import axios, { AxiosStatic } from "axios"
-import { User, UserInput, UsersResolver } from "@djogger/test"
+import { User, UserInput, UsersResolver } from "@djogger/shared"
 import config from "./config"
 
 export default class ApiClient implements UsersResolver {

@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "references": [{ "path":  "../test" }],
+  "references": [{ "path":  "../shared" }],
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

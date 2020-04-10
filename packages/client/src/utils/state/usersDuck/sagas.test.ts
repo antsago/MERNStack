@@ -1,5 +1,5 @@
 import { expectSaga } from "redux-saga-test-plan"
-import { User } from "@djogger/test"
+import { User } from "@djogger/shared"
 import ApiClient from "../../ApiClient"
 import { addAlert } from "../utilsDuck"
 import {

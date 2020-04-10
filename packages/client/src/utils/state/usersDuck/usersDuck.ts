@@ -1,5 +1,5 @@
 import { takeEvery } from "redux-saga/effects"
-import { UserInput } from "@djogger/test"
+import { UserInput } from "@djogger/shared"
 import Duck from "../Duck"
 import { firstNames, lastNames } from "./names"
 import storeDuck from "./storeDuck"

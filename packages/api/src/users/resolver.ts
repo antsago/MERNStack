@@ -1,11 +1,11 @@
 import { Resolver, Query, Arg, Mutation } from "type-graphql"
-import { UsersResolver as ResolverContract } from "@djogger/test"
+import { UsersResolver as ResolverContract } from "@djogger/shared"
 import { User, UserInput } from "./schema"
 import UserResolver from "./repository"
 
 @Resolver()
 export default class UsersResolver implements ResolverContract {
-  constructor(private resolver: UserResolver = new UserResolver()) {}
+  constructor(private resolver: UserResolver = new UserResolver()) { }
 
   @Query(() => User)
   async user(@Arg("id") id: string): Promise<User> {
