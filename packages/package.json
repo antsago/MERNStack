@@ -1,6 +1,9 @@
 {
   "name": "djogger",
   "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "test": "lerna run test",
     "format": "eslint --ext .js,.jsx,.ts,.tsx --fix ."
   },
   "devDependencies": {
