@@ -1,5 +1,5 @@
 import { Resolver, Query, Arg, Mutation } from "type-graphql"
-import { UsersResolver as ResolverContract } from "../../../shared"
+import { UsersResolver as ResolverContract } from "@djogger/test"
 import { User, UserInput } from "./schema"
 import UserResolver from "./repository"
 

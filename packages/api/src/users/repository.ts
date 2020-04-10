@@ -1,6 +1,6 @@
 import uuid from "uuid/v4"
+import { User, UserInput } from "@djogger/test"
 import UserModel, { UserModelType } from "./model"
-import { User, UserInput } from "../../../shared"
 
 export default class UserRepository {
   constructor(private userModel = UserModel) {}

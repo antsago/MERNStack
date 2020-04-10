@@ -1,5 +1,5 @@
 import { model, Schema, Document } from "mongoose"
-import { User } from "../../../shared"
+import { User } from "@djogger/test"
 
 export type UserModelType = User & Document
 
