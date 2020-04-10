@@ -1,34 +1,38 @@
 FROM node:12 AS build
 
-ARG root=./packages
+WORKDIR /usr/src/app
 
 # Create build environment
-WORKDIR /usr/src/app/api
-COPY $root/api/package*.json ./
+COPY ./packages/*.json ./
+COPY ./packages/shared/package*.json ./shared/
+COPY ./packages/api/package*.json ./api/
 
 RUN npm ci
+RUN npx lerna bootstrap --ci
 
 # Build the service
-WORKDIR /usr/src/app/
-COPY $root/api/ ./api/
-COPY $root/shared/ ./shared/
+COPY ./packages/api/ ./api/
+COPY ./packages/shared/ ./shared/
 
-WORKDIR /usr/src/app/api
-RUN npm run build
+RUN npx lerna run build
 
 ## ------- ##
 
 FROM node:12
 
-ARG root=./packages
+WORKDIR /usr/src/app
 
 # Create run environment
-WORKDIR /usr/src/app/api
-COPY $root/api/package*.json ./
+COPY ./packages/*.json ./
+COPY ./packages/shared/package*.json ./shared/
+COPY ./packages/api/package*.json ./api/
 
-RUN npm ci --only=production
+RUN npm ci lerna
+RUN npx lerna bootstrap --ci -- --only=production
 
 # Run the service
-COPY --from=build /usr/src/app/api/build ./build
+COPY --from=build /usr/src/app/shared/dist/ ./shared/dist/
+COPY --from=build /usr/src/app/api/dist/ ./api/dist/
 
+WORKDIR /usr/src/app/api
 CMD [ "npm", "start" ]

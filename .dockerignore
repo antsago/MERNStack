@@ -3,7 +3,13 @@
 **/node_modules
 **/npm-debug.log
 **/build
+**/dist
+**/*.test.ts
+**/*.test.tsx
+**/tsconfig.tsbuildinfo
 **/.eslintignore
 **/.eslintrc.json
 **/jest.config.js
 **/.next
+**/public/sw*
+**/public/workbox*
