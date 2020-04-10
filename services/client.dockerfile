@@ -1,27 +1,39 @@
 FROM node:12 AS build
 
-ARG root=./packages/client
 WORKDIR /usr/src/app
 
 # Create build environment
-COPY $root/package*.json ./
+COPY ./packages/*.json ./
 RUN npm ci
 
-COPY $root/ ./
-RUN npm run build
+COPY ./packages/shared/package*.json ./shared/
+COPY ./packages/client/package*.json ./client/
+RUN npx lerna bootstrap --ci
+
+# Build the service
+COPY ./packages/shared/ ./shared/
+COPY ./packages/client/ ./client/
+
+RUN npx lerna run build
 
 ## ------- ##
 
 FROM node:12
 
-ARG root=./packages/client
 WORKDIR /usr/src/app
 
 # Create run environment
-COPY $root/package*.json ./
-RUN npm ci --only=production
+COPY ./packages/*.json ./
+RUN npm ci lerna
 
-COPY --from=build /usr/src/app/.next ./.next
-COPY --from=build /usr/src/app/public ./public
+COPY ./packages/shared/package*.json ./shared/
+COPY ./packages/client/package*.json ./client/
+RUN npx lerna bootstrap --ci -- --only=production
 
+# Run the service
+COPY --from=build /usr/src/app/shared/dist/ ./shared/dist/
+COPY --from=build /usr/src/app/client/.next/ ./client/.next/
+COPY --from=build /usr/src/app/client/public/ ./client/public/
+
+WORKDIR /usr/src/app/client
 CMD [ "npm", "start" ]

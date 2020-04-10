@@ -4,15 +4,15 @@ WORKDIR /usr/src/app
 
 # Create build environment
 COPY ./packages/*.json ./
+RUN npm ci
+
 COPY ./packages/shared/package*.json ./shared/
 COPY ./packages/api/package*.json ./api/
-
-RUN npm ci
 RUN npx lerna bootstrap --ci
 
 # Build the service
-COPY ./packages/api/ ./api/
 COPY ./packages/shared/ ./shared/
+COPY ./packages/api/ ./api/
 
 RUN npx lerna run build
 
@@ -24,10 +24,10 @@ WORKDIR /usr/src/app
 
 # Create run environment
 COPY ./packages/*.json ./
+RUN npm ci lerna
+
 COPY ./packages/shared/package*.json ./shared/
 COPY ./packages/api/package*.json ./api/
-
-RUN npm ci lerna
 RUN npx lerna bootstrap --ci -- --only=production
 
 # Run the service
