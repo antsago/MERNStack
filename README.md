@@ -2,28 +2,51 @@
 
 Reference setup for a dockerize microservice app using typescript and the MERN stack.
 
-To try it just run `docker-compose up` and play with the React client at http://localhost:3000/ or with the graphiql client at http://localhost:4000/. Check the tests for examples on the queries that can be made to the api.
+To try it just run `docker-compose up` and play with the React client at http://localhost:3000/ or with the graphiql client at http://localhost:4000/.
 
-## Microservice description
 
-It consists of two microservices:
+## Microservices
+
+This sample app consists of three services:
 
 - api: a GraphQL server with Docker and Mongo.
 - client: an SSR PWA build with React, Redux-Saga and Material-UI and served with Next.js
-- (and a default mongo image for persitency)
+- mongo: for persitency
 
-Each microservice follows these conventions:
 
-- The code is contained within the src folder
-- `npm run dev` for easy development (e.g. nodemon-like)
-- `npm run test` to execute the tests (done with jest)
-- `npm run format` to use eslint and prettier to format and lint the code
-- `npm run build` to create the production build (compile typescript among others)
-- `npm start` to execute the build (you can see it in action in the Dockerfiles)
+## File structure
+
+At the high-level, the repository is divided into:
+
+- services: where the dockerfiles and other service-related thing live.
+- packages: where the packages that make up the different services live.
+
+
+The app consists of three packages:
+
+- share: which contains common coode and type definitions to ensure the integration
+between the services.
+- api: the code for the api service.
+- client: the code for the client service.
+
+
+When using the app, these are useful things to know:
+
+- The code for each package is contained within the src folder.
+- `npm run dev` for easy development of leave packages (e.g. nodemon-like).
+- `npm run test` to execute the tests (done with jest).
+- `npm run format` to use eslint and prettier to format and lint the code (only available at root).
+- `npm run build` to create the production build (I recommend to use it at root).
+- `npm start` to execute the build (you can see it in action in the Dockerfiles).
+
 
 ## Potential next steps
 
-- E2E tests: for extra confidence (with cypress?)
-- Logging
-- Split api into two. A stateful microservice to handle data storing and persitency and a stateless one to include business logic.
-- Integration tests: current tests are mostly unit tests, which don't give that much security. On the other hand the application is very simple one and typescript does a lot to test the integration between the different components.
+- E2E tests: business logic is covered by unit tests, typing (shared between services) goes
+a long way to prevent integration errors. What is missing for full confidence are end to end
+tests of the whole deployed application (with cypress and docker?).
+- CI (Husky, Travis?) / CD: as another filter to prevent errors form creeping in.
+- Nextjs alternative?: as it happens to most libraries that do a lot of things, nextjs is amazing
+at letting you start very fast, but the moment you need something more custom (which in my experience
+always happens) you have to fight against the framework that used to manage it for you.
+- Logging.
