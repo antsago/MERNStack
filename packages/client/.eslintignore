@@ -1,5 +1,0 @@
-node_modules
-.next
-# Auto generated:
-client/public/sw.js*
-client/public/workbox*

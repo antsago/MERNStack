@@ -10,7 +10,6 @@ dist
 .next
 tsconfig.tsbuildinfo
 *.map
-# Auto generated:
 **/public/sw*
 **/public/workbox*
 

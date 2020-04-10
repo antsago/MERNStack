@@ -1,0 +1,14 @@
+# Auto generated:
+node_modules
+.next
+dist
+jest.config.js
+tsconfig.tsbuildinfo
+*.map
+client/public/sw.js*
+client/public/workbox*
+
+# No linting
+client/jest.setup.ts
+next.config.js
+next-env.d.ts

@@ -12,5 +12,5 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": ["./packages/api", "./packages/client"]
+  "eslint.workingDirectories": ["./packages"]
 }

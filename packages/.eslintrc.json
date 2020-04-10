@@ -1,7 +1,14 @@
 {
     "parser": "@typescript-eslint/parser",
+    "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
+      },
     "parserOptions": {
-        "project": ["./tsconfig.json"]
+        "project": ["./api/tsconfig.json", "./client/tsconfig.json", "./shared/tsconfig.json", "./client/tsconfig.jest.json"]
     },
     "plugins": [
         "@typescript-eslint",
@@ -12,7 +19,8 @@
         // Use "airbnb-typescript/base" for non-react and 
         // "airbnb-typescript" with react (requires aditional plugins),
         // check: https://www.npmjs.com/package/eslint-config-airbnb-typescript
-        "airbnb-typescript/base",
+        "airbnb-typescript",
+        "airbnb/hooks",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -27,9 +35,13 @@
         "object-curly-newline": "off",
         "operator-linebreak": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
+        "react/jsx-props-no-spreading": "off",
         "function-paren-newline": "off",
+        "react/jsx-curly-newline": "off",
         "no-confusing-arrow": "off",
         "implicit-arrow-linebreak": "off",
+        "react/jsx-wrap-multilines": "off",
+        "react/destructuring-assignment": "off",
         "prettier/prettier": ["error", {
             "trailingComma": "all",
             "semi": false
