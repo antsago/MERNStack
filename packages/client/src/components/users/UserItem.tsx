@@ -8,7 +8,7 @@ import {
   Typography,
   Button,
 } from "@material-ui/core"
-import { User } from "@djogger/shared"
+import { User } from "@mernstack/shared"
 
 const UserItem = ({
   user,

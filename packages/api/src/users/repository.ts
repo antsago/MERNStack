@@ -1,9 +1,9 @@
 import uuid from "uuid/v4"
-import { User, UserInput } from "@djogger/shared"
+import { User, UserInput } from "@mernstack/shared"
 import UserModel, { UserModelType } from "./model"
 
 export default class UserRepository {
-  constructor(private userModel = UserModel) {}
+  constructor(private userModel = UserModel) { }
 
   private static toPlainObject(mongoUser: UserModelType): User {
     return {

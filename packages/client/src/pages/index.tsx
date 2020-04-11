@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { User } from "@djogger/shared"
+import { User } from "@mernstack/shared"
 import { Layout, UsersList } from "../components"
 import {
   loadUsers,

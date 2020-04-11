@@ -1,5 +1,5 @@
 import axios, { AxiosStatic } from "axios"
-import { User, UserInput, UsersResolver } from "@djogger/shared"
+import { User, UserInput, UsersResolver } from "@mernstack/shared"
 import config from "./config"
 
 export default class ApiClient implements UsersResolver {
@@ -7,7 +7,7 @@ export default class ApiClient implements UsersResolver {
     private urlFromServer: string = config.apiFromServer,
     private urlFromClient: string = config.apiFromClient,
     private fetcher: AxiosStatic = axios,
-  ) {}
+  ) { }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async makeQuery(query, variables?): Promise<any> {

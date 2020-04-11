@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { makeStyles, Grid, CircularProgress } from "@material-ui/core"
-import { User, UserInput } from "@djogger/shared"
+import { User, UserInput } from "@mernstack/shared"
 import UserItem from "./UserItem"
 import UserDialog from "./UserDialog"
 

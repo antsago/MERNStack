@@ -8,7 +8,7 @@ import {
   TextField,
   Button,
 } from "@material-ui/core"
-import { UserInput } from "@djogger/shared"
+import { UserInput } from "@mernstack/shared"
 
 const useStyles = makeStyles((theme) =>
   createStyles({

@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { connect } from "react-redux"
 import { Add, PlusOne } from "@material-ui/icons"
 import { IconButton } from "@material-ui/core"
-import { UserInput } from "@djogger/shared"
+import { UserInput } from "@mernstack/shared"
 import { UserDialog } from "../../users"
 import {
   createUser as addUser,

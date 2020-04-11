@@ -1,5 +1,5 @@
 {
-  "name": "djogger",
+  "name": "mernstack",
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
