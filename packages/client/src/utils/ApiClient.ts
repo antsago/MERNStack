@@ -7,7 +7,7 @@ export default class ApiClient implements UsersResolver {
     private urlFromServer: string = config.apiFromServer,
     private urlFromClient: string = config.apiFromClient,
     private fetcher: AxiosStatic = axios,
-  ) { }
+  ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async makeQuery(query, variables?): Promise<any> {

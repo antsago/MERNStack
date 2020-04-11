@@ -5,7 +5,7 @@ import UserRepository from "./repository"
 
 @Resolver()
 export default class UsersResolver implements ResolverContract {
-  constructor(private repository: UserRepository = new UserRepository()) { }
+  constructor(private repository = new UserRepository()) {}
 
   @Query(() => User)
   async user(@Arg("id") id: string): Promise<User> {
