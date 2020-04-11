@@ -1,25 +1,25 @@
 import { Resolver, Query, Arg, Mutation } from "type-graphql"
 import { UsersResolver as ResolverContract } from "@mernstack/shared"
 import { User, UserInput } from "./schema"
-import UserResolver from "./repository"
+import UserRepository from "./repository"
 
 @Resolver()
 export default class UsersResolver implements ResolverContract {
-  constructor(private resolver: UserResolver = new UserResolver()) { }
+  constructor(private repository: UserRepository = new UserRepository()) { }
 
   @Query(() => User)
   async user(@Arg("id") id: string): Promise<User> {
-    return this.resolver.getUser(id)
+    return this.repository.getUser(id)
   }
 
   @Query(() => [User])
   async users(): Promise<User[]> {
-    return this.resolver.getUsers()
+    return this.repository.getUsers()
   }
 
   @Mutation(() => User)
   async createUser(@Arg("user") user: UserInput): Promise<User> {
-    return this.resolver.createUser(user)
+    return this.repository.createUser(user)
   }
 
   @Mutation(() => User)
@@ -27,11 +27,11 @@ export default class UsersResolver implements ResolverContract {
     @Arg("id") id: string,
     @Arg("user") user: UserInput,
   ): Promise<User> {
-    return this.resolver.updateUser(id, user)
+    return this.repository.updateUser(id, user)
   }
 
   @Mutation(() => User)
   async deleteUser(@Arg("id") id: string): Promise<User> {
-    return this.resolver.deleteUser(id)
+    return this.repository.deleteUser(id)
   }
 }
