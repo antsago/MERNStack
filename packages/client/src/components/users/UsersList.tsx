@@ -27,33 +27,32 @@ const USERS_QUERY = gql`
 `
 
 const UsersList = ({
-  users,
-  isLoading,
   deleteUser,
   updateUser,
 }: {
-  users: User[]
-  isLoading: boolean
   deleteUser: (id: string) => void
   updateUser: (id: string, changedUser: UserInput) => void
 }) => {
-  const { loading, data } = useQuery(USERS_QUERY)
-  const classes = useStyles()
+  const { loading, data } = useQuery<{ users: User[] }>(USERS_QUERY)
   const [selectedUser, setSelectedUser] = useState(null)
+  const classes = useStyles()
 
   return (
     <>
-      <Grid container spacing={2}>
-        {users.map((user) => (
-          <UserItem
-            key={user.id}
-            user={user}
-            onUpdate={() => setSelectedUser(user)}
-            onDelete={() => deleteUser(user.id)}
-          />
-        ))}
-      </Grid>
-      {isLoading && <CircularProgress className={classes.loader} />}
+      {loading || !data ? (
+        <CircularProgress className={classes.loader} color="secondary" />
+      ) : (
+        <Grid container spacing={2}>
+          {data.users.map((user) => (
+            <UserItem
+              key={user.id}
+              user={user}
+              onUpdate={() => setSelectedUser(user)}
+              onDelete={() => deleteUser(user.id)}
+            />
+          ))}
+        </Grid>
+      )}
       {!!selectedUser && (
         <UserDialog
           open={!!selectedUser}
