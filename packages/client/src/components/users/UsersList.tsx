@@ -1,18 +1,11 @@
 import React, { useState } from "react"
-import { makeStyles, Grid, CircularProgress } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import { User, UserInput } from "@mernstack/shared"
 import { gql } from "apollo-boost"
 import { useQuery } from "@apollo/react-hooks"
 import UserItem from "./UserItem"
 import UserDialog from "./UserDialog"
-
-const useStyles = makeStyles((theme) => ({
-  loader: {
-    position: "relative",
-    left: "50%",
-    margin: theme.spacing(3),
-  },
-}))
+import WaitForLoad from "../WaitForLoad"
 
 const USERS_QUERY = gql`
   {
@@ -35,13 +28,10 @@ const UsersList = ({
 }) => {
   const { loading, data } = useQuery<{ users: User[] }>(USERS_QUERY)
   const [selectedUser, setSelectedUser] = useState(null)
-  const classes = useStyles()
 
   return (
     <>
-      {loading || !data ? (
-        <CircularProgress className={classes.loader} color="secondary" />
-      ) : (
+      <WaitForLoad loading={loading}>
         <Grid container spacing={2}>
           {data.users.map((user) => (
             <UserItem
@@ -52,7 +42,7 @@ const UsersList = ({
             />
           ))}
         </Grid>
-      )}
+      </WaitForLoad>
       {!!selectedUser && (
         <UserDialog
           open={!!selectedUser}
