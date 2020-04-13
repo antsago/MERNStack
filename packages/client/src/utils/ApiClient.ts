@@ -1,57 +1,104 @@
-import axios, { AxiosStatic } from "axios"
 import { User, UserInput, UsersResolver } from "@mernstack/shared"
+import ApolloClient, { gql } from "apollo-boost"
+import fetch from "isomorphic-unfetch"
 import config from "./config"
 
 export default class ApiClient implements UsersResolver {
   constructor(
-    private urlFromServer: string = config.apiFromServer,
-    private urlFromClient: string = config.apiFromClient,
-    private fetcher: AxiosStatic = axios,
+    private client = new ApolloClient({
+      uri:
+        typeof window === "undefined"
+          ? config.apiFromServer
+          : config.apiFromClient,
+      fetch,
+    }),
   ) {}
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async makeQuery(query, variables?): Promise<any> {
-    const url =
-      typeof window === "undefined" ? this.urlFromServer : this.urlFromClient
-    const response = await this.fetcher.post(url, { query, variables })
-    return response.data.data
-  }
-
   async createUser(user: UserInput): Promise<User> {
-    const response = await this.makeQuery(
-      "mutation createUser($user: UserInput!) { createUser(user: $user){ id, givenName, familyName, email, created } }",
-      { user },
-    )
-    return response.createUser
+    const response = await this.client.mutate({
+      mutation: gql`
+        mutation createUser($user: UserInput!) {
+          createUser(user: $user) {
+            id
+            givenName
+            familyName
+            email
+            created
+          }
+        }
+      `,
+      variables: { user },
+    })
+    return response.data.createUser
   }
 
   async user(): Promise<User> {
-    const response = await this.makeQuery(
-      "{ user{ id, givenName, familyName, email, created } }",
-    )
-    return response.users
+    const response = await this.client.query({
+      query: gql`
+        {
+          user {
+            id
+            givenName
+            familyName
+            email
+            created
+          }
+        }
+      `,
+    })
+    return response.data.user
   }
 
   async users(): Promise<User[]> {
-    const response = await this.makeQuery(
-      "{ users{ id, givenName, familyName, email, created } }",
-    )
-    return response.users
+    const response = await this.client.query({
+      query: gql`
+        {
+          users {
+            id
+            givenName
+            familyName
+            email
+            created
+          }
+        }
+      `,
+    })
+    return response.data.users
   }
 
   async updateUser(id: string, user: UserInput): Promise<User> {
-    const response = await this.makeQuery(
-      "mutation updateUser($id: String!, $user: UserInput!) { updateUser(id: $id, user: $user){ id, givenName, familyName, email, created } }",
-      { id, user },
-    )
-    return response.updateUser
+    const response = await this.client.mutate({
+      mutation: gql`
+        mutation updateUser($id: String!, $user: UserInput!) {
+          updateUser(id: $id, user: $user) {
+            id
+            givenName
+            familyName
+            email
+            created
+          }
+        }
+      `,
+      variables: { id, user },
+    })
+    return response.data.updateUser
   }
 
   async deleteUser(id: string): Promise<User> {
-    const response = await this.makeQuery(
-      "mutation deleteUser($id: String!) { deleteUser(id: $id){ id, givenName, familyName, email, created } }",
-      { id },
-    )
-    return response.deleteUser
+    const response = await this.client.mutate({
+      mutation: gql`
+        mutation deleteUser($id: String!) {
+          deleteUser(id: $id) {
+            id
+            givenName
+            familyName
+            email
+            created
+          }
+        }
+      `,
+      variables: { id },
+    })
+    return response.data.deleteUser
   }
 }

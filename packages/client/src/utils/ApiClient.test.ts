@@ -1,42 +1,21 @@
-import { AxiosStatic } from "axios"
+import ApolloClient from "apollo-boost"
 import ApiClient from "./ApiClient"
 
+function testClient() {
+  return {
+    query: jest.fn(),
+    mutate: jest.fn(),
+  }
+}
+
 describe("ApiClient", () => {
-  test("Make query", async () => {
-    const mockAxios = { post: jest.fn() }
-
-    const query = "grapqhQl"
-    const variables = { foo: "foo" }
-    const graphQlPayload = "Graphql data"
-    const url = "serverUrl"
-
-    mockAxios.post.mockResolvedValue({ data: { data: graphQlPayload } })
-
-    const client = new ApiClient(
-      url,
-      url,
-      (mockAxios as unknown) as AxiosStatic,
-    )
-    const response = await client.makeQuery(query, variables)
-
-    expect(response).toEqual(graphQlPayload)
-    expect(mockAxios.post).toHaveBeenCalledWith(url, { query, variables })
-  })
-
   test("Create user", async () => {
-    const mockAxios = { post: jest.fn() }
-
     const newUser = { givenName: "name" }
-    const url = "serverUrl"
-
-    mockAxios.post.mockResolvedValue({
-      data: { data: { createUser: newUser } },
-    })
+    const mockApollo = testClient()
+    mockApollo.mutate.mockResolvedValue({ data: { createUser: newUser } })
 
     const client = new ApiClient(
-      url,
-      url,
-      (mockAxios as unknown) as AxiosStatic,
+      (mockApollo as unknown) as ApolloClient<unknown>,
     )
     const response = await client.createUser(newUser)
 
@@ -44,19 +23,14 @@ describe("ApiClient", () => {
   })
 
   test("Load users", async () => {
-    const mockAxios = { post: jest.fn() }
-
     const users = [
       { id: "test", givenName: "name", created: "2020-02-20T11:37:16.423Z" },
     ]
-    const url = "serverUrl"
-
-    mockAxios.post.mockResolvedValue({ data: { data: { users } } })
+    const mockApollo = testClient()
+    mockApollo.query.mockResolvedValue({ data: { users } })
 
     const client = new ApiClient(
-      url,
-      url,
-      (mockAxios as unknown) as AxiosStatic,
+      (mockApollo as unknown) as ApolloClient<unknown>,
     )
     const response = await client.users()
 
@@ -64,21 +38,14 @@ describe("ApiClient", () => {
   })
 
   test("Update user", async () => {
-    const mockAxios = { post: jest.fn() }
-
     const id = "test"
     const userChange = { givenName: "name" }
-    const url = "serverUrl"
     const responseUser = { id, ...userChange }
-
-    mockAxios.post.mockResolvedValue({
-      data: { data: { updateUser: responseUser } },
-    })
+    const mockApollo = testClient()
+    mockApollo.mutate.mockResolvedValue({ data: { updateUser: responseUser } })
 
     const client = new ApiClient(
-      url,
-      url,
-      (mockAxios as unknown) as AxiosStatic,
+      (mockApollo as unknown) as ApolloClient<unknown>,
     )
     const response = await client.updateUser(id, userChange)
 
@@ -86,20 +53,13 @@ describe("ApiClient", () => {
   })
 
   test("Delete user", async () => {
-    const mockAxios = { post: jest.fn() }
-
     const id = "test"
     const responseUser = { id, givenName: "name" }
-    const url = "serverUrl"
-
-    mockAxios.post.mockResolvedValue({
-      data: { data: { deleteUser: responseUser } },
-    })
+    const mockApollo = testClient()
+    mockApollo.mutate.mockResolvedValue({ data: { deleteUser: responseUser } })
 
     const client = new ApiClient(
-      url,
-      url,
-      (mockAxios as unknown) as AxiosStatic,
+      (mockApollo as unknown) as ApolloClient<unknown>,
     )
     const response = await client.deleteUser(id)
 
