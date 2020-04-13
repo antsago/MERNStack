@@ -7,8 +7,9 @@ import { Provider } from "react-redux"
 import { Store } from "redux"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { ThemeProvider } from "@material-ui/core/styles"
+import { getDataFromTree } from "@apollo/react-ssr"
 import { theme } from "../components"
-import { createStore } from "../utils"
+import { createStore, withApollo } from "../utils"
 
 class MyApp extends NextApp<{ store: Store }> {
   static async getInitialProps({ Component, ctx }) {
@@ -46,4 +47,6 @@ class MyApp extends NextApp<{ store: Store }> {
   }
 }
 
-export default withRedux(createStore)(withReduxSaga(MyApp))
+export default withRedux(createStore)(
+  withReduxSaga(withApollo(MyApp, { getDataFromTree })),
+)

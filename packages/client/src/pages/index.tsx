@@ -11,17 +11,19 @@ import {
   Context,
 } from "../utils"
 
+interface Props {
+  users: User[]
+  usersLoading: boolean
+  changeUser: () => void
+  removeUser: () => void
+}
+
 export const Index = ({
   users,
   usersLoading,
   changeUser,
   removeUser,
-}: {
-  users: User[]
-  usersLoading: boolean
-  changeUser: () => void
-  removeUser: () => void
-}) => (
+}: Props) => (
   <Layout>
     <UsersList
       users={users}
