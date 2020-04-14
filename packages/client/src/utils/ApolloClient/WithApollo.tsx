@@ -4,7 +4,7 @@ import ApolloClient, { InMemoryCache, gql } from "apollo-boost"
 import { ApolloProvider } from "@apollo/react-hooks"
 import { NextPage } from "next"
 import config from "../config"
-import { resolver } from "./UpdateCounter"
+import counterMutation from "./counter"
 
 function getCache(restoredState) {
   const cache = new InMemoryCache().restore(restoredState || {})
@@ -25,7 +25,7 @@ export default withApollo(
           : config.apiFromClient,
       cache: getCache(initialState),
       resolvers: {
-        Mutation: resolver,
+        Mutation: counterMutation,
       },
     }),
   {

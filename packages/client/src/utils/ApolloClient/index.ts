@@ -1,4 +1,3 @@
 export * from "./users"
+export * from "./counter"
 export { default as withApollo } from "./WithApollo"
-export { default as useIncrement } from "./UpdateCounter"
-export { default as useGetCounter } from "./GetCounter"
