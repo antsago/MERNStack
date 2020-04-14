@@ -1,19 +1,12 @@
 import React, { useState } from "react"
-import { connect } from "react-redux"
 import { Add, PlusOne } from "@material-ui/icons"
 import { IconButton } from "@material-ui/core"
 import { UserDialog } from "../../users"
-import {
-  createRandomUser as addRandomUser,
-  useCreateUser,
-} from "../../../utils"
+import { useCreateRandomUser, useCreateUser } from "../../../utils"
 
-export const Menu = ({
-  createRandomUser,
-}: {
-  createRandomUser: () => void
-}) => {
+export const Menu = () => {
   const createUser = useCreateUser()
+  const createRandomUser = useCreateRandomUser()
   const [showDialog, setShowDialog] = useState(false)
 
   return (
@@ -48,8 +41,4 @@ export const Menu = ({
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  createRandomUser: () => dispatch(addRandomUser()),
-})
-
-export default connect(undefined, mapDispatchToProps)(Menu)
+export default Menu
