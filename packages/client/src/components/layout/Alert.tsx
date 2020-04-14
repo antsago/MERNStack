@@ -1,11 +1,12 @@
 import React from "react"
-import { connect } from "react-redux"
 import { Snackbar, IconButton, Slide } from "@material-ui/core"
 import { Close as CloseIcon } from "@material-ui/icons"
-import { dismissAlert, useGetShownAlert } from "../../utils"
+import { useDismissAlert, useGetShownAlert } from "../../utils"
 
-export const Alert = ({ onDismiss }: { onDismiss: () => void }) => {
+export const Alert = () => {
   const alert = useGetShownAlert()
+  const dismissAlert = useDismissAlert()
+
   return alert ? (
     <Snackbar
       key={alert.id}
@@ -15,14 +16,14 @@ export const Alert = ({ onDismiss }: { onDismiss: () => void }) => {
       }}
       TransitionComponent={(props) => <Slide {...props} direction="left" />}
       autoHideDuration={6000}
-      onClose={() => console.log("Close!")}
+      onClose={() => dismissAlert(alert.id)}
       message={alert.message}
       action={
         <IconButton
           size="small"
           aria-label="close"
           color="inherit"
-          onClick={onDismiss}
+          onClick={() => dismissAlert(alert.id)}
         >
           <CloseIcon fontSize="small" />
         </IconButton>
@@ -32,8 +33,4 @@ export const Alert = ({ onDismiss }: { onDismiss: () => void }) => {
   ) : null
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onDismiss: () => dispatch(dismissAlert()),
-})
-
-export default connect(null, mapDispatchToProps)(Alert)
+export default Alert
