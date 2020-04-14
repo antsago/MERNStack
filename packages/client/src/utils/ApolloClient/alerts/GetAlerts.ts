@@ -7,8 +7,14 @@ export const GET_ALERTS = gql`
   }
 `
 
-export default () => {
+const useGetAlerts = () => {
   const { data } = useQuery(GET_ALERTS)
 
   return data.alerts
+}
+
+export default () => {
+  const alerts = useGetAlerts()
+
+  return alerts.length > 0 ? alerts[0] : undefined
 }
