@@ -1,13 +1,13 @@
 import React from "react"
 import { Layout, UsersList } from "../components"
-import { useGetCounter } from "../utils"
+import { useGetAlerts } from "../utils"
 
 export const Index = () => {
-  const counter = useGetCounter()
+  const alerts = useGetAlerts()
 
   return (
     <Layout>
-      {JSON.stringify(counter)}
+      {JSON.stringify(alerts)}
       <UsersList />
     </Layout>
   )

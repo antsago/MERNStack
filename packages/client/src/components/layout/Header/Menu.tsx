@@ -1,19 +1,13 @@
 import React, { useState } from "react"
 import { Add, PlusOne } from "@material-ui/icons"
 import { IconButton } from "@material-ui/core"
-import { useMutation } from "@apollo/react-hooks"
-import { gql } from "apollo-boost"
 import { UserDialog } from "../../users"
-import {
-  useCreateRandomUser,
-  useCreateUser,
-  useIncrement,
-} from "../../../utils"
+import { useCreateRandomUser, useCreateUser, useAddAlert } from "../../../utils"
 
 export const Menu = () => {
   const createUser = useCreateUser()
   // const createRandomUser = useCreateRandomUser()
-  const increment = useIncrement()
+  const addAlert = useAddAlert()
 
   const [showDialog, setShowDialog] = useState(false)
 
@@ -30,7 +24,7 @@ export const Menu = () => {
         color="inherit"
         edge="end"
         // onClick={createRandomUser}
-        onClick={increment}
+        onClick={() => addAlert("Hi!")}
         aria-label="Add random user"
       >
         <PlusOne />

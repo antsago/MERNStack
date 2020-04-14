@@ -4,13 +4,13 @@ import ApolloClient, { InMemoryCache, gql } from "apollo-boost"
 import { ApolloProvider } from "@apollo/react-hooks"
 import { NextPage } from "next"
 import config from "../config"
-import counterMutation from "./counter"
+import alertMutation from "./alerts"
 
 function getCache(restoredState) {
   const cache = new InMemoryCache().restore(restoredState || {})
 
   if (!restoredState) {
-    cache.writeData({ data: { counter: 0 } })
+    cache.writeData({ data: { alerts: [] } })
   }
 
   return cache
@@ -25,7 +25,7 @@ export default withApollo(
           : config.apiFromClient,
       cache: getCache(initialState),
       resolvers: {
-        Mutation: counterMutation,
+        Mutation: alertMutation,
       },
     }),
   {
