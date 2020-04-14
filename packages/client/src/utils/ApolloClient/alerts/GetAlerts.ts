@@ -10,7 +10,7 @@ export const GET_ALERTS = gql`
 const useGetAlerts = () => {
   const { data } = useQuery(GET_ALERTS)
 
-  return data.alerts
+  return data ? data.alerts : []
 }
 
 export default () => {

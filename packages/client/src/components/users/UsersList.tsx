@@ -6,7 +6,7 @@ import UserItem from "./UserItem"
 import UserDialog from "./UserDialog"
 
 const UsersList = () => {
-  const { loading, data } = useGetUsers()
+  const { loading, users } = useGetUsers()
   const updateUser = useUpdateUser()
   const deleteUser = useDeleteUser()
   const [selectedUser, setSelectedUser] = useState(null)
@@ -15,8 +15,8 @@ const UsersList = () => {
     <>
       <WaitForLoad loading={loading}>
         <Grid container spacing={2}>
-          {data &&
-            data.users.map((user) => (
+          {users &&
+            users.map((user) => (
               <UserItem
                 key={user.id}
                 user={user}

@@ -14,4 +14,8 @@ export const GET_USERS = gql`
   }
 `
 
-export default () => useQuery<{ users: User[] }>(GET_USERS)
+export default () => {
+  const { data, loading } = useQuery<{ users: User[] }>(GET_USERS)
+
+  return { loading, users: data && data.users }
+}
