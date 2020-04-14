@@ -1,14 +1,11 @@
 import { gql } from "apollo-boost"
 import { useMutation } from "@apollo/react-hooks"
+import { GET_USERS } from "./GetUsers"
 
 const DELETE_USER = gql`
   mutation deleteUser($id: String!) {
     deleteUser(id: $id) {
       id
-      givenName
-      familyName
-      email
-      created
     }
   }
 `
@@ -16,5 +13,16 @@ const DELETE_USER = gql`
 export default () => {
   const [deleteUser] = useMutation(DELETE_USER)
 
-  return (id: string) => deleteUser({ variables: { id } })
+  return (id: string) =>
+    deleteUser({
+      variables: { id },
+      update: (cache, { data: { deleteUser: deletedUser } }) => {
+        const { users } = cache.readQuery({ query: GET_USERS })
+
+        cache.writeQuery({
+          query: GET_USERS,
+          data: { users: users.filter((user) => user.id !== deletedUser.id) },
+        })
+      },
+    })
 }

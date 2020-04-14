@@ -2,7 +2,7 @@ import { User } from "@mernstack/shared"
 import { gql } from "apollo-boost"
 import { useQuery } from "@apollo/react-hooks"
 
-const USERS_QUERY = gql`
+export const GET_USERS = gql`
   {
     users {
       id
@@ -14,4 +14,4 @@ const USERS_QUERY = gql`
   }
 `
 
-export default () => useQuery<{ users: User[] }>(USERS_QUERY)
+export default () => useQuery<{ users: User[] }>(GET_USERS)
