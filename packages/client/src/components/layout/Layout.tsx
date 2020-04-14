@@ -1,12 +1,11 @@
-import React, { Component, ReactNode } from "react"
-import { connect } from "react-redux"
+import React, { Component, PropsWithChildren } from "react"
 import {
   createStyles,
   withStyles,
   WithStyles,
   Container,
 } from "@material-ui/core"
-import { addAlert } from "../../utils"
+import { withAddAlert, WithAddAlert } from "../../utils"
 import Header from "./Header"
 import Footer from "./Footer"
 import Alerts from "./Alert"
@@ -24,10 +23,7 @@ const styles = (theme) =>
     },
   })
 
-interface Props extends WithStyles<typeof styles> {
-  showAlert: (string) => void
-  children: ReactNode
-}
+type Props = PropsWithChildren<WithStyles<typeof styles> & WithAddAlert>
 
 export class Layout extends Component<Props, { hasError: boolean }> {
   constructor(props) {
@@ -40,7 +36,7 @@ export class Layout extends Component<Props, { hasError: boolean }> {
   }
 
   componentDidCatch(error) {
-    this.props.showAlert(error.message)
+    this.props.addAlert(error.message)
   }
 
   render() {
@@ -60,11 +56,4 @@ export class Layout extends Component<Props, { hasError: boolean }> {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  showAlert: (message) => dispatch(addAlert(message)),
-})
-
-export default connect(
-  undefined,
-  mapDispatchToProps,
-)(withStyles(styles)(Layout))
+export default withAddAlert(withStyles(styles)(Layout))

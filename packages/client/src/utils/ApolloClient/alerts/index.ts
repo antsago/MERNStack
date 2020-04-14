@@ -2,6 +2,7 @@ import { resolver as addResolver } from "./AddAlert"
 import { resolver as dismissResolver } from "./DismissAlert"
 
 export { default as useAddAlert } from "./AddAlert"
+export * from "./AddAlertHOC"
 export { default as useGetShownAlert } from "./GetAlerts"
 export { default as useDismissAlert } from "./DismissAlert"
 
