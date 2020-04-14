@@ -3,20 +3,31 @@ import { connect } from "react-redux"
 import { Add, PlusOne } from "@material-ui/icons"
 import { IconButton } from "@material-ui/core"
 import { UserInput } from "@mernstack/shared"
+import { gql } from "apollo-boost"
+import { useMutation } from "@apollo/react-hooks"
 import { UserDialog } from "../../users"
-import {
-  createUser as addUser,
-  createRandomUser as addRandomUser,
-} from "../../../utils"
+import { createRandomUser as addRandomUser } from "../../../utils"
+
+const CREATE_USER = gql`
+  mutation createUser($user: UserInput!) {
+    createUser(user: $user) {
+      id
+      givenName
+      familyName
+      email
+      created
+    }
+  }
+`
 
 export const Menu = ({
-  createUser,
   createRandomUser,
 }: {
-  createUser: (user: UserInput) => void
   createRandomUser: () => void
 }) => {
+  const [createUser] = useMutation(CREATE_USER)
   const [showDialog, setShowDialog] = useState(false)
+
   return (
     <>
       <IconButton
@@ -39,7 +50,7 @@ export const Menu = ({
           user={{}}
           onClose={() => setShowDialog(false)}
           onSubmit={(newUser) => {
-            createUser(newUser)
+            createUser({ variables: { user: newUser } })
             setShowDialog(false)
           }}
           open
@@ -50,7 +61,6 @@ export const Menu = ({
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createUser: (user) => dispatch(addUser(user)),
   createRandomUser: () => dispatch(addRandomUser()),
 })
 
