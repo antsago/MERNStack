@@ -1,7 +1,5 @@
 export * from "./state"
 export * from "./NextContext"
 export * from "./types"
+export * from "./ApolloClient"
 export { default as withApollo } from "./WithApollo"
-export { default as useUpdateUser } from "./UpdateUserMutation"
-export { default as useGetUsers } from "./GetUsersQuery"
-export { default as useDeleteUser } from "./DeleteUserMutation"
