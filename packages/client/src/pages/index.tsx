@@ -1,20 +1,10 @@
 import React from "react"
-import { connect } from "react-redux"
 import { Layout, UsersList } from "../components"
-import { deleteUser } from "../utils"
 
-interface Props {
-  removeUser: () => void
-}
-
-export const Index = ({ removeUser }: Props) => (
+export const Index = () => (
   <Layout>
-    <UsersList deleteUser={removeUser} />
+    <UsersList />
   </Layout>
 )
 
-const mapDispatchToProps = (dispatch) => ({
-  removeUser: (id) => dispatch(deleteUser(id)),
-})
-
-export default connect(null, mapDispatchToProps)(Index)
+export default Index
