@@ -1,20 +1,13 @@
 import React from "react"
-import { useQuery } from "@apollo/react-hooks"
-import { gql } from "apollo-boost"
 import { Layout, UsersList } from "../components"
-
-const GET_COUNTER = gql`
-  query GetCounterValue {
-    counter @client
-  }
-`
+import { useGetCounter } from "../utils"
 
 export const Index = () => {
-  const { data } = useQuery(GET_COUNTER)
+  const counter = useGetCounter()
 
   return (
     <Layout>
-      {JSON.stringify(data)}
+      {JSON.stringify(counter)}
       <UsersList />
     </Layout>
   )

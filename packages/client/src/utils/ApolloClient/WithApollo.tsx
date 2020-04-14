@@ -4,12 +4,7 @@ import ApolloClient, { InMemoryCache, gql } from "apollo-boost"
 import { ApolloProvider } from "@apollo/react-hooks"
 import { NextPage } from "next"
 import config from "../config"
-
-const GET_COUNTER = gql`
-  query GetCounterValue {
-    counter @client
-  }
-`
+import { resolver } from "./UpdateCounter"
 
 function getCache(restoredState) {
   const cache = new InMemoryCache().restore(restoredState || {})
@@ -30,18 +25,7 @@ export default withApollo(
           : config.apiFromClient,
       cache: getCache(initialState),
       resolvers: {
-        Mutation: {
-          updateCounter: (_, variables, { cache }) => {
-            // query existing data
-            const data = cache.readQuery({ query: GET_COUNTER })
-            // Calculate new counter value
-            const newCounterValue = data.counter + variables.offset
-            cache.writeData({
-              data: { counter: newCounterValue },
-            })
-            return null // best practices
-          },
-        },
+        Mutation: resolver,
       },
     }),
   {

@@ -4,18 +4,16 @@ import { IconButton } from "@material-ui/core"
 import { useMutation } from "@apollo/react-hooks"
 import { gql } from "apollo-boost"
 import { UserDialog } from "../../users"
-import { useCreateRandomUser, useCreateUser } from "../../../utils"
-
-const UPDATE_COUNTER = gql`
-  mutation updateCounter($offset: Number!) {
-    updateCounter(offset: $offset) @client
-  }
-`
+import {
+  useCreateRandomUser,
+  useCreateUser,
+  useIncrement,
+} from "../../../utils"
 
 export const Menu = () => {
   const createUser = useCreateUser()
   // const createRandomUser = useCreateRandomUser()
-  const [increment] = useMutation(UPDATE_COUNTER, { variables: { offset: 1 } })
+  const increment = useIncrement()
 
   const [showDialog, setShowDialog] = useState(false)
 
@@ -32,10 +30,7 @@ export const Menu = () => {
         color="inherit"
         edge="end"
         // onClick={createRandomUser}
-        onClick={() => {
-          console.log("here")
-          increment()
-        }}
+        onClick={increment}
         aria-label="Add random user"
       >
         <PlusOne />
