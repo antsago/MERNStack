@@ -27,6 +27,8 @@ export const resolver = {
 }
 
 export default () => {
-  const [addAlert] = useMutation(ADD_ALERT)
-  return (message) => addAlert({ variables: { message } })
+  const [addAlert] = useMutation<{}, { message: string }>(ADD_ALERT)
+  return async (message: string) => {
+    addAlert({ variables: { message } })
+  }
 }

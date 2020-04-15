@@ -24,7 +24,7 @@ export const Menu = () => {
         color="inherit"
         edge="end"
         // onClick={createRandomUser}
-        onClick={() => addAlert("Hi!")}
+        onClick={async () => addAlert("Hi!")}
         aria-label="Add random user"
       >
         <PlusOne />

@@ -35,8 +35,8 @@ export class Layout extends Component<Props, { hasError: boolean }> {
     return { hasError: true }
   }
 
-  componentDidCatch(error) {
-    this.props.addAlert(error.message)
+  async componentDidCatch(error) {
+    await this.props.addAlert(error.message)
   }
 
   render() {

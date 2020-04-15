@@ -2,7 +2,7 @@ import React, { ComponentType, FC } from "react"
 import useAddAlert from "./AddAlert"
 
 export interface WithAddAlert {
-  addAlert: (message: string) => void
+  addAlert: (message: string) => Promise<void>
 }
 
 type WithAddAlertReturn<P> = FC<Omit<P, keyof WithAddAlert>>
