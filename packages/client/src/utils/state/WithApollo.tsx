@@ -1,6 +1,6 @@
 import React from "react"
 import withApollo from "next-with-apollo"
-import ApolloClient, { InMemoryCache, gql } from "apollo-boost"
+import ApolloClient, { InMemoryCache } from "apollo-boost"
 import { ApolloProvider } from "@apollo/react-hooks"
 import { NextPage } from "next"
 import config from "../config"
