@@ -10,7 +10,7 @@ To try it just run `docker-compose up` and play with the React client at http://
 This sample app consists of three services:
 
 - api: a GraphQL server with Docker and Mongo.
-- client: an SSR PWA build with React, Redux-Saga and Material-UI and served with Next.js
+- client: an SSR PWA build with React, Apollo and Material-UI and served with Next.js
 - mongo: for persitency
 
 
