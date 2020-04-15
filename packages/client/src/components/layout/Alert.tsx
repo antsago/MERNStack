@@ -3,7 +3,7 @@ import { Snackbar, IconButton, Slide } from "@material-ui/core"
 import { Close as CloseIcon } from "@material-ui/icons"
 import { useDismissAlert, useGetShownAlert } from "../../utils"
 
-export const Alert = () => {
+export const AlertList = () => {
   const alert = useGetShownAlert()
   const dismissAlert = useDismissAlert()
 
@@ -15,8 +15,12 @@ export const Alert = () => {
         horizontal: "left",
       }}
       TransitionComponent={(props) => <Slide {...props} direction="left" />}
-      autoHideDuration={6000}
-      onClose={async () => dismissAlert(alert.id)}
+      autoHideDuration={5000}
+      onClose={async (_, reason) => {
+        if (reason !== "clickaway") {
+          await dismissAlert(alert.id)
+        }
+      }}
       message={alert.message}
       action={
         <IconButton
@@ -33,4 +37,4 @@ export const Alert = () => {
   ) : null
 }
 
-export default Alert
+export default AlertList

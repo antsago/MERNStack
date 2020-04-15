@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks"
 import { gql } from "apollo-boost"
+import { Alert } from "../../types"
 
 export const GET_ALERTS = gql`
   {
@@ -8,7 +9,7 @@ export const GET_ALERTS = gql`
 `
 
 const useGetAlerts = () => {
-  const { data } = useQuery(GET_ALERTS)
+  const { data } = useQuery<{ alerts: Alert[] }>(GET_ALERTS)
 
   return data ? data.alerts : []
 }
