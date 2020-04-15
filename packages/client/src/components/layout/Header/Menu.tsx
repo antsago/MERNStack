@@ -2,12 +2,11 @@ import React, { useState } from "react"
 import { Add, PlusOne } from "@material-ui/icons"
 import { IconButton } from "@material-ui/core"
 import { UserDialog } from "../../users"
-import { useCreateRandomUser, useCreateUser, useAddAlert } from "../../../utils"
+import { useCreateRandomUser, useCreateUser } from "../../../utils"
 
 export const Menu = () => {
   const createUser = useCreateUser()
-  // const createRandomUser = useCreateRandomUser()
-  const addAlert = useAddAlert()
+  const createRandomUser = useCreateRandomUser()
 
   const [showDialog, setShowDialog] = useState(false)
 
@@ -23,8 +22,7 @@ export const Menu = () => {
       <IconButton
         color="inherit"
         edge="end"
-        // onClick={createRandomUser}
-        onClick={async () => addAlert("Hi!")}
+        onClick={createRandomUser}
         aria-label="Add random user"
       >
         <PlusOne />
