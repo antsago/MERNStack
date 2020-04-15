@@ -11,10 +11,13 @@ const DELETE_USER = gql`
 `
 
 export default () => {
-  const [deleteUser] = useMutation(DELETE_USER)
+  const [deleteUser] = useMutation<
+    { deleteUser: { id: string } },
+    { id: string }
+  >(DELETE_USER)
 
-  return (id: string) =>
-    deleteUser({
+  return async (id: string) => {
+    await deleteUser({
       variables: { id },
       update: (cache, { data: { deleteUser: deletedUser } }) => {
         const { users } = cache.readQuery({ query: GET_USERS })
@@ -25,4 +28,5 @@ export default () => {
         })
       },
     })
+  }
 }

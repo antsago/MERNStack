@@ -33,8 +33,8 @@ export const Menu = () => {
         <UserDialog
           user={{}}
           onClose={() => setShowDialog(false)}
-          onSubmit={(newUser) => {
-            createUser(newUser)
+          onSubmit={async (newUser) => {
+            await createUser(newUser)
             setShowDialog(false)
           }}
           open

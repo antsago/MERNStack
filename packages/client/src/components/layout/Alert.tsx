@@ -16,14 +16,14 @@ export const Alert = () => {
       }}
       TransitionComponent={(props) => <Slide {...props} direction="left" />}
       autoHideDuration={6000}
-      onClose={() => dismissAlert(alert.id)}
+      onClose={async () => dismissAlert(alert.id)}
       message={alert.message}
       action={
         <IconButton
           size="small"
           aria-label="close"
           color="inherit"
-          onClick={() => dismissAlert(alert.id)}
+          onClick={async () => dismissAlert(alert.id)}
         >
           <CloseIcon fontSize="small" />
         </IconButton>

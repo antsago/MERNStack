@@ -1,4 +1,4 @@
-import { UserInput } from "@mernstack/shared"
+import { UserInput, User } from "@mernstack/shared"
 import { gql } from "apollo-boost"
 import { useMutation } from "@apollo/react-hooks"
 
@@ -15,7 +15,11 @@ const UPDATE_USER = gql`
 `
 
 export default () => {
-  const [updateUser] = useMutation(UPDATE_USER)
-  return (id: string, user: UserInput) =>
-    updateUser({ variables: { id, user } })
+  const [updateUser] = useMutation<
+    { updateUser: User },
+    { id: string; user: UserInput }
+  >(UPDATE_USER)
+  return async (id: string, user: UserInput) => {
+    await updateUser({ variables: { id, user } })
+  }
 }

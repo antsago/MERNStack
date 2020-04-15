@@ -1,4 +1,4 @@
-import { UserInput } from "@mernstack/shared"
+import { UserInput, User } from "@mernstack/shared"
 import { gql } from "apollo-boost"
 import { useMutation } from "@apollo/react-hooks"
 import { GET_USERS } from "./GetUsers"
@@ -16,9 +16,11 @@ export const CREATE_USER = gql`
 `
 
 export default () => {
-  const [createUser] = useMutation(CREATE_USER)
-  return (user: UserInput) =>
-    createUser({
+  const [createUser] = useMutation<{ createUser: User }, { user: UserInput }>(
+    CREATE_USER,
+  )
+  return async (user: UserInput) => {
+    await createUser({
       variables: { user },
       update: (cache, { data: { createUser: newUser } }) => {
         const { users } = cache.readQuery({ query: GET_USERS })
@@ -29,4 +31,5 @@ export default () => {
         })
       },
     })
+  }
 }

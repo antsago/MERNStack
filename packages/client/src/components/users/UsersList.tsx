@@ -21,7 +21,7 @@ const UsersList = () => {
                 key={user.id}
                 user={user}
                 onUpdate={() => setSelectedUser(user)}
-                onDelete={() => deleteUser(user.id)}
+                onDelete={async () => deleteUser(user.id)}
               />
             ))}
         </Grid>
@@ -31,8 +31,8 @@ const UsersList = () => {
           open={!!selectedUser}
           user={selectedUser}
           onClose={() => setSelectedUser(null)}
-          onSubmit={(changes) => {
-            updateUser(selectedUser.id, changes)
+          onSubmit={async (changes) => {
+            await updateUser(selectedUser.id, changes)
             setSelectedUser(null)
           }}
         />

@@ -18,5 +18,5 @@ const getRandomUser = () => {
 export default () => {
   const createUser = useCreateUser()
 
-  return () => createUser(getRandomUser())
+  return async () => createUser(getRandomUser())
 }

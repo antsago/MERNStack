@@ -27,7 +27,7 @@ const UserItem = ({
   user: UserInput
   open: boolean
   onClose: () => void
-  onSubmit: (user: UserInput) => void
+  onSubmit: (user: UserInput) => Promise<void>
 }) => {
   const [name, setName] = useState((user && user.givenName) || "")
   const [surname, setSurname] = useState((user && user.familyName) || "")
@@ -67,7 +67,7 @@ const UserItem = ({
         <Button
           variant="text"
           color="primary"
-          onClick={() =>
+          onClick={async () =>
             onSubmit({
               givenName: name,
               familyName: surname,

@@ -24,6 +24,8 @@ export const resolver = {
 }
 
 export default () => {
-  const [dismissAlert] = useMutation(DISMISS_ALERT)
-  return (id: number) => dismissAlert({ variables: { id } })
+  const [dismissAlert] = useMutation<{}, { id: number }>(DISMISS_ALERT)
+  return async (id: number) => {
+    await dismissAlert({ variables: { id } })
+  }
 }
