@@ -30,4 +30,39 @@ describe("Index page", () => {
 
     expect(dispatch).toHaveBeenCalledWith(loadUsers())
   })
+  // test("Call random user on clicking", () => {
+  //   const createRandomUser = jest.fn()
+  //   const { getByLabelText } = renderWithState()(<Menu />)
+
+  //   fireEvent.click(getByLabelText("Add random user"))
+  //   expect(createRandomUser).toHaveBeenCalled()
+  // })
+
+  // test("Add user flow", async () => {
+  //   const user = testUser()
+  //   const userInput = toUserInput(user)
+  //   const createUser = jest.fn(() => ({ data: { createUser: user } }))
+  //   const createUserQuery = {
+  //     request: {
+  //       query: CREATE_USER,
+  //       variables: { user: userInput },
+  //     },
+  //     result: createUser,
+  //   }
+
+  //   const { getByLabelText, queryByRole, getByText } = renderWithState([
+  //     getUsersQuery(),
+  //     createUserQuery,
+  //   ])(<Menu />)
+
+  //   userEvent.click(getByLabelText("Add user"))
+  //   expect(queryByRole("dialog")).toBeInTheDocument()
+  //   await userEvent.type(getByLabelText("Name"), user.givenName)
+  //   await userEvent.type(getByLabelText("Surname"), user.familyName)
+  //   await userEvent.type(getByLabelText("Email"), user.email)
+  //   userEvent.click(getByText("Save"))
+
+  //   await waitFor(() => expect(queryByRole("dialog")).not.toBeInTheDocument())
+  //   expect(createUser).toHaveBeenCalled()
+  // })
 })

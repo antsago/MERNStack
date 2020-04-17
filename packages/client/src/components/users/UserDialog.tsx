@@ -40,6 +40,7 @@ const UserItem = ({
         <TextField
           className={classes.textField}
           label="Name"
+          id="user-name"
           value={name}
           onChange={(event) => setName(event.target.value)}
           fullWidth
@@ -47,6 +48,7 @@ const UserItem = ({
         <TextField
           className={classes.textField}
           label="Surname"
+          id="user-surname"
           value={surname}
           onChange={(event) => setSurname(event.target.value)}
           fullWidth
@@ -55,6 +57,7 @@ const UserItem = ({
           className={classes.textField}
           label="Email"
           type="email"
+          id="user-email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           fullWidth

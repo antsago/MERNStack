@@ -12,13 +12,13 @@ import UsersList from "./UsersList"
 
 describe("UsersList", () => {
   test("Shows loader while getting users", () => {
-    const { getByRole } = renderWithState([getUsersQuery()], <UsersList />)
+    const { getByRole } = renderWithState([getUsersQuery()])(<UsersList />)
 
     expect(getByRole("progressbar")).toBeInTheDocument()
   })
 
   test("Does not shows loader when not loading", async () => {
-    const { queryByRole } = renderWithState([getUsersQuery()], <UsersList />)
+    const { queryByRole } = renderWithState([getUsersQuery()])(<UsersList />)
 
     await waitFor(() =>
       expect(queryByRole("progressbar")).not.toBeInTheDocument(),
@@ -26,7 +26,7 @@ describe("UsersList", () => {
   })
 
   test("Shows users if given", async () => {
-    const { getByTestId } = renderWithState([getUsersQuery()], <UsersList />)
+    const { getByTestId } = renderWithState([getUsersQuery()])(<UsersList />)
 
     await waitFor(() => expect(getByTestId("user-item")).toBeInTheDocument())
   })
@@ -38,8 +38,7 @@ describe("UsersList", () => {
     const mocks = [getUsersQuery([user]), updateUserQuery(updatedUser)]
     const { queryByRole, getByText, getByDisplayValue } = renderWithState(
       mocks,
-      <UsersList />,
-    )
+    )(<UsersList />)
     await waitFor(() => expect(getByText(user.email)).toBeInTheDocument())
 
     expect(queryByRole("dialog")).not.toBeInTheDocument()
@@ -57,7 +56,7 @@ describe("UsersList", () => {
   test("Deletes user", async () => {
     const user = testUser()
     const mocks = [getUsersQuery([user]), deleteUserQuery(user.id)]
-    const { queryByText, getByText } = renderWithState(mocks, <UsersList />)
+    const { queryByText, getByText } = renderWithState(mocks)(<UsersList />)
     await waitFor(() => expect(getByText(user.email)).toBeInTheDocument())
 
     userEvent.click(getByText("Delete"))

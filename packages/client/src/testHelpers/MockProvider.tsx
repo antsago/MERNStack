@@ -34,7 +34,9 @@ export const deleteUserQuery = (id: string) => ({
   result: { data: { deleteUser: { id } } },
 })
 
-export const renderWithState = (mocks: MockedResponse[], ui: JSX.Element) =>
+export const renderWithState = (mocks: MockedResponse[] = []) => (
+  ui: JSX.Element,
+) =>
   render(
     <MockedProvider mocks={mocks} addTypename={false}>
       {ui}
