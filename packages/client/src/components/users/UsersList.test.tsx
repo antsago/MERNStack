@@ -1,8 +1,8 @@
 import React from "react"
-import { render, waitFor } from "@testing-library/react"
-import { UserInput, User } from "@mernstack/shared"
+import { waitFor } from "@testing-library/react"
+import { User } from "@mernstack/shared"
 import userEvent from "@testing-library/user-event"
-import { MockedProvider, MockedResponse } from "@apollo/react-testing"
+import { renderWithState } from "../../testHelpers"
 import { GET_USERS } from "../../utils/state/users/GetUsers"
 import { DELETE_USER } from "../../utils/state/users/DeleteUser"
 import UsersList from "./UsersList"
@@ -41,13 +41,6 @@ const deleteUserQuery = (id: string) => ({
 //   },
 //   result: { data: { updateUser: updatedUser } },
 // })
-
-const renderWithState = (mocks: MockedResponse[], ui) =>
-  render(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      {ui}
-    </MockedProvider>,
-  )
 
 describe("UsersList", () => {
   test("Shows loader while getting users", () => {

@@ -2,7 +2,7 @@ import { gql } from "apollo-boost"
 import { useMutation } from "@apollo/react-hooks"
 import { GET_USERS } from "./GetUsers"
 
-const DELETE_USER = gql`
+export const DELETE_USER = gql`
   mutation deleteUser($id: String!) {
     deleteUser(id: $id) {
       id
