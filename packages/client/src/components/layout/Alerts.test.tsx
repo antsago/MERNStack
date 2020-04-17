@@ -1,6 +1,6 @@
 import React from "react"
 import { render, fireEvent } from "@testing-library/react"
-import { Alert } from "./Alert"
+import Alerts from "./Alerts"
 
 describe("Alert", () => {
   test("Renders correctly", () => {
@@ -8,12 +8,12 @@ describe("Alert", () => {
       id: 1,
       message: "A test message",
     }
-    const { getByText } = render(<Alert alert={alert} onDismiss={() => {}} />)
+    const { getByText } = render(<Alerts />)
     expect(getByText(alert.message)).toBeInTheDocument()
   })
 
   test("Does not throw when not given an alert", () => {
-    const renderAlert = () => render(<Alert onDismiss={() => {}} />)
+    const renderAlert = () => render(<Alerts />)
 
     expect(renderAlert).not.toThrow()
   })
@@ -24,9 +24,7 @@ describe("Alert", () => {
       id: 1,
       message: "A test message",
     }
-    const { getByText, getByLabelText } = render(
-      <Alert alert={alert} onDismiss={dissmiss} />,
-    )
+    const { getByText, getByLabelText } = render(<Alerts />)
 
     expect(getByText(alert.message)).toBeInTheDocument()
     fireEvent.click(getByLabelText("close"))

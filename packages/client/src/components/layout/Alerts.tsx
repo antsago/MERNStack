@@ -2,7 +2,7 @@ import React from "react"
 import { Snackbar } from "@material-ui/core"
 import { useDismissAlert, useGetShownAlert } from "../../utils"
 
-export const AlertList = () => {
+const Alerts = () => {
   const alert = useGetShownAlert()
   const dismissAlert = useDismissAlert()
 
@@ -25,4 +25,4 @@ export const AlertList = () => {
   ) : null
 }
 
-export default AlertList
+export default Alerts

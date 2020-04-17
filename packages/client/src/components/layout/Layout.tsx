@@ -8,7 +8,7 @@ import {
 import { withAddAlert, WithAddAlert } from "../../utils"
 import Header from "./Header"
 import Footer from "./Footer"
-import Alerts from "./Alert"
+import Alerts from "./Alerts"
 
 const styles = (theme) =>
   createStyles({
