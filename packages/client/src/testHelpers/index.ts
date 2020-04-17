@@ -1,1 +1,1 @@
-export { default as renderWithState } from "./MockProvider"
+export * from "./MockProvider"

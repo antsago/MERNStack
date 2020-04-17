@@ -1,38 +1,13 @@
 import React from "react"
 import { waitFor } from "@testing-library/react"
-import { User } from "@mernstack/shared"
 import userEvent from "@testing-library/user-event"
-import { renderWithState } from "../../testHelpers"
-import { GET_USERS } from "../../utils/state/users/GetUsers"
-import { DELETE_USER } from "../../utils/state/users/DeleteUser"
+import {
+  renderWithState,
+  testUser,
+  getUsersQuery,
+  deleteUserQuery,
+} from "../../testHelpers"
 import UsersList from "./UsersList"
-
-const testUser = () => ({
-  id: "test",
-  givenName: "name",
-  familyName: "surname",
-  email: "name@surname.com",
-  created: new Date(),
-})
-
-const getUsersQuery = (users: User[] = [testUser()]) => ({
-  request: {
-    query: GET_USERS,
-  },
-  result: {
-    data: {
-      users,
-    },
-  },
-})
-
-const deleteUserQuery = (id: string) => ({
-  request: {
-    query: DELETE_USER,
-    variables: { id },
-  },
-  result: { data: { deleteUser: { id } } },
-})
 
 // const updateUserQuery = (id: string, user: UserInput, updatedUser: User) => ({
 //   request: {
