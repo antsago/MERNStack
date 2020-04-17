@@ -1,32 +1,40 @@
 import React from "react"
 import { render, waitFor } from "@testing-library/react"
-import {} from "@mernstack/shared"
-import { MockedProvider } from "@apollo/react-testing"
+import { UserInput, User } from "@mernstack/shared"
+import userEvent from "@testing-library/user-event"
+import { MockedProvider, MockedResponse } from "@apollo/react-testing"
 import { GET_USERS } from "../../utils/state/users/GetUsers"
+import { UPDATE_USER } from "../../utils/state/users/UpdateUser"
 import UsersList from "./UsersList"
 
-const mocks = [
-  {
-    request: {
-      query: GET_USERS,
-    },
-    result: {
-      data: {
-        users: [
-          {
-            id: "test",
-            givenName: "name",
-            familyName: "surname",
-            email: "name@surname.com",
-            created: new Date(),
-          },
-        ],
-      },
+const testUser = () => ({
+  id: "test",
+  givenName: "name",
+  familyName: "surname",
+  email: "name@surname.com",
+  created: new Date(),
+})
+
+const getUsersQuery = (users: User[] = [testUser()]) => ({
+  request: {
+    query: GET_USERS,
+  },
+  result: {
+    data: {
+      users,
     },
   },
-]
+})
 
-const renderWithState = () =>
+// const updateUserQuery = (id: string, user: UserInput, updatedUser: User) => ({
+//   request: {
+//     query: UPDATE_USER,
+//     variables: { id, user },
+//   },
+//   result: { data: { updateUser: updatedUser } },
+// })
+
+const renderWithState = (mocks: MockedResponse[]) =>
   render(
     <MockedProvider mocks={mocks} addTypename={false}>
       <UsersList />
@@ -35,13 +43,13 @@ const renderWithState = () =>
 
 describe("UsersList", () => {
   test("Shows loader while getting users", () => {
-    const { getByRole } = renderWithState()
+    const { getByRole } = renderWithState([getUsersQuery()])
 
     expect(getByRole("progressbar")).toBeInTheDocument()
   })
 
   test("Does not shows loader when not loading", async () => {
-    const { queryByRole } = renderWithState()
+    const { queryByRole } = renderWithState([getUsersQuery()])
 
     await waitFor(() =>
       expect(queryByRole("progressbar")).not.toBeInTheDocument(),
@@ -49,33 +57,39 @@ describe("UsersList", () => {
   })
 
   test("Shows users if given", async () => {
-    const { getByTestId } = renderWithState()
+    const { getByTestId } = renderWithState([getUsersQuery()])
 
     await waitFor(() => expect(getByTestId("user-item")).toBeInTheDocument())
   })
 
-  // test("Calls updates user when clicking", () => {
-  //   const updateUser = jest.fn()
-  //   const user = {
-  //     id: "test",
-  //     givenName: "name",
-  //     familyName: "surname",
-  //     email: "email",
-  //     created: new Date(),
+  // test.only("Update user", async () => {
+  //   const user: User = testUser()
+  //   const append = "2"
+  //   const changes: UserInput = {
+  //     givenName: user.givenName,
+  //     familyName: user.familyName,
+  //     email: `${user.email}${append}`,
   //   }
-  //   const { queryByRole, getByText } = render(<UsersList />)
+  //   const updatedUser = { ...user, ...changes }
+  //   const mocks = [
+  //     getUsersQuery([user]),
+  //     updateUserQuery(user.id, changes, updatedUser),
+  //   ]
+  //   const { queryByRole, getByText, getByDisplayValue } = renderWithState(mocks)
+  //   await waitFor(() => expect(getByText(user.email)).toBeInTheDocument())
 
   //   expect(queryByRole("dialog")).not.toBeInTheDocument()
-  //   fireEvent.click(getByText("Update"))
+  //   userEvent.click(getByText("Update"))
   //   expect(queryByRole("dialog")).toBeInTheDocument()
-  //   fireEvent.click(getByText("Save"))
+  //   await userEvent.type(getByDisplayValue(user.email), append)
+  //   userEvent.click(getByText("Save"))
+
+  //   await waitFor(
+  //     () => expect(getByText(updatedUser.email)).toBeInTheDocument(),
+  //     { timeout: 5000 },
+  //   )
   //   expect(queryByRole("dialog")).not.toBeInTheDocument()
-  //   expect(updateUser).toHaveBeenCalledWith(user.id, {
-  //     ...user,
-  //     id: undefined,
-  //     created: undefined,
-  //   })
-  // })
+  // }, 6000)
 
   // test("Calls delete user when clicking", () => {
   //   const deleteUser = jest.fn()
