@@ -26,6 +26,14 @@ const getUsersQuery = (users: User[] = [testUser()]) => ({
   },
 })
 
+const deleteUserQuery = (id: string) => ({
+  request: {
+    query: DELETE_USER,
+    variables: { id },
+  },
+  result: { data: { deleteUser: { id } } },
+})
+
 // const updateUserQuery = (id: string, user: UserInput, updatedUser: User) => ({
 //   request: {
 //     query: UPDATE_USER,
@@ -34,22 +42,22 @@ const getUsersQuery = (users: User[] = [testUser()]) => ({
 //   result: { data: { updateUser: updatedUser } },
 // })
 
-const renderWithState = (mocks: MockedResponse[]) =>
+const renderWithState = (mocks: MockedResponse[], ui) =>
   render(
     <MockedProvider mocks={mocks} addTypename={false}>
-      <UsersList />
+      {ui}
     </MockedProvider>,
   )
 
 describe("UsersList", () => {
   test("Shows loader while getting users", () => {
-    const { getByRole } = renderWithState([getUsersQuery()])
+    const { getByRole } = renderWithState([getUsersQuery()], <UsersList />)
 
     expect(getByRole("progressbar")).toBeInTheDocument()
   })
 
   test("Does not shows loader when not loading", async () => {
-    const { queryByRole } = renderWithState([getUsersQuery()])
+    const { queryByRole } = renderWithState([getUsersQuery()], <UsersList />)
 
     await waitFor(() =>
       expect(queryByRole("progressbar")).not.toBeInTheDocument(),
@@ -57,7 +65,7 @@ describe("UsersList", () => {
   })
 
   test("Shows users if given", async () => {
-    const { getByTestId } = renderWithState([getUsersQuery()])
+    const { getByTestId } = renderWithState([getUsersQuery()], <UsersList />)
 
     await waitFor(() => expect(getByTestId("user-item")).toBeInTheDocument())
   })
@@ -92,17 +100,9 @@ describe("UsersList", () => {
   // }, 6000)
 
   test("Deletes user", async () => {
-    const deleteUserQuery = (id: string) => ({
-      request: {
-        query: DELETE_USER,
-        variables: { id },
-      },
-      result: { data: { deleteUser: { id } } },
-    })
-
     const user = testUser()
     const mocks = [getUsersQuery([user]), deleteUserQuery(user.id)]
-    const { queryByText, getByText } = renderWithState(mocks)
+    const { queryByText, getByText } = renderWithState(mocks, <UsersList />)
     await waitFor(() => expect(getByText(user.email)).toBeInTheDocument())
 
     userEvent.click(getByText("Delete"))
