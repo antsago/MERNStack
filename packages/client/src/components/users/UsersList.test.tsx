@@ -4,7 +4,7 @@ import { UserInput, User } from "@mernstack/shared"
 import userEvent from "@testing-library/user-event"
 import { MockedProvider, MockedResponse } from "@apollo/react-testing"
 import { GET_USERS } from "../../utils/state/users/GetUsers"
-import { UPDATE_USER } from "../../utils/state/users/UpdateUser"
+import { DELETE_USER } from "../../utils/state/users/DeleteUser"
 import UsersList from "./UsersList"
 
 const testUser = () => ({
@@ -91,17 +91,22 @@ describe("UsersList", () => {
   //   expect(queryByRole("dialog")).not.toBeInTheDocument()
   // }, 6000)
 
-  // test("Calls delete user when clicking", () => {
-  //   const deleteUser = jest.fn()
-  //   const user = {
-  //     id: "test",
-  //     givenName: "name",
-  //     familyName: "surname",
-  //     created: new Date(),
-  //   }
-  //   const { getByText } = render(<UsersList />)
+  test("Deletes user", async () => {
+    const deleteUserQuery = (id: string) => ({
+      request: {
+        query: DELETE_USER,
+        variables: { id },
+      },
+      result: { data: { deleteUser: { id } } },
+    })
 
-  //   fireEvent.click(getByText("Delete"))
-  //   expect(deleteUser).toHaveBeenCalledWith(user.id)
-  // })
+    const user = testUser()
+    const mocks = [getUsersQuery([user]), deleteUserQuery(user.id)]
+    const { queryByText, getByText } = renderWithState(mocks)
+    await waitFor(() => expect(getByText(user.email)).toBeInTheDocument())
+
+    userEvent.click(getByText("Delete"))
+
+    await waitFor(() => expect(queryByText(user.email)).not.toBeInTheDocument())
+  })
 })
