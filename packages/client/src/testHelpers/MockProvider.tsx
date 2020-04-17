@@ -2,17 +2,9 @@
 import React from "react"
 import { MockedProvider, MockedResponse } from "@apollo/react-testing"
 import { render } from "@testing-library/react"
-import { User } from "@mernstack/shared"
+import { User, testUser } from "@mernstack/shared"
 import { GET_USERS } from "../utils/state/users/GetUsers"
 import { DELETE_USER } from "../utils/state/users/DeleteUser"
-
-export const testUser = () => ({
-  id: "test",
-  givenName: "name",
-  familyName: "surname",
-  email: "name@surname.com",
-  created: new Date(),
-})
 
 export const getUsersQuery = (users: User[] = [testUser()]) => ({
   request: {

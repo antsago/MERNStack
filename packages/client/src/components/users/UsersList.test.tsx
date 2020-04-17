@@ -1,9 +1,9 @@
 import React from "react"
 import { waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { testUser } from "@mernstack/shared"
 import {
   renderWithState,
-  testUser,
   getUsersQuery,
   deleteUserQuery,
 } from "../../testHelpers"
