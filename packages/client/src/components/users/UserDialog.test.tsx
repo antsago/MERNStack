@@ -10,7 +10,12 @@ describe("UserDialog", () => {
       email: "email@email.com",
     }
     const { getByText, getByDisplayValue } = render(
-      <UserDialog user={user} onClose={() => {}} onSubmit={() => {}} open />,
+      <UserDialog
+        user={user}
+        onClose={() => {}}
+        onSubmit={async () => {}}
+        open
+      />,
     )
 
     expect(getByText("Save")).toBeInTheDocument()
@@ -27,7 +32,7 @@ describe("UserDialog", () => {
           open={false}
           user={null}
           onClose={() => {}}
-          onSubmit={() => {}}
+          onSubmit={async () => {}}
         />,
       )
 
@@ -42,7 +47,12 @@ describe("UserDialog", () => {
     }
     const onClose = jest.fn()
     const { getByText } = render(
-      <UserDialog open user={user} onClose={onClose} onSubmit={() => {}} />,
+      <UserDialog
+        open
+        user={user}
+        onClose={onClose}
+        onSubmit={async () => {}}
+      />,
     )
 
     fireEvent.click(getByText("Cancel"))
