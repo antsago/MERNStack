@@ -2,8 +2,9 @@
 import React from "react"
 import { MockedProvider, MockedResponse } from "@apollo/react-testing"
 import { render } from "@testing-library/react"
-import { User, testUser } from "@mernstack/shared"
+import { User, testUser, toUserInput } from "@mernstack/shared"
 import { GET_USERS } from "../utils/state/users/GetUsers"
+import { UPDATE_USER } from "../utils/state/users/UpdateUser"
 import { DELETE_USER } from "../utils/state/users/DeleteUser"
 
 export const getUsersQuery = (users: User[] = [testUser()]) => ({
@@ -15,6 +16,14 @@ export const getUsersQuery = (users: User[] = [testUser()]) => ({
       users,
     },
   },
+})
+
+export const updateUserQuery = (updatedUser: User) => ({
+  request: {
+    query: UPDATE_USER,
+    variables: { id: updatedUser.id, user: toUserInput(updatedUser) },
+  },
+  result: { data: { updateUser: updatedUser } },
 })
 
 export const deleteUserQuery = (id: string) => ({

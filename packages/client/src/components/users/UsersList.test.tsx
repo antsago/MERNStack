@@ -1,22 +1,14 @@
 import React from "react"
 import { waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { testUser, toUserInput, User } from "@mernstack/shared"
-import { UPDATE_USER } from "../../utils/state/users/UpdateUser"
+import { testUser, User } from "@mernstack/shared"
 import {
   renderWithState,
   getUsersQuery,
+  updateUserQuery,
   deleteUserQuery,
 } from "../../testHelpers"
 import UsersList from "./UsersList"
-
-const updateUserQuery = (updatedUser: User) => ({
-  request: {
-    query: UPDATE_USER,
-    variables: { id: updatedUser.id, user: toUserInput(updatedUser) },
-  },
-  result: { data: { updateUser: updatedUser } },
-})
 
 describe("UsersList", () => {
   test("Shows loader while getting users", () => {
