@@ -1,7 +1,8 @@
 import React from "react"
 import { waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { testUser } from "@mernstack/shared"
+import { testUser, toUserInput, User } from "@mernstack/shared"
+import { UPDATE_USER } from "../../utils/state/users/UpdateUser"
 import {
   renderWithState,
   getUsersQuery,
@@ -9,13 +10,13 @@ import {
 } from "../../testHelpers"
 import UsersList from "./UsersList"
 
-// const updateUserQuery = (id: string, user: UserInput, updatedUser: User) => ({
-//   request: {
-//     query: UPDATE_USER,
-//     variables: { id, user },
-//   },
-//   result: { data: { updateUser: updatedUser } },
-// })
+const updateUserQuery = (updatedUser: User) => ({
+  request: {
+    query: UPDATE_USER,
+    variables: { id: updatedUser.id, user: toUserInput(updatedUser) },
+  },
+  result: { data: { updateUser: updatedUser } },
+})
 
 describe("UsersList", () => {
   test("Shows loader while getting users", () => {
@@ -38,34 +39,28 @@ describe("UsersList", () => {
     await waitFor(() => expect(getByTestId("user-item")).toBeInTheDocument())
   })
 
-  // test.only("Update user", async () => {
-  //   const user: User = testUser()
-  //   const append = "2"
-  //   const changes: UserInput = {
-  //     givenName: user.givenName,
-  //     familyName: user.familyName,
-  //     email: `${user.email}${append}`,
-  //   }
-  //   const updatedUser = { ...user, ...changes }
-  //   const mocks = [
-  //     getUsersQuery([user]),
-  //     updateUserQuery(user.id, changes, updatedUser),
-  //   ]
-  //   const { queryByRole, getByText, getByDisplayValue } = renderWithState(mocks)
-  //   await waitFor(() => expect(getByText(user.email)).toBeInTheDocument())
+  test("Update user", async () => {
+    const user = testUser()
+    const append = "2"
+    const updatedUser: User = { ...user, email: `${user.email}${append}` }
+    const mocks = [getUsersQuery([user]), updateUserQuery(updatedUser)]
+    const { queryByRole, getByText, getByDisplayValue } = renderWithState(
+      mocks,
+      <UsersList />,
+    )
+    await waitFor(() => expect(getByText(user.email)).toBeInTheDocument())
 
-  //   expect(queryByRole("dialog")).not.toBeInTheDocument()
-  //   userEvent.click(getByText("Update"))
-  //   expect(queryByRole("dialog")).toBeInTheDocument()
-  //   await userEvent.type(getByDisplayValue(user.email), append)
-  //   userEvent.click(getByText("Save"))
+    expect(queryByRole("dialog")).not.toBeInTheDocument()
+    userEvent.click(getByText("Update"))
+    expect(queryByRole("dialog")).toBeInTheDocument()
+    await userEvent.type(getByDisplayValue(user.email), append)
+    userEvent.click(getByText("Save"))
 
-  //   await waitFor(
-  //     () => expect(getByText(updatedUser.email)).toBeInTheDocument(),
-  //     { timeout: 5000 },
-  //   )
-  //   expect(queryByRole("dialog")).not.toBeInTheDocument()
-  // }, 6000)
+    await waitFor(() =>
+      expect(getByText(updatedUser.email)).toBeInTheDocument(),
+    )
+    expect(queryByRole("dialog")).not.toBeInTheDocument()
+  })
 
   test("Deletes user", async () => {
     const user = testUser()

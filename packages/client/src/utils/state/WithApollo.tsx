@@ -6,7 +6,7 @@ import { NextPage } from "next"
 import config from "../config"
 import alertMutation from "./alerts"
 
-function getCache(restoredState) {
+function getCache(restoredState?): InMemoryCache {
   const cache = new InMemoryCache().restore(restoredState || {})
 
   if (!restoredState) {
