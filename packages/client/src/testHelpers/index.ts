@@ -1,2 +1,2 @@
-export * from "./MockProvider"
+export * from "./mocksProvider"
 export * from "./mockUserQueries"
