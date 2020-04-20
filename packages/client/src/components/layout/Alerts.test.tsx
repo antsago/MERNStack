@@ -1,12 +1,15 @@
 import React from "react"
 import { waitFor, act } from "@testing-library/react"
-import { renderWithState, testAlert } from "../../testHelpers"
+import { renderWithState, testAlert, buildCache } from "../../testHelpers"
 import Alerts from "./Alerts"
 
 describe("Alert", () => {
   test("Renders correctly", () => {
     const alert = testAlert()
-    const { getByText } = renderWithState(undefined, [alert])(<Alerts />)
+    const { getByText } = renderWithState(
+      undefined,
+      buildCache([alert]),
+    )(<Alerts />)
 
     expect(getByText(alert.message)).toBeInTheDocument()
   })
@@ -14,9 +17,10 @@ describe("Alert", () => {
   test("Dismiss alerts after timeout", async () => {
     jest.useFakeTimers()
     const alert = testAlert()
-    const { getByText, queryByText } = renderWithState(undefined, [alert])(
-      <Alerts />,
-    )
+    const { getByText, queryByText } = renderWithState(
+      undefined,
+      buildCache([alert]),
+    )(<Alerts />)
     expect(getByText(alert.message)).toBeInTheDocument()
 
     act(() => jest.runAllTimers())

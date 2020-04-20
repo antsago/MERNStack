@@ -2,6 +2,7 @@
 import React from "react"
 import { MockedProvider, MockedResponse } from "@apollo/react-testing"
 import { render } from "@testing-library/react"
+import { InMemoryCache } from "apollo-boost"
 import { resolvers, getCache } from "../utils/state/WithApollo"
 import { GET_ALERTS } from "../utils/state/alerts/GetAlerts"
 import { Alert } from "../utils"
@@ -11,7 +12,7 @@ export const testAlert = () => ({
   message: "A test message",
 })
 
-function buildCache(alerts: Alert[]) {
+export function buildCache(alerts: Alert[] = []) {
   const cache = getCache()
   cache.writeQuery({
     query: GET_ALERTS,
@@ -25,14 +26,14 @@ function buildCache(alerts: Alert[]) {
 
 export const renderWithState = (
   mocks: MockedResponse[] = [],
-  alerts: Alert[] = [],
+  cache: InMemoryCache = undefined,
 ) => (ui: JSX.Element) =>
   render(
     <MockedProvider
       mocks={mocks}
       addTypename={false}
       resolvers={resolvers}
-      cache={buildCache(alerts)}
+      cache={cache}
     >
       {ui}
     </MockedProvider>,

@@ -17,17 +17,14 @@ describe("UsersList", () => {
     expect(getByRole("progressbar")).toBeInTheDocument()
   })
 
-  test("Does not shows loader when not loading", async () => {
-    const { queryByRole } = renderWithState([getUsersQuery()])(<UsersList />)
+  test("Does users after loading", async () => {
+    const { getByTestId, queryByRole } = renderWithState([getUsersQuery()])(
+      <UsersList />,
+    )
 
     await waitFor(() =>
       expect(queryByRole("progressbar")).not.toBeInTheDocument(),
     )
-  })
-
-  test("Shows users if given", async () => {
-    const { getByTestId } = renderWithState([getUsersQuery()])(<UsersList />)
-
     await waitFor(() => expect(getByTestId("user-item")).toBeInTheDocument())
   })
 
