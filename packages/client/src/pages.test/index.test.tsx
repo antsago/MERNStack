@@ -1,68 +1,62 @@
 import React from "react"
-import { Context, loadUsers } from "../utils"
-import { renderWithStore } from "../components/MockStore"
+import { waitFor } from "@testing-library/react"
+import { testUser } from "@mernstack/shared"
+import userEvent from "@testing-library/user-event"
+import { renderWithState, getUsersQuery, createUserQuery } from "../testHelpers"
 import { Index } from "../pages/index"
 
 describe("Index page", () => {
-  test("Renders correctly", () => {
-    const user = {
-      id: "test",
-      givenName: "name",
-      familyName: "surname",
-      created: new Date(),
-    }
-    const { getByRole } = renderWithStore(
-      <Index
-        users={[user]}
-        usersLoading
-        removeUser={() => {}}
-        changeUser={() => {}}
-      />,
+  test("Shows loader and then users", async () => {
+    const user = testUser()
+    const { getByRole, getByText } = renderWithState([getUsersQuery([user])])(
+      <Index />,
     )
 
     expect(getByRole("progressbar")).toBeInTheDocument()
+
+    await waitFor(() => expect(getByText(user.email)).toBeInTheDocument())
   })
 
-  test("Loads users on initial props", () => {
-    const dispatch = jest.fn()
-    const contex: Context = ({ store: { dispatch } } as unknown) as Context
-    Index.getInitialProps({ ctx: contex })
+  test("Create new user", async () => {
+    const newUser = testUser()
+    const mocks = [getUsersQuery([]), createUserQuery(newUser)]
+    const {
+      getByLabelText,
+      queryByRole,
+      getByText,
+      queryByText,
+    } = renderWithState(mocks)(<Index />)
+    await waitFor(() =>
+      expect(queryByRole("progressbar")).not.toBeInTheDocument(),
+    )
+    expect(queryByText(newUser.email)).not.toBeInTheDocument()
 
-    expect(dispatch).toHaveBeenCalledWith(loadUsers())
+    userEvent.click(getByLabelText("Add user"))
+    expect(queryByRole("dialog")).toBeInTheDocument()
+    await userEvent.type(getByLabelText("Name"), newUser.givenName)
+    await userEvent.type(getByLabelText("Surname"), newUser.familyName)
+    await userEvent.type(getByLabelText("Email"), newUser.email)
+    userEvent.click(getByText("Save"))
+
+    await waitFor(() => expect(queryByRole("dialog")).not.toBeInTheDocument())
+    expect(getByText(newUser.email)).toBeInTheDocument()
   })
-  // test("Call random user on clicking", () => {
-  //   const createRandomUser = jest.fn()
-  //   const { getByLabelText } = renderWithState()(<Menu />)
 
-  //   fireEvent.click(getByLabelText("Add random user"))
-  //   expect(createRandomUser).toHaveBeenCalled()
-  // })
+  // test("Create random user", async () => {
+  //   const mocks = [getUsersQuery(), createUserQuery()]
+  //   const {
+  //     getByLabelText,
+  //     queryByRole,
+  //     getByTestId,
+  //     queryByTestId,
+  //   } = renderWithState()(<Index />)
+  //   await waitFor(() =>
+  //     expect(queryByRole("progressbar")).not.toBeInTheDocument(),
+  //   )
+  //   expect(queryByTestId("user-item")).not.toBeInTheDocument()
 
-  // test("Add user flow", async () => {
-  //   const user = testUser()
-  //   const userInput = toUserInput(user)
-  //   const createUser = jest.fn(() => ({ data: { createUser: user } }))
-  //   const createUserQuery = {
-  //     request: {
-  //       query: CREATE_USER,
-  //       variables: { user: userInput },
-  //     },
-  //     result: createUser,
-  //   }
+  //   userEvent.click(getByLabelText("Add random user"))
 
-  //   const { getByLabelText, queryByRole, getByText } = renderWithState([
-  //     getUsersQuery(),
-  //     createUserQuery,
-  //   ])(<Menu />)
-
-  //   userEvent.click(getByLabelText("Add user"))
-  //   expect(queryByRole("dialog")).toBeInTheDocument()
-  //   await userEvent.type(getByLabelText("Name"), user.givenName)
-  //   await userEvent.type(getByLabelText("Surname"), user.familyName)
-  //   await userEvent.type(getByLabelText("Email"), user.email)
-  //   userEvent.click(getByText("Save"))
-
-  //   await waitFor(() => expect(queryByRole("dialog")).not.toBeInTheDocument())
-  //   expect(createUser).toHaveBeenCalled()
+  //   await waitFor(() => expect(getByTestId("user-item")).toBeInTheDocument())
   // })
 })
