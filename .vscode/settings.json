@@ -12,5 +12,8 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": ["./packages"]
+  "eslint.workingDirectories": [
+    "./packages"
+  ],
+  "debug.node.autoAttach": "on"
 }
