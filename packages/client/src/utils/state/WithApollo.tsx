@@ -6,7 +6,7 @@ import { NextPage } from "next"
 import config from "../config"
 import alertMutation from "./alerts"
 
-function getCache(restoredState?): InMemoryCache {
+export function getCache(restoredState?): InMemoryCache {
   const cache = new InMemoryCache().restore(restoredState || {})
 
   if (!restoredState) {
@@ -16,6 +16,8 @@ function getCache(restoredState?): InMemoryCache {
   return cache
 }
 
+export const resolvers = { Mutation: alertMutation }
+
 export default withApollo(
   ({ initialState }) =>
     new ApolloClient({
@@ -24,9 +26,7 @@ export default withApollo(
           ? config.apiFromServer
           : config.apiFromClient,
       cache: getCache(initialState),
-      resolvers: {
-        Mutation: alertMutation,
-      },
+      resolvers,
     }),
   {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
