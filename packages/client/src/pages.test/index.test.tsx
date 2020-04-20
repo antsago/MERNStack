@@ -41,22 +41,4 @@ describe("Index page", () => {
     await waitFor(() => expect(queryByRole("dialog")).not.toBeInTheDocument())
     expect(getByText(newUser.email)).toBeInTheDocument()
   })
-
-  // test("Create random user", async () => {
-  //   const mocks = [getUsersQuery(), createUserQuery()]
-  //   const {
-  //     getByLabelText,
-  //     queryByRole,
-  //     getByTestId,
-  //     queryByTestId,
-  //   } = renderWithState()(<Index />)
-  //   await waitFor(() =>
-  //     expect(queryByRole("progressbar")).not.toBeInTheDocument(),
-  //   )
-  //   expect(queryByTestId("user-item")).not.toBeInTheDocument()
-
-  //   userEvent.click(getByLabelText("Add random user"))
-
-  //   await waitFor(() => expect(getByTestId("user-item")).toBeInTheDocument())
-  // })
 })
