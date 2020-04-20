@@ -1,9 +1,9 @@
 import useGetShownAlert from "./GetAlerts"
-import { Alert } from "../../types"
+import { testAlert } from "../../../testHelpers"
 
 describe("useGetShownAlert", () => {
   test("With alerts returns first alert", () => {
-    const alert: Alert = { message: "Hello test", id: 1 }
+    const alert = testAlert()
     const queryHook = jest.fn()
     queryHook.mockReturnValue({ data: { alerts: [alert] } })
 
