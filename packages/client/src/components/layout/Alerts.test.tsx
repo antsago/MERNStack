@@ -1,4 +1,5 @@
 import React from "react"
+import { waitFor, act } from "@testing-library/react"
 import { renderWithState, testAlert } from "../../testHelpers"
 import Alerts from "./Alerts"
 
@@ -10,16 +11,18 @@ describe("Alert", () => {
     expect(getByText(alert.message)).toBeInTheDocument()
   })
 
-  // test("Calls dismiss when clicking on close", () => {
-  //   const dissmiss = jest.fn()
-  //   const alert = {
-  //     id: 1,
-  //     message: "A test message",
-  //   }
-  //   const { getByText, getByLabelText } = render(<Alerts />)
+  test("Dismiss alerts after timeout", async () => {
+    jest.useFakeTimers()
+    const alert = testAlert()
+    const { getByText, queryByText } = renderWithState(undefined, [alert])(
+      <Alerts />,
+    )
+    expect(getByText(alert.message)).toBeInTheDocument()
 
-  //   expect(getByText(alert.message)).toBeInTheDocument()
-  //   fireEvent.click(getByLabelText("close"))
-  //   expect(dissmiss).toHaveBeenCalled()
-  // })
+    act(() => jest.runAllTimers())
+
+    await waitFor(() =>
+      expect(queryByText(alert.message)).not.toBeInTheDocument(),
+    )
+  })
 })
