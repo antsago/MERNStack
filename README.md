@@ -46,7 +46,8 @@ When using the app, these are useful things to know:
 a long way to prevent integration errors. What is missing for full confidence are end to end
 tests of the whole deployed application (with cypress and docker?).
 - CI (Husky, Travis?) / CD: as another filter to prevent errors form creeping in.
-- Nextjs alternative?: as it happens to most libraries that do a lot of things, nextjs is amazing
-at letting you start very fast, but the moment you need something more custom (which in my experience
-always happens) you have to fight against the framework that used to manage it for you.
+- Nextjs alternative?: as it happens to most libraries that manage a lot of things,
+nextjs is amazing at letting you start very fast, but the moment you need
+something more custom (which in my experience happens for any non-sample application)
+you have to fight against the framework that used to do it for you (e.g. tsconfig)
 - Logging.
