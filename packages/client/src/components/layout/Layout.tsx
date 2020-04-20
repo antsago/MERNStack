@@ -25,7 +25,7 @@ const styles = (theme) =>
 
 type Props = PropsWithChildren<WithStyles<typeof styles> & WithAddAlert>
 
-export class Layout extends Component<Props, { hasError: boolean }> {
+class Layout extends Component<Props, { hasError: boolean }> {
   constructor(props) {
     super(props)
     this.state = { hasError: false }
