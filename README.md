@@ -42,12 +42,13 @@ When using the app, these are useful things to know:
 
 ## Potential next steps
 
-- Add a reverse proxy and enable ssl. Recommend setting chrome://flags/#allow-insecure-localhost to avoid warnings while developing.
+- Add a reverse proxy and enable ssl. Recommend setting chrome://flags/#allow-insecure-localhost to avoid warnings while developing. Nextjs in development uses first load to build page, which can trigger a timeout. Need to run certbot ones before the other services.
+- Deploy somewhere?
 - E2E tests: business logic is covered by unit tests, typing (shared between services) goes
 a long way to prevent integration errors. What is missing for full confidence are end to end
 tests of the whole deployed application (with cypress and docker?).
 - CI (Husky, Travis?) / CD: as another filter to prevent errors form creeping in.
-- Nextjs alternative?: as it happens to most libraries that manage a lot of things,
+- Nextjs alternative? Eject Nextjs?: as it happens to most libraries that manage a lot of things,
 nextjs is amazing at letting you start very fast, but the moment you need
 something more custom (which in my experience happens for any non-sample application)
 you have to fight against the framework that used to do it for you (e.g. tsconfig)
