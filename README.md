@@ -42,6 +42,7 @@ When using the app, these are useful things to know:
 
 ## Potential next steps
 
+- Add a reverse proxy and enable ssl. Recommend setting chrome://flags/#allow-insecure-localhost to avoid warnings while developing.
 - E2E tests: business logic is covered by unit tests, typing (shared between services) goes
 a long way to prevent integration errors. What is missing for full confidence are end to end
 tests of the whole deployed application (with cypress and docker?).
@@ -50,4 +51,4 @@ tests of the whole deployed application (with cypress and docker?).
 nextjs is amazing at letting you start very fast, but the moment you need
 something more custom (which in my experience happens for any non-sample application)
 you have to fight against the framework that used to do it for you (e.g. tsconfig)
-- Logging.
+- Logging / monitoring.
