@@ -1,25 +1,25 @@
 import path from 'path'
 import express from "express"
 
-async function main() {
-  const pageFolder = path.resolve(__dirname, '..', 'page')
+async function servePage(pageFolder) {
   const indexPath = path.resolve(pageFolder, 'index.html')
-  const app = express()
 
-  app.use('/dist/page', express.static(pageFolder))
-
-  if (process.env.NODE_ENV === "production") {
-
-    app.use((req, res) => {
-      res.sendFile(indexPath);
-    });
-  } else {
+  if (process.env.NODE_ENV === "development") {
     const Bundler = (await import('parcel-bundler')).default
 
     const bundler = new Bundler(indexPath);
-    app.use(bundler.middleware());
+    return bundler.middleware();
   }
 
+  return (req, res) => res.sendFile(indexPath)
+}
+
+async function main() {
+  const pageFolder = path.resolve(__dirname, '..', 'page')
+  const app = express()
+
+  app.use('/dist/page', express.static(pageFolder))
+  app.use(await servePage(pageFolder))
   app.listen(3000)
 }
 
