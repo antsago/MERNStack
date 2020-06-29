@@ -1,11 +1,14 @@
 {
   "version": "1.0.0",
   "scripts": {
-    "dev": "npm-run-all --parallel dev:client dev:server",
+    "dev": "npm-run-all --parallel dev:page dev:server",
+    "build": "npm run clean && npm-run-all --parallel build:page build:server",
     "start": "node dist/server/server.js",
-    "dev:client": "webpack --config-name page --mode development --watch",
+    "dev:page": "webpack --config webpack.page.config.js --mode development --watch",
     "dev:server": "ts-node-dev src/server/server.tsx",
-    "build": "rm -rf ./dist && webpack --mode production"
+    "clean": "rm -rf ./dist",
+    "build:server": "webpack --config webpack.server.config.js --mode production",
+    "build:page": "rm -rf ./dist && webpack --config webpack.page.config.js --mode production"
   },
   "dependencies": {
     "express": "^4.17.1",
