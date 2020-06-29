@@ -11,8 +11,8 @@ function main() {
 
   const pageDirectory = process.env.NODE_ENV === "development" ?
     path.resolve(__dirname, '..', '..', 'dist', 'page')
-    : path.resolve(__dirname, '..', '..', 'page')
-  app.use("/dist/page", express.static(pageDirectory));
+    : path.resolve(__dirname, '..', 'page')
+  app.use("/distribution", express.static(pageDirectory));
 
   app.get("/*", (req, res) => {
     const renderedApp = ReactDOMServer.renderToString(<App name="server" />);

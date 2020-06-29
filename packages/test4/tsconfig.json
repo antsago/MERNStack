@@ -6,11 +6,6 @@
       "jsx": "react",
       "baseUrl": "src/page",
       "esModuleInterop": true,
-      "sourceMap": true,
-      // Page is built from webpack, server with ts
-      "outDir": "dist/server"
-  },
-  "include": [
-    "src/server"
-  ],
+      "sourceMap": true
+  }
 }
