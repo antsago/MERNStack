@@ -1,9 +1,14 @@
 import path from 'path'
 import express from "express"
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import App from '../page/App'
 
 async function servePage(pageFolder) {
   const indexPath = path.resolve(pageFolder, 'index.html')
 
+  console.log('Hello')
+  console.log(process.env.NODE_ENV)
   if (process.env.NODE_ENV === "development") {
     const Bundler = (await import('parcel-bundler')).default
 
@@ -11,7 +16,7 @@ async function servePage(pageFolder) {
     return bundler.middleware();
   }
 
-  return (req, res) => res.sendFile(indexPath)
+  return (req, res) => ReactDOMServer.renderToString(<App name="server" />)
 }
 
 async function main() {

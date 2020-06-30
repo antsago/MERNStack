@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --inspect -- src/server/server.ts",
+    "dev": "ts-node-dev --inspect -- src/server/server.tsx",
     "start": "NODE_ENV=production node dist/server/server.js",
     "build": "npm run check && npm run build:page && npm run build:server",
     "check": "tsc --noEmit",
     "build:page": "parcel build -d dist/page src/page/index.html --public-url /dist/page",
-    "build:server": "parcel build -d dist/server src/server/server.ts --public-url /dist --target=node"
+    "build:server": "parcel build -d dist/server src/server/server.tsx --public-url /dist --target=node"
   },
   "keywords": [],
   "author": "",
