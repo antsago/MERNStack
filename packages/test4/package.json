@@ -1,19 +1,27 @@
 {
   "version": "1.0.0",
   "scripts": {
-    "dev": "npm-run-all --parallel dev:page dev:server",
+    "dev": "NODE_ENV=development ts-node-dev --inspect -- src/server/server.tsx",
     "build": "npm run clean && npm-run-all --parallel build:page build:server",
     "start": "node dist/server/server.js",
-    "dev:page": "webpack --config webpack.page.config.js --mode development --watch",
-    "dev:server": "ts-node-dev src/server/server.tsx",
     "clean": "rm -rf ./dist",
     "build:server": "webpack --config webpack.server.config.js --mode production",
     "build:page": "rm -rf ./dist && webpack --config webpack.page.config.js --mode production"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
+    "@apollo/react-ssr": "^3.1.5",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link": "^1.2.14",
+    "apollo-link-error": "^1.1.13",
+    "apollo-link-http": "^1.5.17",
     "express": "^4.17.1",
+    "graphql": "^15.2.0",
+    "graphql-tag": "^2.10.3",
+    "isomorphic-unfetch": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
