@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
+import { ServerStyleSheets } from '@material-ui/core/styles';
 import App from '../page/App'
 
 async function getStaticAssets(isDevelopment, distDirectory) {
@@ -18,6 +19,20 @@ async function getStaticAssets(isDevelopment, distDirectory) {
   }
 }
 
+function renderPage(distDirectory) {
+  return (req, res) => {
+    const sheets = new ServerStyleSheets()
+    const htmlApp = ReactDOMServer.renderToString(sheets.collect(<App name="server" />))
+    const css = sheets.toString()
+
+    const renderedPage = fs.readFileSync(path.resolve(distDirectory, 'index.html'), 'utf8')
+      .replace('<div id="app"></div>', `<div id="app">${htmlApp}</div>`)
+      .replace('<style id="jss-server-side"></style>', `<style id="jss-server-side">${css}</style>`)
+    
+    res.send(renderedPage)
+  }
+}
+
 async function main() {
   const app = express();
   const port = 8080;
@@ -28,16 +43,7 @@ async function main() {
   // the prefix should be the same as webpackConfig.output.publicPath
   app.use("/static", await getStaticAssets(isDevelopment, distDirectory))
   
-  app.get("/*", (req, res) => {
-    const renderedApp = ReactDOMServer.renderToString(<App name="server" />);
-    const indexFile = path.resolve(distDirectory, 'index.html')
-
-    const htmlTemplate = fs.readFileSync(indexFile, 'utf8')
-  
-    return res.send(
-      htmlTemplate.replace('<div id="app"></div>', `<div id="app">${renderedApp}</div>`)
-    )
-  })
+  app.get("/*", renderPage(distDirectory))
 
   const server = app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
