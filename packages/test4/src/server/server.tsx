@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import { ServerStyleSheets } from '@material-ui/core/styles';
+import { ServerStyleSheets } from '@material-ui/core';
 import App from '../page/App'
 
 async function getStaticAssets(isDevelopment, distDirectory) {

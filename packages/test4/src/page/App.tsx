@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline, ThemeProvider}from "@material-ui/core"
 import theme from '../page/theme';
 
 interface Props {
@@ -16,6 +16,7 @@ const App = ({ name }: Props) => {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div>Hello {name}</div>
     </ThemeProvider>
   )
