@@ -27,6 +27,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/page/index.html',
+      favicon: './src/page/favicon.ico',
       alwaysWriteToDisk: true, // added by HtmlWebpackHarddiskPlugin
     }),
     new HtmlWebpackHarddiskPlugin(),
