@@ -51,3 +51,4 @@ nextjs is amazing at letting you start very fast, but the moment you need
 something more custom (which in my experience happens for any non-sample application)
 you have to fight against the framework that used to do it for you (e.g. tsconfig)
 - Logging.
+- Enable offline

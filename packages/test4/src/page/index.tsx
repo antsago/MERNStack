@@ -20,3 +20,10 @@ const client = new ApolloClient({
 
 const mountNode = document.getElementById("app")
 ReactDOM.hydrate(<App client={client}/>, mountNode)
+
+if ('serviceWorker' in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/assets/serviceWorker.js');
+  });
+}
