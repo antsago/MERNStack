@@ -1,8 +1,9 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
-const { GenerateSW } = require('workbox-webpack-plugin')
+import { Configuration } from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin'
+import { GenerateSW } from 'workbox-webpack-plugin'
 
-module.exports = {
+const config: Configuration = {
   name: "page",
   target: 'web',
   entry: {
@@ -40,3 +41,5 @@ module.exports = {
     }),
   ],
 }
+
+export default config

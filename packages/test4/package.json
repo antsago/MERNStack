@@ -5,8 +5,8 @@
     "build": "npm run clean && npm-run-all --parallel build:page build:server",
     "start": "node dist/server/server.js",
     "clean": "rm -rf ./dist",
-    "build:server": "webpack --config webpack.server.config.ts --mode production",
-    "build:page": "webpack --config webpack.page.config.js --mode production"
+    "build:server": "webpack --config webpack.server.config.ts",
+    "build:page": "webpack --config webpack.page.config.ts --mode production"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",

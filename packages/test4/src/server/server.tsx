@@ -10,11 +10,11 @@ import { createHttpLink } from 'apollo-link-http'
 import fetch from 'isomorphic-unfetch'
 import App from '../page/App'
 
-async function getStaticAssets(isDevelopment, distDirectory) {
-  if (isDevelopment) {
+async function getStaticAssets(distDirectory) {
+  if (process.env.NODE_ENV === "development") {
     const webpack = (await import('webpack')).default
     const middleware = (await import('webpack-dev-middleware')).default
-    const webpackConfig = (await import('../../webpack.page.config.js')).default
+    const webpackConfig = (await import('../../webpack.page.config')).default
 
     const compiler = webpack(webpackConfig)
     return middleware(compiler, { publicPath: '/' })
@@ -53,11 +53,10 @@ async function main() {
   const app = express();
   const port = 8080;
 
-  const isDevelopment = process.env.NODE_ENV === "development"
-  const distDirectory = isDevelopment ? path.resolve(__dirname, '..', '..', 'dist', 'page') : path.resolve(__dirname, '..', 'page')
+  const distDirectory = process.env.NODE_ENV === "development" ? path.resolve(__dirname, '..', '..', 'dist', 'page') : path.resolve(__dirname, '..', 'page')
   
   // the prefix should be the same as webpackConfig.output.publicPath
-  app.use("/assets", await getStaticAssets(isDevelopment, distDirectory))
+  app.use("/assets", await getStaticAssets(distDirectory))
   
   app.get("/*", renderPage(distDirectory))
 
