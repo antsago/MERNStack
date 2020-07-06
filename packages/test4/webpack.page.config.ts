@@ -1,10 +1,11 @@
-import { Configuration } from 'webpack'
+import webpack, { Configuration } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin'
 import { GenerateSW } from 'workbox-webpack-plugin'
 
-const config: Configuration = {
+const config = ({ isProd }: Record<'isProd', boolean>): Configuration => ({
   name: "page",
+  mode: isProd ? "production" : "development",
   target: 'web',
   entry: {
     page: './src/page/index.tsx',
@@ -40,6 +41,6 @@ const config: Configuration = {
       swDest: "serviceWorker.js",
     }),
   ],
-}
+})
 
 export default config

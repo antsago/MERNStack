@@ -16,7 +16,7 @@ async function getStaticAssets(distDirectory) {
     const middleware = (await import('webpack-dev-middleware')).default
     const webpackConfig = (await import('../../webpack.page.config')).default
 
-    const compiler = webpack(webpackConfig)
+    const compiler = webpack(webpackConfig({ isProd: false }))
     return middleware(compiler, { publicPath: '/' })
   } else {
     return express.static(distDirectory)
