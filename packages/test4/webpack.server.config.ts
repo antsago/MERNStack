@@ -1,6 +1,14 @@
-const nodeExternals = require("webpack-node-externals");
+import { Configuration } from 'webpack'
+import nodeExternals from "webpack-node-externals"
 
-module.exports = {
+const config: Configuration = {
+  target: 'node',
+  mode: 'production',
+  entry: './src/server/server.tsx',
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
   module: {
     rules: [
       {
@@ -14,16 +22,11 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
     modules: ["src", "node_modules"]
   },
-  name: "server",
-  target: 'node',
-  node: {
-    __dirname: false,
-    __filename: false,
-  },
-  entry:'./src/server/server.tsx',
   externals: [nodeExternals()],
-  output:{
+  output: {
     path: `${__dirname}/dist/server`,
     filename: 'server.js',
   },
 }
+
+export default config
