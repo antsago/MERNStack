@@ -55,8 +55,7 @@ async function main() {
 
   const distDirectory = process.env.NODE_ENV === "development" ? path.resolve(__dirname, '..', '..', 'dist', 'page') : path.resolve(__dirname, '..', 'page')
   
-  // the prefix should be the same as webpackConfig.output.publicPath
-  app.use("/assets", await getStaticAssets(distDirectory))
+  app.use("/", await getStaticAssets(distDirectory))
   
   app.get("/*", renderPage(distDirectory))
 

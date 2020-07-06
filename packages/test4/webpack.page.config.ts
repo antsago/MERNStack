@@ -1,6 +1,7 @@
 import webpack, { Configuration } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 import { GenerateSW } from 'workbox-webpack-plugin'
 
 const config = ({ isProd }: Record<'isProd', boolean>): Configuration => {
@@ -26,19 +27,25 @@ const config = ({ isProd }: Record<'isProd', boolean>): Configuration => {
     output: {
       path: `${__dirname}/dist/page`,
       filename: '[name].[hash].js',
-      publicPath: '/assets',
+      publicPath: '/',
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/page/index.html',
-        favicon: './src/page/favicon.ico',
         alwaysWriteToDisk: true, // added by HtmlWebpackHarddiskPlugin
       }),
       new HtmlWebpackHarddiskPlugin(),
-      new GenerateSW({
-        clientsClaim: true,
-        skipWaiting: true,
-        swDest: "serviceWorker.js",
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: 'src/page/icons',
+            to: 'icons/',
+            globOptions: {
+              ignore: ['.DS_Store']
+            },
+          },
+          'src/page/manifest.json',
+        ]
       }),
     ],
   }
@@ -47,6 +54,14 @@ const config = ({ isProd }: Record<'isProd', boolean>): Configuration => {
     ...base,
     mode: "production",
     devtool: 'source-map',
+    plugins: [
+      ...(base.plugins as webpack.Plugin[]),
+      new GenerateSW({
+        clientsClaim: true,
+        skipWaiting: true,
+        swDest: "serviceWorker.js",
+      }),
+    ]
   }
 
   const devConfig: Configuration = {
