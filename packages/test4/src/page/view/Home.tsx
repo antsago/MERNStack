@@ -11,7 +11,7 @@ const EXCHANGE_RATES = gql`
   }
 `;
 
-const Page = () => {
+const Home = () => {
   const { loading, error, data } = useQuery(EXCHANGE_RATES);
 
   if (loading) {
@@ -30,4 +30,4 @@ const Page = () => {
   ))
 }
 
-export default Page;
+export default Home;

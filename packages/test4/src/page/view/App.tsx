@@ -5,7 +5,7 @@ import { ApolloClient } from 'apollo-client'
 import { NormalizedCacheObject } from "apollo-cache-inmemory"
 import { ApolloProvider } from '@apollo/react-hooks'
 import theme from './theme'
-import Page from './Page'
+import Home from './Home'
 
 interface Props {
   client: ApolloClient<NormalizedCacheObject> 
@@ -23,7 +23,7 @@ const App = ({ client }: Props) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <ApolloProvider client={client}>
-        <Page />
+        <Home />
       </ApolloProvider>
     </ThemeProvider>
   )
