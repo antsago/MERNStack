@@ -8,7 +8,7 @@ import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from "apollo-cache-inmemory"
 import { createHttpLink } from 'apollo-link-http'
 import fetch from 'isomorphic-unfetch'
-import App from '../page/App'
+import App from '../page/view'
 
 async function getStaticAssets(distDirectory) {
   if (process.env.NODE_ENV === "development") {

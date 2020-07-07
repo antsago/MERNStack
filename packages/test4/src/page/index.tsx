@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory"
 import { createHttpLink } from 'apollo-link-http'
-import App from './App';
+import App from './view';
 
 declare global {
   interface Window {
