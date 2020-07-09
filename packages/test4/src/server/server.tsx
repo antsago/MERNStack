@@ -47,7 +47,7 @@ function renderPage(distDirectory) {
 
 async function main() {
   const app = express()
-  const port = 8080
+  const port = 3000
 
   const distDirectory =
     process.env.NODE_ENV === "development"
