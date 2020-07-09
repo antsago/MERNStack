@@ -8,7 +8,13 @@
         }
       },
     "parserOptions": {
-        "project": ["./api/tsconfig.json", "./client/tsconfig.json", "./shared/tsconfig.json", "./client/tsconfig.jest.json"]
+        "project": [
+            "./shared/tsconfig.json",
+            "./api/tsconfig.json",
+            "./client/tsconfig.json",
+            "./client/tsconfig.jest.json",
+            "./test4/tsconfig.json"
+        ]
     },
     "plugins": [
         "@typescript-eslint",
@@ -42,6 +48,7 @@
         "implicit-arrow-linebreak": "off",
         "react/jsx-wrap-multilines": "off",
         "react/destructuring-assignment": "off",
+        "no-underscore-dangle": ["error", { "allow": ["__APOLLO_STATE__"] }],
         "prettier/prettier": ["error", {
             "trailingComma": "all",
             "semi": false

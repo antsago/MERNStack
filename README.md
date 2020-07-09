@@ -52,3 +52,4 @@ something more custom (which in my experience happens for any non-sample applica
 you have to fight against the framework that used to do it for you (e.g. tsconfig)
 - Logging.
 - Enable offline caching and appshell https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
+- Enable strict mode for typescript
