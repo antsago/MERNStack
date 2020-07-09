@@ -3,6 +3,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { createApolloClient } from "./utils"
 import App from "./view"
+import config from "./config"
 
 declare global {
   interface Window {
@@ -10,7 +11,7 @@ declare global {
   }
 }
 
-const client = createApolloClient(false)
+const client = createApolloClient(config.api, false)
 
 const mountNode = document.getElementById("app")
 ReactDOM.hydrate(<App client={client} />, mountNode)

@@ -6,6 +6,7 @@ import { ServerStyleSheets } from "@material-ui/core"
 import { renderToStringWithData } from "@apollo/react-ssr"
 import App from "../page/view"
 import { createApolloClient } from "../page/utils"
+import config from "./config"
 
 async function getStaticAssets(distDirectory) {
   if (process.env.NODE_ENV === "development") {
@@ -21,7 +22,7 @@ async function getStaticAssets(distDirectory) {
 
 function renderPage(distDirectory) {
   return async (req, res) => {
-    const client = createApolloClient(true)
+    const client = createApolloClient(config.api, true)
     const sheets = new ServerStyleSheets()
     const htmlApp = await renderToStringWithData(
       sheets.collect(<App client={client} />),
@@ -47,7 +48,6 @@ function renderPage(distDirectory) {
 
 async function main() {
   const app = express()
-  const port = 3000
 
   const distDirectory =
     process.env.NODE_ENV === "development"
@@ -58,8 +58,8 @@ async function main() {
 
   app.get("/*", renderPage(distDirectory))
 
-  const server = app.listen(port, () => {
-    console.log(`Server listening on port ${port}`)
+  const server = app.listen(config.port, () => {
+    console.log(`Server listening on port ${config.port}`)
   })
 
   if (module.hot) {
