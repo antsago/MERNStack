@@ -2,7 +2,7 @@ import type { NormalizedCacheObject } from "apollo-cache-inmemory"
 import React from "react"
 import ReactDOM from "react-dom"
 import { createApolloClient } from "./utils"
-import App from "./view"
+import App from "./App"
 import config from "./config"
 
 declare global {

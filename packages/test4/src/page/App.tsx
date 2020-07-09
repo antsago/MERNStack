@@ -4,8 +4,7 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { ApolloClient } from "apollo-client"
 import { NormalizedCacheObject } from "apollo-cache-inmemory"
 import { ApolloProvider } from "@apollo/react-hooks"
-import theme from "./theme"
-import Home from "./Home"
+import { theme, Home } from "./view"
 
 interface Props {
   client: ApolloClient<NormalizedCacheObject>

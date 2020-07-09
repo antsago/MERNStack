@@ -4,7 +4,7 @@ import path from "path"
 import React from "react"
 import { ServerStyleSheets } from "@material-ui/core"
 import { renderToStringWithData } from "@apollo/react-ssr"
-import App from "../page/view"
+import App from "../page/App"
 import { createApolloClient } from "../page/utils"
 import config from "./config"
 
