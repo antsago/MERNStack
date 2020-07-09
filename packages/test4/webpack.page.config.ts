@@ -26,7 +26,12 @@ const config = ({ isProd }: Record<"isProd", boolean>): Configuration => {
                 ],
               },
             },
-            "ts-loader",
+            {
+              loader: "ts-loader",
+              options: {
+                configFile: "tsconfig.page.json",
+              },
+            },
           ],
           include: `${__dirname}/src/page`,
         },
