@@ -16,7 +16,18 @@ const config = ({ isProd }: Record<"isProd", boolean>): Configuration => {
       rules: [
         {
           test: /\.tsx?$/,
-          use: ["babel-loader", "ts-loader"],
+          use: [
+            {
+              loader: "babel-loader",
+              options: {
+                presets: [
+                  ["@babel/preset-env", { useBuiltIns: "usage", corejs: 3 }],
+                  "@babel/preset-react",
+                ],
+              },
+            },
+            "ts-loader",
+          ],
           include: `${__dirname}/src/page`,
         },
       ],
