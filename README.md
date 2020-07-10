@@ -10,7 +10,7 @@ To try it just run `docker-compose up` and play with the React client at http://
 This sample app consists of three services:
 
 - api: a GraphQL server with Docker and Mongo.
-- client: an SSR PWA build with React, Apollo and Material-UI and served with Next.js
+- client: an SSR PWA build with React, Apollo and Material-UI
 - mongo: for persitency
 
 
@@ -46,10 +46,6 @@ When using the app, these are useful things to know:
 a long way to prevent integration errors. What is missing for full confidence are end to end
 tests of the whole deployed application (with cypress and docker?).
 - CI (Husky, Travis?) / CD: as another filter to prevent errors form creeping in.
-- Nextjs alternative?: as it happens to most libraries that manage a lot of things,
-nextjs is amazing at letting you start very fast, but the moment you need
-something more custom (which in my experience happens for any non-sample application)
-you have to fight against the framework that used to do it for you (e.g. tsconfig)
 - Logging.
 - Enable offline caching and appshell https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
 - Enable strict mode for typescript
