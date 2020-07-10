@@ -11,9 +11,7 @@
         "project": [
             "./shared/tsconfig.json",
             "./api/tsconfig.json",
-            "./client/tsconfig.json",
-            "./client/tsconfig.jest.json",
-            "./test4/tsconfig.json"
+            "./client/tsconfig.json"
         ]
     },
     "plugins": [
