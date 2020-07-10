@@ -4,7 +4,7 @@ import { createHttpLink } from "apollo-link-http"
 import fetch from "isomorphic-unfetch"
 import alertMutations from "./alerts"
 
-function getCache(isServer: boolean): InMemoryCache {
+export function getCache(isServer: boolean): InMemoryCache {
   if (!isServer) {
     return new InMemoryCache().restore(window.__APOLLO_STATE__)
   }
@@ -14,7 +14,7 @@ function getCache(isServer: boolean): InMemoryCache {
   return cache
 }
 
-const resolvers = { Mutation: alertMutations }
+export const resolvers = { Mutation: alertMutations }
 
 export default (apiUrl, isServer: boolean) => {
   const cache = new InMemoryCache()
