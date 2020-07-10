@@ -61,11 +61,6 @@ async function main() {
   const server = app.listen(config.port, () => {
     console.log(`Server listening on port ${config.port}`)
   })
-
-  if (module.hot) {
-    module.hot.accept()
-    module.hot.dispose(() => server.close())
-  }
 }
 
 main()
