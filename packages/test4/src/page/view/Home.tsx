@@ -1,10 +1,10 @@
 import React from "react"
 import { Layout, UsersList } from "./components"
 
-export const Index = () => (
+export const Home = () => (
   <Layout>
     <UsersList />
   </Layout>
 )
 
-export default Index
+export default Home
