@@ -42,11 +42,13 @@ When using the app, these are useful things to know:
 
 ## Potential next steps
 
+- Add a reverse proxy and enable ssl. Recommend setting chrome://flags/#allow-insecure-localhost to avoid warnings while developing. Need to run certbot ones before the other services.
+- Deploy somewhere?
 - E2E tests: business logic is covered by unit tests, typing (shared between services) goes
 a long way to prevent integration errors. What is missing for full confidence are end to end
 tests of the whole deployed application (with cypress and docker?).
 - CI (Husky, Travis?) / CD: as another filter to prevent errors form creeping in.
-- Logging.
+- Logging / monitoring.
 - Enable offline caching and appshell https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
 - Enable strict mode for typescript
-- Webpack production build requires raising node's memory limit, this is likely caused by typescript + webpack or a leak in one of the plugins. Can this be fixed?
+- Webpack production build requires raising node's memory limit, this is likely caused by typescript + webpack or a leak in one of the plugins.
