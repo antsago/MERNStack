@@ -49,3 +49,4 @@ tests of the whole deployed application (with cypress and docker?).
 - Logging.
 - Enable offline caching and appshell https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
 - Enable strict mode for typescript
+- Webpack production build requires raising node's memory limit, this is likely caused by typescript + webpack or a leak in one of the plugins. Can this be fixed?

@@ -17,11 +17,12 @@ async function getStaticAssets(distDirectory) {
     const compiler = webpack(webpackConfig({ isProd: false }))
     return middleware(compiler, { publicPath: "/", index: false })
   }
-  return express.static(distDirectory)
+  return express.static(distDirectory, { index: false })
 }
 
 function renderPage(distDirectory) {
   return async (req, res) => {
+    console.log("here")
     const client = createApolloClient(config.api, true)
     const sheets = new ServerStyleSheets()
     const htmlApp = await renderToStringWithData(
@@ -58,7 +59,8 @@ async function main() {
 
   app.get("/*", renderPage(distDirectory))
 
-  const server = app.listen(config.port, () => {
+  app.listen(config.port, () => {
+    // eslint-disable-next-line no-console
     console.log(`Server listening on port ${config.port}`)
   })
 }
