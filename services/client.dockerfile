@@ -32,8 +32,7 @@ RUN npx lerna bootstrap --ci -- --only=production
 
 # Run the service
 COPY --from=build /usr/src/app/shared/dist/ ./shared/dist/
-COPY --from=build /usr/src/app/client/.next/ ./client/.next/
-COPY --from=build /usr/src/app/client/public/ ./client/public/
+COPY --from=build /usr/src/app/client/dist/ ./client/dist/
 
 WORKDIR /usr/src/app/client
 CMD [ "npm", "start" ]

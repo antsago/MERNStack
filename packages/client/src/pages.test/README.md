@@ -1,1 +1,0 @@
-> ["As the docs state any file inside the pages directory is a page. There are no exceptions."](https://spectrum.chat/next-js/general/exclude-jest-test-files-from-nextjs-build~70245b4c-3bdb-45c1-8862-44175a71022f)

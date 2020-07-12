@@ -6,11 +6,8 @@
 ## Packages ##
 node_modules
 dist
-.next
 tsconfig.tsbuildinfo
 *.map
-**/public/sw*
-**/public/workbox*
 
 ## Services ##
 db-data

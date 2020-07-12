@@ -10,6 +10,3 @@
 **/.eslintignore
 **/.eslintrc.json
 **/jest.config.js
-**/.next
-**/public/sw*
-**/public/workbox*
