@@ -1,9 +1,6 @@
 {
   "name": "mernstack",
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
-    "test": "lerna run test --stream",
     "format": "eslint --ext .js,.jsx,.ts,.tsx --fix ."
   },
   "devDependencies": {
@@ -18,7 +15,6 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
-    "lerna": "^3.20.2",
     "prettier": "^2.0.1",
     "typescript": "^3.8.3"
   }
