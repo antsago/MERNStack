@@ -52,3 +52,6 @@ tests of the whole deployed application (with cypress and docker?).
 - Enable offline caching and appshell https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12
 - Enable strict mode for typescript
 - Webpack production build requires raising node's memory limit, this is likely caused by typescript + webpack or a leak in one of the plugins.
+- Reduce container size by bundling server dependencies with webpack (in both api and client).
+  - That would also simplify the dockerfile
+  - Tree shaking would be necessary to truly reduce size, and that requires ES5+, which is only supported by Node 14+
