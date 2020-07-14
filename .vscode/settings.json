@@ -14,6 +14,5 @@
   ],
   "eslint.workingDirectories": [
     "./packages"
-  ],
-  "debug.node.autoAttach": "on"
+  ]
 }
