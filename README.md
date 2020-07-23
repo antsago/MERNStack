@@ -55,3 +55,4 @@ tests of the whole deployed application (with cypress and docker?).
 - Reduce container size by bundling server dependencies with webpack (in both api and client).
   - That would also simplify the dockerfile
   - Tree shaking would be necessary to truly reduce size, and that requires ES5+, which is only supported by Node 14+
+- Explore webcomponents for microfrontends: use fast https://fast.design/docs/fast-element/defining-elements? (they do not support react as of yet)
