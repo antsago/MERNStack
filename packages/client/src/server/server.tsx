@@ -22,7 +22,6 @@ async function getStaticAssets(distDirectory) {
 
 function renderPage(distDirectory) {
   return async (req, res) => {
-    console.log("here")
     const client = createApolloClient(config.api, true)
     const sheets = new ServerStyleSheets()
     const htmlApp = await renderToStringWithData(
